@@ -8,7 +8,7 @@
  - **layouts:** Nơi chứa layout khác
  - **pages:** Nơi chứa các của pages, ví dụ: Home, Contact,...
  - **routes:** Nơi chứa các routes của dự án
- - **store:** Nơi chứa redux store và saga của dự án
+ - **redux:** Nơi chứa các mục redux của dự án - Slice là mục chứa các tệp liên quan đến redux toolkit - Saga là mục chứa các tệp liên quan đến Redux Saga
  - **utils:** Nơi chứa các hàm sử lý logic
 
 # Hướng dẫn khởi chạy dự án
