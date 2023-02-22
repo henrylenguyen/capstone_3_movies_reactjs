@@ -138,3 +138,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và  cập nhật nhanh chón
 ```
   npm i antd
 ```
+## install loading skeleton
+
+```
+  npm i react-loading-skeleton
+```
