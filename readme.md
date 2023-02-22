@@ -119,8 +119,22 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và  cập nhật nhanh chón
 ```
   npm i yup
 ```
+## install yup hook-form (validate với yup dành cho react-hook-form)
 
+```
+  npm install @hookform/resolvers yup
+```
 ## install swiper (thư viện carousel)
 ```
    npm i swiper
+```
+## install material UI
+
+```
+  npm install @mui/material @emotion/react @emotion/styled
+```
+## install Ant Design
+
+```
+  npm i antd
 ```
