@@ -18,6 +18,7 @@ export default defineConfig({
       reduxs: `${path.resolve(__dirname, "./src/reduxs/")}`,
       routes: `${path.resolve(__dirname, "./src/routes")}`,
       utils: `${path.resolve(__dirname, "./src/utils")}`,
+      thunks: `${path.resolve(__dirname, "./src/thunks")}`,
     },
   },
 });

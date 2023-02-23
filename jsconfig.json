@@ -14,7 +14,8 @@
       "hooks/*": ["src/hooks/*"],
       "reduxs/*": ["src/reduxs/*"],
       "routes/*": ["src/routes/*"],
-      "utils/*": ["src/utils/*"]
+      "utils/*": ["src/utils/*"],
+      "thunks/*": ["src/thunks/*"]
     }
   }
 }
