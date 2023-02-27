@@ -189,3 +189,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i clsx
 ```
+## install react-toastify (thư viện hiển thị alert dạng toast)
+
+```
+  npm install react-toastify
+```
