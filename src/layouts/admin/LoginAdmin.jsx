@@ -28,7 +28,7 @@ const LoginAdmin = () => {
       setTimeout(() => {
         resolve();
         if (values.taiKhoan === "admin" && values.matKhau === "admin@123") {
-          <Modal title="Đăng nhập thành công"></Modal>
+         
         }
       }, 500);
     });
