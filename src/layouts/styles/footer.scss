@@ -1,0 +1,13 @@
+@import "./root.scss";
+
+.footer {
+  background-color: $bg-black-0;
+  .footer__item {
+    a {
+      color: $color-gray;
+      &:hover {
+        color: $color-white;
+      }
+    }
+  }
+}

@@ -1,0 +1,80 @@
+.application {
+  background-image: url("../../assets/images/background-application.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+  .application__container {
+    .application__container-img {
+      height: 540px;
+      position: relative;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: contain;
+      z-index: 99;
+      overflow: hidden;
+      display: block;
+
+      // for tablet
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+        height: 616px;
+      }
+
+      // for mobile with large screen
+      @media screen and (max-width: 767px) {
+        height: 341px;
+      }
+
+      // for mobile with medium screen
+      @media screen and (max-width: 376px) {
+        height: 293.9px;
+      }
+
+      // for mobile with small screen
+      @media screen and (max-width: 320px) {
+        height: 254px;
+      }
+    }
+
+    .application__image {
+      position: absolute;
+      top: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 94%;
+      padding: 1.5% 29.1% 0 29.1%;
+      z-index: 98;
+      overflow: hidden;
+      border-radius: 20px;
+
+      // for tablet
+      @media screen and (min-width: 768px) and (max-width: 1023px) {
+        top: 0.36px;
+      }
+
+      // for mobile with large screen
+      @media screen and (max-width: 767px) {
+        top: 0.36px;
+      }
+
+      // for mobile with medium screen
+      @media screen and (max-width: 376px) {
+        top: 0.36px;
+      }
+
+      // for mobile with small screen
+      @media screen and (max-width: 320px) {
+        top: -1px;
+      }
+
+      img {
+        border-radius: 20px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .swiper-horizontal {
+    border-radius: 20px !important;
+  }
+}

@@ -1,0 +1,30 @@
+.movie__item {
+  &-title {
+    line-height: 30px;
+    height: 60px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+
+  &-container-img {
+    position: relative;
+
+    .movie__item-play-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  &-des {
+    line-height: 20px;
+    height: 40px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
