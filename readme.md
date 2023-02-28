@@ -194,3 +194,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm install react-toastify
 ```
+
+##  @mui/icons-material (thư viện icon của MUI)
+```
+  npm i @mui/icons-material
+```
