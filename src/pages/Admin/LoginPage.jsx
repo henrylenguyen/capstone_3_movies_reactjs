@@ -1,6 +1,7 @@
 import React from "react";
 import bg from "assets/images/background-login-admin.png";
-import LoginAdmin from "layouts/admin/LoginAdmin";
+import LoginAdmin from "layouts/admin/login/LoginAdmin";
+
 
 const LoginPage = () => {
   return (

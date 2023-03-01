@@ -60,3 +60,38 @@ button {
 .full-width{
   @apply flex-100;
 }
+.css-o4b71y-MuiAccordionSummary-content{
+  align-items: center;
+}
+.navbarTransition{
+  width: 0px;
+  animation: animatedNav 2s linear forwards;
+  @keyframes animatedNav{
+    0%{
+      left: 0;
+      opacity: 1;
+    }
+    100%{
+      left: -100%;
+      opacity: 0;
+    }
+  }
+}
+
+.statistical{
+  border-radius: 12px;
+  padding: 20px;
+}
+.ticket-book-in-month{
+  background: linear-gradient(89.69deg, #F39034 2.03%, #FF2727 99.73%);
+}
+.affiliate-theater-system{
+  background: linear-gradient(270deg, #003AD2 0%, #0097EC 100%);
+}
+.is-playing{
+  background: linear-gradient(270.23deg, #00A843 0.19%, #1FD071 99.8%);
+}
+.number-of-new-subscribers{
+  background: linear-gradient(269.97deg, #5900C9 0.02%, #9852F0 99.98%);
+
+}

@@ -28,20 +28,27 @@ const LoginAdmin = () => {
     if (!isValid) return;
     // để hiển thị loading trên nút
     return new Promise((resolve) => {
-      resolve();
       setTimeout(() => {
+        resolve();
         if (values.taiKhoan === "admin" && values.matKhau === "admin@123") {
           toast.success("Đăng nhập thành công!", {
             position: toast.POSITION.TOP_RIGHT,
           });
+          setIsLogin(true);
         }
-        setIsLogin(true);
+        else{
+          toast.error("Đăng nhập thất bại!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
       }, 1000);
     });
   };
-  // if(isLogin){
-  //   return navigate("/")
-  // }
+  setTimeout(()=>{
+    if(isLogin){
+      return navigate("/")
+    }
+  },2000)
   return (
     <>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white">
@@ -87,7 +94,7 @@ const LoginAdmin = () => {
           <button
             type="submit"
             className={`w-full md:p-3 text-[13px] md:text-[18px]  font-bold rounded-xl  cursor-pointer bg-[rgba(189,_12,_71,_1)]
-       ${isSubmitting ? "opacity-50" : ""}`}
+          ${isSubmitting ? "opacity-50" : ""}`}
             disabled={isSubmitting}
           >
             {isSubmitting ? (
