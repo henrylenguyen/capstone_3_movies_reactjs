@@ -199,3 +199,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i @mui/icons-material
 ```
+
+## react-chartjs (thư viện vẽ biểu đồ)
+```
+  npm install --save chart.js react-chartjs-2
+```
