@@ -26,7 +26,7 @@ const DetailsPage = () => {
     <section className="detail py-32">
       <div className="detail__content container mx-auto">
         <DetailMovie isLoading={isLoading} />
-        <TheaterDetailList />
+        <TheaterDetailList isLoading={isLoading} />
       </div>
     </section>
   );

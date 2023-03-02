@@ -1,7 +1,14 @@
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Skeleton,
+  Typography,
+} from "@mui/material";
 import ModalContent from "components/modal/ModalContent";
 import moment from "moment";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+
 import { useSelector } from "react-redux";
 
 import "./detailMovie.scss";
@@ -41,8 +48,42 @@ function DetailMovie({ isLoading }) {
     setOpenModal(true);
   }
 
-  if (isLoading || !selectedMovie) {
-    return <h2 className="text-white">Loading...</h2>;
+  if (isLoading || Object.keys(selectedMovie).length < 1) {
+    return (
+      <section className="detail__movie px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="col-span-1">
+            <div className="detail__item">
+              <div className="grid grid-cols-2 gap-6">
+                <div className="col-span-1">
+                  <div className="detail__item-movie">
+                    <Skeleton
+                      sx={{ bgcolor: "gray" }}
+                      variant="rectangular"
+                      width={"100%"}
+                      height={"400px"}
+                    />
+                  </div>
+                </div>
+                <div className="col-span-1 text-white flex flex-col justify-center">
+                  <Skeleton sx={{ bgcolor: "gray" }} />
+                  <div>
+                    <Skeleton sx={{ bgcolor: "gray" }} width="20%" />
+                    <Skeleton sx={{ bgcolor: "gray" }} />
+                  </div>
+                  <p className="my-4">
+                    <Skeleton sx={{ bgcolor: "gray" }} width="20%" />{" "}
+                    <Skeleton sx={{ bgcolor: "gray" }} />
+                  </p>
+
+                  <Skeleton sx={{ bgcolor: "gray" }} width="100%" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
   }
 
   return (

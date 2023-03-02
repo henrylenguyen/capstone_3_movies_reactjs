@@ -1,23 +1,26 @@
-import { Tab, Tabs } from "@mui/material";
+import { CircularProgress, Tab, Tabs } from "@mui/material";
 import TheaterDetailItem from "components/theaterDetailItem/TheaterDetailItem";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import "./theaterDetailList.scss";
 
-function TheaterDetailList() {
+function TheaterDetailList({ isLoading }) {
   const [idxValue, setIdxValue] = useState(0);
 
   const theaterListByMovieId = useSelector(
     (state) => state.theater.theaterListByMovieId
   );
 
-  console.log(theaterListByMovieId);
-
   function handleChange(event, newValue) {
     setIdxValue(newValue);
   }
 
-  if (theaterListByMovieId.length < 1) return <div>Loading...</div>;
+  if (isLoading || theaterListByMovieId.length < 1)
+    return (
+      <div>
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <section
