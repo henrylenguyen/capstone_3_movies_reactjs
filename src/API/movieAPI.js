@@ -9,6 +9,15 @@ const movieAPI = {
     const url = `/QuanLyPhim/LayDanhSachPhimPhanTrang`;
     return axiosClient.get(url, { params });
   },
+
+  getMovieInfo(movieId) {
+    const url = `/QuanLyPhim/LayThongTinPhim`;
+    return axiosClient.get(url, {
+      params: {
+        MaPhim: movieId,
+      },
+    });
+  },
 };
 
 export default movieAPI;

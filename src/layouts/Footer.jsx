@@ -23,7 +23,9 @@ function Footer() {
         <div className="footer__top pb-10 border-b-2 border-solid border-zinc-100">
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             <div className="footer__item col-span-1 text-center lg:text-left">
-              <h2 className="text-base text-white mb-4 uppercase">TIX</h2>
+              <h2 className="text-base text-white mb-4 uppercase">
+                MovieTheater
+              </h2>
               <div className="flex flex-col gap-2">
                 <a href="#" className="text-sm inline-block ">
                   FAQ

@@ -15,7 +15,7 @@ const routes = [
         component: BookingPage,
       },
       {
-        path: "/detail",
+        path: "/detail/:movieId",
         component: DetailsPage,
       },
       {

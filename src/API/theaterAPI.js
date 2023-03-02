@@ -5,6 +5,14 @@ const theaterAPI = {
     const url = `/QuanLyRap/LayThongTinLichChieuHeThongRap`;
     return axiosClient.get(url, { params });
   },
+  getScheduleMovie(movieId) {
+    const url = `QuanLyRap/LayThongTinLichChieuPhim`;
+    return axiosClient.get(url, {
+      params: {
+        MaPhim: movieId,
+      },
+    });
+  },
 };
 
 export default theaterAPI;

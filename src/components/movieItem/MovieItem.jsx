@@ -1,33 +1,18 @@
-import {
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Modal,
-  Skeleton,
-} from "@mui/material";
+import { Button, Card, CardContent, CardMedia, Skeleton } from "@mui/material";
 import { Box } from "@mui/system";
+import ModalContent from "components/modal/ModalContent";
 
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import "./movieItem.scss";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 700,
-  height: 450,
-  border: "2px solid #000",
-  boxShadow: 24,
-};
 
 function MovieItem(props) {
   const { onActive, idx, active } = props;
-  const { hinhAnh, moTa, tenPhim, trailer } = props.movie;
+  const { hinhAnh, moTa, tenPhim, trailer, maPhim } = props.movie;
   const [openModal, setOpenModal] = useState(false);
   const isLoading = useSelector((state) => state.movie.isLoading);
+  const navigate = useNavigate();
 
   function handleActiveHover(idx) {
     if (onActive) onActive(idx);
@@ -39,6 +24,10 @@ function MovieItem(props) {
 
   function handleCloseModal() {
     setOpenModal(false);
+  }
+
+  function handleChangePage(movieId, movieName) {
+    navigate(`/detail/${movieId}?movie=${movieName}`);
   }
 
   if (isLoading)
@@ -112,6 +101,7 @@ function MovieItem(props) {
               <Button
                 className="hidden md:block w-full h-24 text-3xl"
                 variant="contained"
+                onClick={() => handleChangePage(maPhim, tenPhim)}
               >
                 Mua vé
               </Button>
@@ -120,17 +110,12 @@ function MovieItem(props) {
         </CardContent>
       </Card>
 
-      <Modal keepMounted onClose={handleCloseModal} open={openModal}>
-        <Box sx={style}>
-          <iframe
-            width={700}
-            height={450}
-            src={trailer}
-            frameBorder={0}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          />
-        </Box>
-      </Modal>
+      <ModalContent
+        onClose={handleCloseModal}
+        openModal={openModal}
+        src={trailer}
+        height={450}
+      />
     </div>
   );
 }

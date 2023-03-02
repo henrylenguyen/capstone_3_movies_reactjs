@@ -3,6 +3,7 @@ import { getMovieBanner } from "reduxs/Slice/MoviesSlice";
 import { MOVIE_GROUP } from "constants/constants";
 import { TOTAL_MOVIE_PER_PAGE } from "constants/constants";
 import { getMoviePagination, loadingDone } from "reduxs/Slice/MoviesSlice";
+import { setSelectedMovie } from "reduxs/Slice/MoviesSlice";
 
 export function fetchBannerList() {
   return async function (dispatch) {
@@ -28,6 +29,18 @@ export function fetchMoviePagination(page) {
       dispatch(loadingDone());
 
       dispatch(getMoviePagination(res.data.content));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function fetchMovieDetail(movieId) {
+  return async function (dispatch) {
+    try {
+      const res = await movieAPI.getMovieInfo(movieId);
+
+      dispatch(setSelectedMovie(res.data.content));
     } catch (error) {
       console.log(error);
     }

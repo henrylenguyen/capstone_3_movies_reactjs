@@ -6,6 +6,7 @@ const movieSlice = createSlice({
     bannerList: [],
     movieList: [],
     isLoading: true,
+    selectedMovie: {},
   },
   reducers: {
     getMovieBanner(state, action) {
@@ -17,8 +18,15 @@ const movieSlice = createSlice({
     loadingDone(state) {
       state.isLoading = false;
     },
+    setSelectedMovie(state, action) {
+      state.selectedMovie = { ...action.payload };
+    },
   },
 });
-export const { getMovieBanner, getMoviePagination, loadingDone } =
-  movieSlice.actions;
+export const {
+  getMovieBanner,
+  getMoviePagination,
+  loadingDone,
+  setSelectedMovie,
+} = movieSlice.actions;
 export default movieSlice.reducer;

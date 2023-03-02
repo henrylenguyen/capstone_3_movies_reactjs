@@ -3,6 +3,7 @@ import Carousel from "components/carousel/Carousel";
 import MovieList from "components/movieList/MovieList";
 import ScrollBtn from "components/scrollBtn/ScrollBtn";
 import TheaterList from "components/theaterList/TheaterList";
+
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 

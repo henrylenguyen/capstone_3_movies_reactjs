@@ -1,0 +1,7 @@
+.detail__theater-list {
+  .detail__theater-list-right {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
