@@ -110,4 +110,26 @@
     opacity: 0;
     transition: transform linear 0.4s, opacity linear 0.4s;
   }
+
+  .header__user-login {
+    position: relative;
+    &-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+    }
+
+    button {
+      color: #000;
+      &:hover {
+        color: $color-hover-0;
+      }
+    }
+
+    &-menu.open {
+      display: block;
+    }
+  }
 }

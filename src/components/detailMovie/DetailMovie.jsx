@@ -130,7 +130,10 @@ function DetailMovie({ isLoading }) {
                   Mô tả : <span className="detail__description">{moTa}</span>
                 </p>
 
-                <Button variant="contained">
+                <Button
+                  variant="contained"
+                  onClick={() => console.log("click")}
+                >
                   <a href="#theaterMovieList">Mua vé</a>
                 </Button>
               </div>

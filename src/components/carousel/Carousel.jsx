@@ -48,7 +48,7 @@ function Carousel() {
   }, [bannerList]);
 
   return (
-    <section className="hidden md:block">
+    <section className="hidden md:block carousel">
       <Swiper
         spaceBetween={0}
         loop

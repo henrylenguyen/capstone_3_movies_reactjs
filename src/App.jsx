@@ -1,9 +1,17 @@
-import HomePage from "pages/HomePage";
 import PageNotFound from "pages/NotFoundPage";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import routes from "routes/routes";
+import { fetchProfile } from "thunks/userThunk";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProfile());
+  }, []);
+
   return (
     <Routes>
       {/* <Route>Route này để navbar hoặc header</Route> */}

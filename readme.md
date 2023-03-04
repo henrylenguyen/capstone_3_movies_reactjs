@@ -11,6 +11,7 @@
 - **routes:** Nơi chứa các routes của dự án
 - **redux:** Nơi chứa các mục redux của dự án - Slice là mục chứa các tệp liên quan đến redux toolkit - Saga là mục chứa các tệp liên quan đến Redux Saga
 - **utils:** Nơi chứa các hàm xử lý logic chung
+- **schemas:** Nơi chứa schema dùng để xử lý validation
 
 # Hướng dẫn khởi chạy dự án
 

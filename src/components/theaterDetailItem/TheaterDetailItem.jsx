@@ -3,8 +3,6 @@ import moment from "moment";
 import React from "react";
 
 function TheaterDetailItem({ theaterList, value, idx }) {
-  console.log(theaterList.cumRapChieu);
-
   return (
     <div className="detail__theater-item">
       {value === idx && (

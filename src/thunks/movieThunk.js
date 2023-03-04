@@ -1,4 +1,4 @@
-import movieAPI from "../API/movieAPI";
+import movieAPI from "API/movieAPI";
 import { getMovieBanner } from "reduxs/Slice/MoviesSlice";
 import { MOVIE_GROUP } from "constants/constants";
 import { TOTAL_MOVIE_PER_PAGE } from "constants/constants";

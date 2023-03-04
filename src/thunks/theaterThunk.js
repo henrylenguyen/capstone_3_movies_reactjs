@@ -1,4 +1,4 @@
-import theaterAPI from "../API/theaterAPI";
+import theaterAPI from "API/theaterAPI";
 import { getTheaterList } from "reduxs/Slice/TheaterSlice";
 import { doneLoading } from "reduxs/Slice/TheaterSlice";
 import { getTheaterListByMovieId } from "reduxs/Slice/TheaterSlice";

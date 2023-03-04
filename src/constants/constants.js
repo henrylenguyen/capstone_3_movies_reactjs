@@ -4,3 +4,8 @@ export const TOKEN =
 
 export const MOVIE_GROUP = "GP07";
 export const TOTAL_MOVIE_PER_PAGE = 10;
+export const ACCESS_TOKEN = "ACCESS_TOKEN";
+export const USER_TYPE = {
+  manager: "QuanTri",
+  customer: "KhachHang",
+};

@@ -28,6 +28,9 @@ function Footer() {
               </h2>
               <div className="flex flex-col gap-2">
                 <a href="#" className="text-sm inline-block ">
+                  Giới thiệu
+                </a>
+                <a href="#" className="text-sm inline-block ">
                   FAQ
                 </a>
                 <a href="#" className="text-sm inline-block">
@@ -46,6 +49,14 @@ function Footer() {
                 </a>
                 <a href="#" className="text-sm inline-block">
                   Chích sách bảo mật
+                </a>
+
+                <a href="#" className="text-sm inline-block">
+                  Chích sách thanh toán
+                </a>
+
+                <a href="#" className="text-sm inline-block">
+                  Điều khoản chung
                 </a>
               </div>
             </div>
@@ -145,24 +156,27 @@ function Footer() {
             <div className="footer__item col-span-1 flex md:block justify-center">
               <img src={zion} className="w-2/5" />
             </div>
-            <div className="footer__item col-span-1 md:col-span-3 text-center md:text-left">
-              <h2 className="text-white text-base uppercase mb-4">
-                TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN ZION
+            <div className="footer__item col-span-1 md:col-span-3 text-center md:text-left text-white">
+              <h2 className="text-base uppercase mb-4">
+                TIX – SẢN PHẨM CỦA CÔNG TY CỔ PHẦN MOVIETHEATER VIETNAM
               </h2>
               <div className="">
-                <h6 className="text-white text-sm">
+                <h6 className="text-sm">
                   Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp.
                   Hồ Chí Minh, Việt Nam.
                 </h6>
-                <h6 className="text-white text-sm">
+                <h6 className="text-sm">
                   Giấy chứng nhận đăng ký kinh doanh số: 0101659783,
                 </h6>
-                <h6 className="text-white text-sm">
+                <h6 className="text-sm">
                   Đăng ký thay đổi lần thứ 30, ngày 22 tháng 01 năm 2020 do Sở
                   kế hoạch và đầu tư Thành phố Hồ Chí Minh cấp.
                 </h6>
-                <h6 className="text-white text-sm">
+                <h6 className="text-sm">
                   Số Điện Thoại (Hotline): 1900 545 436
+                </h6>
+                <h6 className="text-sm">
+                  COPYRIGHT 2017 CJ MOVIETHEATER. All RIGHTS RESERVED .
                 </h6>
               </div>
             </div>
