@@ -80,7 +80,13 @@ function Header() {
             </div>
 
             <div className="header__logo">
-              <Link to="/" className="flex items-center gap-1 h-full">
+              <Link
+                to="/"
+                onClick={() => {
+                  document.documentElement.scrollTop = 0;
+                }}
+                className="flex items-center gap-1 h-full"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"

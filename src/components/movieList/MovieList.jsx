@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import MovieItem from "components/movieItem/MovieItem";
 import MoviePagination from "components/moviePagination/MoviePagination";
 import React, { useState } from "react";
@@ -13,7 +14,7 @@ function MovieList() {
     setActiveIdx(idx);
   }
 
-  if (isLoading) return <h2>Loading...</h2>;
+  if (isLoading) return <CircularProgress />;
 
   return (
     <section id="movieList" className="movie" style={{ overflow: "hidden" }}>
