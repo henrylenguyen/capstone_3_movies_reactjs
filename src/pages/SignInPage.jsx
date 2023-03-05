@@ -6,18 +6,23 @@ import { fetchSignIn } from "thunks/userThunk";
 import styles from "./styles/signIn.module.scss";
 import Swal from "sweetalert2";
 import { ACCESS_TOKEN } from "constants/constants";
+import SnackbarComponent from "components/snackbar/Snackbar";
+import { login } from "reduxs/Slice/UserSlice";
+import { resetLogin } from "reduxs/Slice/UserSlice";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
   const userLogin = useSelector((state) => state.user.userLogin);
+  const hasLogin = useSelector((state) => state.user.hasLogin);
   const timerInterval = useRef();
+  const timeoutId = useRef();
 
   async function handleSubmit(values) {
     try {
       await dispatch(fetchSignIn(values));
-      navigate("/");
+      dispatch(login());
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -28,6 +33,10 @@ const SignInPage = () => {
         `,
       });
     }
+  }
+
+  function handleCloseSnackbar() {
+    dispatch(resetLogin());
   }
 
   useEffect(() => {
@@ -57,42 +66,64 @@ const SignInPage = () => {
     }
   }, []);
 
-  return (
-    <section className={`${styles.signIn} py-24`}>
-      <div className={`styles.signIn__content container mx-auto`}>
-        <div className="signIn__container flex items-center justify-center">
-          <div className="signIn__box bg-white p-4 rounded w-128">
-            <div className="signIn__header flex flex-col items-center py-4 px-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
-                className="w-10 h-10 text-blue-600"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-              <h2 className="text-xl capitalize mt-2 font-medium">Đăng nhập</h2>
-            </div>
-            <div className="signIn__body px-4 ">
-              <FormSignIn onSubmit={handleSubmit} />
-            </div>
+  useEffect(() => {
+    if (userLogin || accessToken) {
+      timeoutId.current = setTimeout(() => {
+        navigate("/");
+      }, 3000);
+    }
+    return () => {
+      clearTimeout(timeoutId.current);
+    };
+  });
 
-            <Link
-              to="/signUp"
-              className="mt-4 block text-right text-blue-500 font-medium"
-            >
-              Bạn chưa có tài khoản ? Đăng ký ngay
-            </Link>
+  return (
+    <>
+      <section className={`${styles.signIn} py-24`}>
+        <div className={`styles.signIn__content container mx-auto`}>
+          <div className="signIn__container flex items-center justify-center">
+            <div className="signIn__box bg-white p-4 rounded w-128">
+              <div className="signIn__header flex flex-col items-center py-4 px-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-10 h-10 text-blue-600"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                  />
+                </svg>
+                <h2 className="text-xl capitalize mt-2 font-medium">
+                  Đăng nhập
+                </h2>
+              </div>
+              <div className="signIn__body px-4 ">
+                <FormSignIn onSubmit={handleSubmit} />
+              </div>
+
+              <Link
+                to="/signUp"
+                className="mt-4 block text-right text-blue-500 font-medium"
+              >
+                Bạn chưa có tài khoản ? Đăng ký ngay
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <SnackbarComponent
+        type="success"
+        message="Đăng nhập thành công"
+        booleanState={hasLogin}
+        time={3000}
+        onClose={handleCloseSnackbar}
+      />
+    </>
   );
 };
 

@@ -4,6 +4,8 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     userLogin: null,
+    hasLogout: false,
+    hasLogin: false,
   },
   reducers: {
     loginUser(state, action) {
@@ -12,9 +14,25 @@ const userSlice = createSlice({
     logoutUser(state) {
       state.userLogin = null;
     },
+    logout(state) {
+      state.hasLogout = true;
+    },
+
+    login(state) {
+      state.hasLogin = true;
+    },
+
+    resetLogin(state) {
+      state.hasLogin = false;
+    },
+
+    resetLogout(state) {
+      state.hasLogout = false;
+    },
   },
 });
 
 const { reducer, actions } = userSlice;
-export const { loginUser, logoutUser } = actions;
+export const { loginUser, logoutUser, logout, resetLogout, login, resetLogin } =
+  actions;
 export default reducer;
