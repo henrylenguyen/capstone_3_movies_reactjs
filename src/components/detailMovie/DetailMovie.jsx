@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   CircularProgress,
+  Rating,
   Skeleton,
   Typography,
 } from "@mui/material";
@@ -170,6 +171,12 @@ function DetailMovie({ isLoading }) {
                   <h2 className="text-white text-4xl">{`${danhGia}`}</h2>
                 </Box>
               </Box>
+              <Rating
+                className="my-4"
+                precision={0.5}
+                value={danhGia / 2}
+                readOnly
+              />
             </div>
           </div>
         </div>
