@@ -50,7 +50,7 @@ function Application() {
             </Button>
 
             <p className="my-6">
-              MovieTheater có hai phiên bản <a href="#">IOS</a> &{" "}
+              MovieTheater hiện có trên hai phiên bản <a href="#">IOS</a> &{" "}
               <a href="#">Android</a>
             </p>
           </div>

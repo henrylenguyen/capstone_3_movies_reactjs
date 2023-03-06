@@ -26,6 +26,8 @@ function DetailMovie({ isLoading }) {
   const { tenPhim, trailer, hinhAnh, hot, danhGia, moTa, ngayKhoiChieu } =
     selectedMovie;
 
+  console.log(selectedMovie);
+
   useEffect(() => {
     timer.current = setInterval(() => {
       setProgress((prevState) => (prevState += 10));
@@ -122,7 +124,9 @@ function DetailMovie({ isLoading }) {
                 </div>
               </div>
               <div className="col-span-1 text-white flex flex-col justify-center">
-                <p>{moment(`${ngayKhoiChieu}`).format("DD/MM/YYYY")}</p>
+                <p>
+                  Khởi chiếu: {moment(`${ngayKhoiChieu}`).format("DD/MM/YYYY")}
+                </p>
                 <div>
                   {hot && <div className="detail__hot">HOT</div>}
                   <h2 className="text-2xl detail__title font-medium uppercase mt-2">

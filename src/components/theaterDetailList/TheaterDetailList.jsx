@@ -27,7 +27,9 @@ function TheaterDetailList({ isLoading }) {
       className="detail__theater-list py-12 text-center"
       id="theaterMovieList"
     >
-      <h2 className="text-white uppercase text-2xl mb-4">Rạp đang chiếu</h2>
+      <h2 className="text-white uppercase text-2xl mb-4">
+        Rạp hiện đang chiếu
+      </h2>
       <div className="grid grid-cols-4 bg-white rounded">
         <div className="col-span-1 detail__theater-list-right h-52 overflow-y-scroll">
           <Tabs

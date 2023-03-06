@@ -1,4 +1,11 @@
-import { Button, Card, CardContent, CardMedia, Skeleton } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Skeleton,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import ModalContent from "components/modal/ModalContent";
 
@@ -9,7 +16,7 @@ import "./movieItem.scss";
 
 function MovieItem(props) {
   const { onActive, idx, active } = props;
-  const { hinhAnh, moTa, tenPhim, trailer, maPhim } = props.movie;
+  const { hinhAnh, moTa, tenPhim, trailer, maPhim, hot } = props.movie;
   const [openModal, setOpenModal] = useState(false);
   const isLoading = useSelector((state) => state.movie.isLoading);
   const navigate = useNavigate();
@@ -61,6 +68,7 @@ function MovieItem(props) {
             image={hinhAnh}
             alt={tenPhim}
           />
+          {hot && <Chip className="movie__item-chip" label="HOT" />}
           <button
             className="movie__item-play-btn text-white hover:text-slate-200 hidden md:block"
             onClick={() => setOpenModal(true)}
