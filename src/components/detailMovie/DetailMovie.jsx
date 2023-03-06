@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import ModalContent from "components/modal/ModalContent";
+import { RATING_LABEL } from "constants/constants";
 import moment from "moment";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
@@ -28,7 +29,7 @@ function DetailMovie({ isLoading }) {
   useEffect(() => {
     timer.current = setInterval(() => {
       setProgress((prevState) => (prevState += 10));
-    }, 300);
+    }, 200);
 
     return () => {
       clearInterval(timer.current);
@@ -38,6 +39,7 @@ function DetailMovie({ isLoading }) {
   useLayoutEffect(() => {
     if (progress >= danhGia * 10) {
       clearInterval(timer.current);
+      setProgress(danhGia * 10);
     }
   }, [progress]);
 
@@ -171,12 +173,17 @@ function DetailMovie({ isLoading }) {
                   <h2 className="text-white text-4xl">{`${danhGia}`}</h2>
                 </Box>
               </Box>
-              <Rating
-                className="my-4"
-                precision={0.5}
-                value={danhGia / 2}
-                readOnly
-              />
+              <Box className="flex items-center gap-6">
+                <Rating
+                  className="my-4"
+                  precision={0.5}
+                  value={danhGia / 2}
+                  readOnly
+                />
+                <Box className="ml-2 text-white uppercase text-xl">
+                  {RATING_LABEL[danhGia / 2]}
+                </Box>
+              </Box>
             </div>
           </div>
         </div>
