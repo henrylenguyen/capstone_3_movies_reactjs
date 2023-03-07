@@ -1,4 +1,4 @@
-import { Button, Menu, MenuItem, MenuList } from "@mui/material";
+import { Button, MenuItem, MenuList } from "@mui/material";
 
 import clsx from "clsx";
 import { ACCESS_TOKEN } from "constants/constants";
@@ -170,7 +170,7 @@ function Header() {
                     autoFocusItem={false}
                   >
                     {userLogin.maLoaiNguoiDung === USER_TYPE.manager && (
-                      <MenuItem>
+                      <MenuItem className="header__user-login-menu-item">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
@@ -193,7 +193,10 @@ function Header() {
                         Trang quản lý
                       </MenuItem>
                     )}
-                    <MenuItem onClick={handleLogout}>
+                    <MenuItem
+                      className="header__user-login-menu-item"
+                      onClick={handleLogout}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

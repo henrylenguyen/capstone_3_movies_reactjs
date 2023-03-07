@@ -131,5 +131,11 @@
     &-menu.open {
       display: block;
     }
+
+    .header__user-login-menu-item {
+      &:hover {
+        color: $color-hover-0;
+      }
+    }
   }
 }
