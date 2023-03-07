@@ -10,6 +10,8 @@ export const USER_TYPE = {
   customer: "KhachHang",
 };
 
+export const USER_GROUP = "GP01";
+
 export const RATING_LABEL = {
   0.5: "Useless",
   1: "Useless+",
@@ -22,3 +24,15 @@ export const RATING_LABEL = {
   4.5: "Excellent",
   5: "Excellent+",
 };
+
+export const NAME_REGEX = /^[A-Z\sa-z]+$/g;
+export const PHONE_REGEX = /^[0-9]+$/g;
+
+export const SIGNUP_VARIABLE = [
+  "taiKhoan",
+  "matKhau",
+  "email",
+  "soDt",
+  "maNhom",
+  "hoTen",
+];

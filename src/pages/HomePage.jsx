@@ -51,7 +51,7 @@ function HomePage() {
 
       <SnackbarComponent
         type="success"
-        message="Đăng xuất thành công"
+        message="Đã đăng xuất thành công"
         booleanState={hasLogout}
         onClose={handleResetLogout}
         time={5000}

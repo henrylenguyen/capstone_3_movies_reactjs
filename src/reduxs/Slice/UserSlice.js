@@ -6,6 +6,8 @@ const userSlice = createSlice({
     userLogin: null,
     hasLogout: false,
     hasLogin: false,
+    hasSignUp: false,
+    userRegister: null,
   },
   reducers: {
     loginUser(state, action) {
@@ -13,6 +15,7 @@ const userSlice = createSlice({
     },
     logoutUser(state) {
       state.userLogin = null;
+      state.userRegister = null;
     },
     logout(state) {
       state.hasLogout = true;
@@ -25,14 +28,32 @@ const userSlice = createSlice({
     resetLogin(state) {
       state.hasLogin = false;
     },
+    registerUser(state, action) {
+      state.userRegister = action.payload;
+    },
 
     resetLogout(state) {
       state.hasLogout = false;
+    },
+    register(state) {
+      state.hasSignUp = true;
+    },
+    resetRegister(state) {
+      state.hasSignUp = false;
     },
   },
 });
 
 const { reducer, actions } = userSlice;
-export const { loginUser, logoutUser, logout, resetLogout, login, resetLogin } =
-  actions;
+export const {
+  loginUser,
+  logoutUser,
+  logout,
+  resetLogout,
+  login,
+  resetLogin,
+  register,
+  resetRegister,
+  registerUser,
+} = actions;
 export default reducer;

@@ -39,6 +39,7 @@ const SignInPage = () => {
     dispatch(resetLogin());
   }
 
+  // Prevent after user login that can access to auth page
   useEffect(() => {
     if (accessToken || userLogin) {
       Swal.fire({
@@ -69,6 +70,8 @@ const SignInPage = () => {
   useEffect(() => {
     if (userLogin || accessToken) {
       timeoutId.current = setTimeout(() => {
+        dispatch(resetLogin());
+
         navigate("/");
       }, 3000);
     }

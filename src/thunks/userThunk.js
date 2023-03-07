@@ -23,7 +23,8 @@ export function fetchProfile() {
       const res = await userAPI.getProfile();
       dispatch(loginUser(res.data.content));
     } catch (error) {
-      console.log(error);
+      const { status } = error.response;
+      if (status === 401) return;
     }
   };
 }
