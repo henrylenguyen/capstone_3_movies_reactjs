@@ -204,3 +204,9 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm install --save chart.js react-chartjs-2
 ```
+
+## react-highlight-words (đánh dấu từ)
+
+```
+  npm i react-highlight-words
+```
