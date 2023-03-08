@@ -20,6 +20,7 @@ function DetailMovie({ isLoading }) {
 
   const [openModal, setOpenModal] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [score, setScore] = useState(0);
 
   const timer = useRef();
 
@@ -31,6 +32,7 @@ function DetailMovie({ isLoading }) {
   useEffect(() => {
     timer.current = setInterval(() => {
       setProgress((prevState) => (prevState += 10));
+      setScore((prevState) => (prevState += 1));
     }, 200);
 
     return () => {
@@ -43,6 +45,11 @@ function DetailMovie({ isLoading }) {
       clearInterval(timer.current);
       setProgress(danhGia * 10);
     }
+
+    if (score >= danhGia) {
+      clearInterval(timer.current);
+      setScore(score);
+    }
   }, [progress]);
 
   function handleCloseModal() {
@@ -53,6 +60,7 @@ function DetailMovie({ isLoading }) {
     setOpenModal(true);
   }
 
+  // Skeleton
   if (isLoading || Object.keys(selectedMovie).length < 1) {
     return (
       <section className="detail__movie px-4">
@@ -174,7 +182,7 @@ function DetailMovie({ isLoading }) {
                     justifyContent: "center",
                   }}
                 >
-                  <h2 className="text-white text-4xl">{`${danhGia}`}</h2>
+                  <h2 className="text-white text-4xl">{`${score}`}</h2>
                 </Box>
               </Box>
               <Box className="flex items-center gap-6">
