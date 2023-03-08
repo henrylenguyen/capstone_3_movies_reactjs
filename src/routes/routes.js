@@ -4,6 +4,7 @@ import SignInPage from "pages/SignInPage.jsx";
 import BookingPage from "pages/BookingPage";
 import DetailsPage from "pages/DetailsPage.jsx";
 import NewsPage from "pages/NewsPage.jsx";
+import UserPage from "pages/UserPage";
 
 const routes = [
   {
@@ -13,6 +14,10 @@ const routes = [
       {
         index: true,
         component: BookingPage,
+      },
+      {
+        path: "/user-info",
+        component: UserPage,
       },
       {
         path: "/detail/:movieId",

@@ -28,6 +28,11 @@ module.exports = {
         200: "780px",
       },
 
+      width: {
+        200: "780px",
+        160: "660px",
+      },
+
       spacing: {
         128: "32rem",
       },

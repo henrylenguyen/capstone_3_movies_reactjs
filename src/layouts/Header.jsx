@@ -6,7 +6,7 @@ import { USER_TYPE } from "constants/constants";
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "reduxs/Slice/UserSlice";
 import { logoutUser } from "reduxs/Slice/UserSlice";
 import Swal from "sweetalert2";
@@ -22,11 +22,17 @@ function Header() {
   const [showNav, setShowNav] = useState(false);
   const userLogin = useSelector((state) => state.user.userLogin);
   const [openMenu, setOpenMenu] = useState(false);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   function handleToggleClick() {
     setOpenMenu((prevState) => !prevState);
+  }
+
+  function handleNavigateToUserPage() {
+    navigate("/user-info");
+    setOpenMenu(false);
   }
 
   function handleShowNavbar() {
@@ -195,6 +201,26 @@ function Header() {
                     )}
                     <MenuItem
                       className="header__user-login-menu-item"
+                      onClick={handleNavigateToUserPage}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6 mr-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                        />
+                      </svg>
+                      Trang cá nhân
+                    </MenuItem>
+                    <MenuItem
+                      className="header__user-login-menu-item"
                       onClick={handleLogout}
                     >
                       <svg
@@ -271,6 +297,7 @@ function Header() {
                     />
                   </svg>
                 </Button>
+
                 <div
                   className={clsx(`header__user-login-menu bg-white rounded`, {
                     open: openMenu,
@@ -305,6 +332,26 @@ function Header() {
                         Trang quản lý
                       </MenuItem>
                     )}
+                    <MenuItem
+                      className="header__user-login-menu-item"
+                      onClick={handleNavigateToUserPage}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="w-6 h-6 mr-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
+                        />
+                      </svg>
+                      Trang cá nhân
+                    </MenuItem>
                     <MenuItem onClick={handleLogout}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

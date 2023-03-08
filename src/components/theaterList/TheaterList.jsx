@@ -19,7 +19,11 @@ function TheaterList() {
       <div className="theater__content container mx-auto">
         <h2 className="text-center text-4xl uppercase mb-4">Cụm rạp</h2>
 
-        {isLoading && <CircularProgress />}
+        {isLoading && (
+          <div className="flex justify-center items-center">
+            <CircularProgress />
+          </div>
+        )}
         {!isLoading && (
           <>
             <div className="theater__main ">

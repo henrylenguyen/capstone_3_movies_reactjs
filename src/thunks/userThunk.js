@@ -28,3 +28,7 @@ export function fetchProfile() {
     }
   };
 }
+
+// export function fetchInfo(data) {
+//   return async function()
+// }

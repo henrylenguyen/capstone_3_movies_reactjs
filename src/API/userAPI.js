@@ -13,6 +13,11 @@ const userAPI = {
     const url = `/QuanLyNguoiDung/DangKy`;
     return axiosClient.post(url, data);
   },
+
+  updateUser(data) {
+    const url = "/QuanLyNguoiDung/CapNhatThongTinNguoiDung";
+    return axiosClient.put(url, data);
+  },
 };
 
 export default userAPI;

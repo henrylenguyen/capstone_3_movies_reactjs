@@ -12,7 +12,7 @@ import React, { useMemo, useState } from "react";
 import { Controller } from "react-hook-form";
 
 function InputField(props) {
-  const { type, label, name, form } = props;
+  const { type, label, name, form, readonly } = props;
   const [showPassword, setShowPassword] = useState(false);
 
   function handleClickShowPassword() {
@@ -26,7 +26,7 @@ function InputField(props) {
         control={form.control}
         render={({
           field: { onChange, value, name },
-          fieldState: { invalid, isTouched, isDirty, error },
+          fieldState: { invalid },
           formState,
         }) => (
           <FormControl variant="outlined" fullWidth>
@@ -115,6 +115,9 @@ function InputField(props) {
           value={value}
           onChange={onChange}
           helperText={formState.errors[name] && formState.errors[name].message}
+          inputProps={{
+            readOnly: readonly,
+          }}
         />
       )}
     />

@@ -14,7 +14,12 @@ function MovieList() {
     setActiveIdx(idx);
   }
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center">
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <section id="movieList" className="movie" style={{ overflow: "hidden" }}>

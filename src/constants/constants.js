@@ -36,3 +36,13 @@ export const SIGNUP_VARIABLE = [
   "maNhom",
   "hoTen",
 ];
+
+export const UPDATE_VARIABLE = [
+  "taiKhoan",
+  "matKhau",
+  "email",
+  "soDt",
+  "maNhom",
+  "hoTen",
+  "maLoaiNguoiDung",
+];
