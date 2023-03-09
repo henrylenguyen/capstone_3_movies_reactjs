@@ -12,12 +12,12 @@ export const navList = [
       {
         child_id: 1,
         title_child: "Danh sách người dùng",
-        to: "/admin/danh-sach/danh-sach-nguoi-dung",
+        to: "/admin/danh-sach-nguoi-dung",
       },
       {
         child_id: 2,
         title_child: "Phân quyền người dùng",
-        to: "/admin/user/phan-quyen-nguoi-dung",
+        to: "/admin/phan-quyen-nguoi-dung",
       },
     ],
   },
@@ -28,8 +28,8 @@ export const navList = [
     children: [
       {
         child_id: 1,
-        title_child: "Danh sách vé đã đặt",
-        to: "/admin/danh-sach/danh-sach-ve-da-dat",
+        title_child: "Danh sách phòng vé ",
+        to: "/admin/danh-sach-phong-ve",
       },
     ],
   },
@@ -41,17 +41,17 @@ export const navList = [
       {
         child_id: 1,
         title_child: "Danh sách phim",
-        to: "/admin/danh-sach/danh-sach-phim",
+        to: "/admin/danh-sach-phim",
       },
       {
         child_id: 2,
         title_child: "Thêm mới phim",
-        to: "/admin/phim/them-moi-phim",
+        to: "/admin/tao-moi-phim",
       },
       {
         child_id: 3,
         title_child: "Tạo lịch chiếu",
-        to: "/admin/phim/tao-lich-chieu",
+        to: "/admin/tao-lich-chieu",
       },
     ],
   },
@@ -62,18 +62,13 @@ export const navList = [
     children: [
       {
         child_id: 1,
-        title_child: "Danh sách phim",
-        to: "/admin/danh-sach/danh-sach-phim",
+        title_child: "Danh sách rạp chiếu phim",
+        to: "/admin/danh-sach-cum-rap",
       },
       {
         child_id: 2,
-        title_child: "Thêm mới phim",
-        to: "/admin/rap/them-moi-phim",
-      },
-      {
-        child_id: 3,
-        title_child: "Tạo lịch chiếu",
-        to: "/admin/rap/tao-lich-chieu",
+        title_child: "Thêm mới cụm rạp",
+        to: "/admin/them-moi-cum-rap",
       },
     ],
   },
@@ -85,7 +80,7 @@ export const navList = [
       {
         child_id: 1,
         title_child: "Cài đặt hệ thống",
-        to: "/admin/cai-dat/cai-dat-he-thong",
+        to: "/admin/cai-dat-he-thong",
       },
     ],
   },

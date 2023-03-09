@@ -5,7 +5,7 @@ import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import GroupAddIcon from "@mui/icons-material/GroupAdd";
 const Statistical = () => {
   return (
-    <div className="bg-adminPrimary col-span-4">
+   
       <div className="grid grid-cols-4 gap-5 p-5">
         <div className="statistical ticket-book-in-month">
           <div className="flex justify-between">
@@ -51,7 +51,6 @@ const Statistical = () => {
           <span className="text-[30px]">300</span>
         </div>
       </div>
-    </div>
   );
 };
 

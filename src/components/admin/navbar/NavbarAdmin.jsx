@@ -1,16 +1,17 @@
-import ControlledAccordions from "components/accordion/Accordion";
+
 import React from "react";
 import { useSelector } from "react-redux";
 import CottageIcon from "@mui/icons-material/Cottage";
 import { NavLink } from "react-router-dom";
 import { navList } from "routes/admin/Slug";
-import LockIcon from "@mui/icons-material/Lock";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
+import ControlledAccordions from "../accordion/Accordion";
 const NavbarAdmin = () => {
   const { isOpen } = useSelector((state) => state.navbar);
   return (
     <div
-      className={`flex flex-col gap-y-5 transition-all ease-in-out duration-300 ${
+      className={`flex flex-col gap-y-5 transition-all ease-in-out duration-300 flex-shrink-0 ${
         isOpen ? " w-[350px] mr-5" : "navbarTransition absolute"
       }`}
     >
@@ -23,15 +24,15 @@ const NavbarAdmin = () => {
           sx={{ bgcolor: "#2B2B4B", color: "#fff", p: 2 }}
         >
           <NavLink
-            to={"/admin/doi-mat-khau"}
+            to={"/admin/thong-tin-tai-khoan"}
             className={({ isActive }) =>
               isActive
                 ? "bg-adminSecondary text-white w-full p-2 block"
                 : "p-4 text-adminThirdary w-full"
             }
           >
-            <LockIcon fontSize="large" sx={{ marginRight: "10px" }}></LockIcon>
-            Đổi mật khẩu
+            <AccountCircleIcon fontSize="large" sx={{ marginRight: "10px" }}></AccountCircleIcon>
+            Thông tin tài khoản
           </NavLink>
           <button className="text-adminThirdary p-4 text-left">
             <LogoutIcon fontSize="large" sx={{ marginRight: "10px" }}></LogoutIcon>

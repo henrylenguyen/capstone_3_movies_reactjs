@@ -5,9 +5,9 @@ import { Outlet } from "react-router-dom";
 
 const ContainerLayout = () => {
   return (
-    <div className="bg-adminSecondary h-[1000px] text-white">
+    <div className="bg-adminSecondary h-auto text-white">
       <Search></Search>
-      <div className="flex container mx-auto py-5 h-[calc(1000px_-_80px)] overflow-hidden ">
+      <div className="flex container mx-auto py-5 h-full overflow-hidden ">
         <NavbarAdmin></NavbarAdmin>
         <Outlet></Outlet>
       </div>
