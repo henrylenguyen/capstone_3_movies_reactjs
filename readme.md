@@ -210,3 +210,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i react-highlight-words
 ```
+
+## react-apexcharts
+```
+  npm install react-apexcharts apexcharts
+```
