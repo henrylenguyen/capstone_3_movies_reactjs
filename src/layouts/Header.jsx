@@ -1,6 +1,7 @@
 import { Button, MenuItem, MenuList } from "@mui/material";
 
 import clsx from "clsx";
+import { navigateList } from "constants/constants";
 import { ACCESS_TOKEN } from "constants/constants";
 import { USER_TYPE } from "constants/constants";
 
@@ -11,12 +12,6 @@ import { logout } from "reduxs/Slice/UserSlice";
 import { logoutUser } from "reduxs/Slice/UserSlice";
 import Swal from "sweetalert2";
 import "./styles/header.scss";
-
-const navigateList = [
-  { id: 1, name: "Danh sách phim", idPath: "#movieList" },
-  { id: 2, name: "Cụm rạp", idPath: "#theaterList" },
-  { id: 3, name: "Ứng dụng", idPath: "#application" },
-];
 
 function Header() {
   const [showNav, setShowNav] = useState(false);
@@ -33,6 +28,7 @@ function Header() {
   function handleNavigateToUserPage() {
     navigate("/user-info");
     setOpenMenu(false);
+    document.documentElement.scrollTop = 0;
   }
 
   function handleShowNavbar() {
@@ -117,7 +113,7 @@ function Header() {
             {navigateList.map((navigate) => (
               <a
                 className="header__navbar-link font-medium text-base"
-                href={navigate.idPath}
+                href={`${navigate.idPath}`}
                 key={navigate.id}
                 variant="a"
               >
@@ -132,6 +128,9 @@ function Header() {
                   <Link
                     to="/signIn"
                     className="font-medium text-sm md:text-base"
+                    onClick={() => {
+                      document.documentElement.scrollTop = 0;
+                    }}
                   >
                     Đăng Nhập
                   </Link>
@@ -140,6 +139,9 @@ function Header() {
                   <Link
                     to="/signUp"
                     className="font-medium text-sm md:text-base"
+                    onClick={() => {
+                      document.documentElement.scrollTop = 0;
+                    }}
                   >
                     Đăng Ký
                   </Link>

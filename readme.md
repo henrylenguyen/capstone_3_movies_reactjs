@@ -182,11 +182,17 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 # install momentJS (Format lại date)
 
 ```
-  npm i moment
+  npm install moment
 ```
 
 # install clsx
 
 ```
-  npm i clsx
+  npm install clsx
+```
+
+# install animate.css
+
+```
+  npm install animate.css
 ```

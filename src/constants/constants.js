@@ -46,3 +46,34 @@ export const UPDATE_VARIABLE = [
   "hoTen",
   "maLoaiNguoiDung",
 ];
+
+export const seatInfor = [
+  {
+    id: 1,
+    title: "Đã đặt",
+    color: "#655F64",
+  },
+  {
+    id: 2,
+    title: "Đang chọn",
+    color: "#FB01D4",
+  },
+  {
+    id: 3,
+    title: "Ghế thường",
+    color: "#0E16DF",
+  },
+  {
+    id: 4,
+    title: "Ghế VIP",
+    color: "#DF0E0E",
+  },
+];
+
+export const ticketListBookingType = ["maGhe", "giaVe"];
+
+export const navigateList = [
+  { id: 1, name: "Danh sách phim", idPath: "#movieList" },
+  { id: 2, name: "Cụm rạp", idPath: "#theaterList" },
+  { id: 3, name: "Ứng dụng", idPath: "#application" },
+];

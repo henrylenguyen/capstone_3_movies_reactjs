@@ -5,6 +5,7 @@ import BookingPage from "pages/BookingPage";
 import DetailsPage from "pages/DetailsPage.jsx";
 import NewsPage from "pages/NewsPage.jsx";
 import UserPage from "pages/UserPage";
+import SeatPage from "pages/SeatPage";
 
 const routes = [
   {
@@ -26,6 +27,10 @@ const routes = [
       {
         path: "/news",
         component: NewsPage,
+      },
+      {
+        path: "/seats/:scheduleId",
+        component: SeatPage,
       },
       {
         path: "/signIn",

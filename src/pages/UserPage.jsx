@@ -2,6 +2,7 @@ import { FormControlLabel, Switch } from "@mui/material";
 import userAPI from "API/userAPI";
 import FormUser from "components/form/formUser/FormUser";
 import HistoryBookingList from "components/historyBookingList/HistoryBookingList";
+
 import SnackbarComponent from "components/snackbar/Snackbar";
 import { ACCESS_TOKEN } from "constants/constants";
 import React, { useEffect, useRef, useState } from "react";
@@ -17,6 +18,7 @@ function UserPage() {
   const [switchChange, setSwitchChange] = useState(false);
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
   const [hasUpdate, setHasUpdate] = useState(false);
+
   const timeoutId = useRef();
   const dispatch = useDispatch();
 
@@ -71,14 +73,14 @@ function UserPage() {
         }
       });
     }
-  });
+  }, []);
 
   return (
     <section className="userInfo py-24">
       <div className="userInfo__content container mx-auto">
         {userLogin && (
           <div className="userInfo__container flex justify-center">
-            <div className="userInfo__box w-96 lg:w-200 md:w-160 bg-white p-4 rounded">
+            <div className="userInfo__box w-96 lg:w-[60rem] md:w-160 bg-white p-4 rounded">
               <h2 className="text-xl uppercase border-b-2 pb-2 mb-4">
                 Thông tin người dùng
               </h2>

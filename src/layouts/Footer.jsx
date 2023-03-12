@@ -162,18 +162,18 @@ function Footer() {
               </h2>
               <div className="">
                 <h6 className="text-sm">
-                  Địa chỉ: Z06 Đường số 13, Phường Tân Thuận Đông, Quận 7, Tp.
+                  Địa chỉ: ZXX Đường số XX, Phường Tân Thuận Đông, Quận X, Tp.
                   Hồ Chí Minh, Việt Nam.
                 </h6>
                 <h6 className="text-sm">
-                  Giấy chứng nhận đăng ký kinh doanh số: 0101659783,
+                  Giấy chứng nhận đăng ký kinh doanh số: 010165xxxx,
                 </h6>
                 <h6 className="text-sm">
                   Đăng ký thay đổi lần thứ 30, ngày 22 tháng 01 năm 2020 do Sở
                   kế hoạch và đầu tư Thành phố Hồ Chí Minh cấp.
                 </h6>
                 <h6 className="text-sm">
-                  Số Điện Thoại (Hotline): 1900 545 436
+                  Số Điện Thoại (Hotline): 1900 545 xxx
                 </h6>
                 <h6 className="text-sm">
                   COPYRIGHT 2017 CJ MOVIETHEATER. All RIGHTS RESERVED .

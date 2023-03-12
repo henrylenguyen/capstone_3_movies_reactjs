@@ -35,6 +35,7 @@ function MovieItem(props) {
 
   function handleChangePage(movieId, movieName) {
     navigate(`/detail/${movieId}?movie=${movieName}`);
+    document.documentElement.scrollTop = 0;
   }
 
   if (isLoading)

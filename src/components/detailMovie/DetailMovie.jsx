@@ -1,11 +1,4 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Rating,
-  Skeleton,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CircularProgress, Rating, Skeleton } from "@mui/material";
 import ModalContent from "components/modal/ModalContent";
 import { RATING_LABEL } from "constants/constants";
 import moment from "moment";
@@ -33,7 +26,7 @@ function DetailMovie({ isLoading }) {
     timer.current = setInterval(() => {
       setProgress((prevState) => (prevState += 10));
       setScore((prevState) => (prevState += 1));
-    }, 200);
+    }, 100);
 
     return () => {
       clearInterval(timer.current);
