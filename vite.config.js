@@ -19,6 +19,7 @@ export default defineConfig({
       routes: `${path.resolve(__dirname, "./src/routes")}`,
       utils: `${path.resolve(__dirname, "./src/utils")}`,
       thunks: `${path.resolve(__dirname, "./src/thunks")}`,
+      API: `${path.resolve(__dirname, "./src/API")}`,
     },
   },
 });

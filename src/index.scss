@@ -78,6 +78,7 @@ button {
   }
 }
 
+
 .statistical{
   border-radius: 12px;
   padding: 20px;
@@ -95,3 +96,46 @@ button {
   background: linear-gradient(269.97deg, #5900C9 0.02%, #9852F0 99.98%);
 
 }
+.apexcharts-legend-text {
+  color: #fff!important;
+
+}
+.ant-table,td.ant-table-cell.ant-table-column-sort{
+  background: transparent!important;
+  min-height: 450px;
+   color: #fff!important;
+   cursor: pointer;
+}
+button.ant-pagination-item-link {
+    color: #fff!important;
+}
+.ant-table-cell-row-hover{
+  background: #93959c5b!important;
+}
+.table-container {
+  overflow-x: auto;
+}
+/* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  .upcomming::-webkit-scrollbar-track,.upcomming::-webkit-scrollbar-thumb{
+    display: none;
+  }
+  .leftHomePage::-webkit-scrollbar-track,.leftHomePage::-webkit-scrollbar-thumb{
+    display: none;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

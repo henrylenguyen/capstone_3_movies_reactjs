@@ -1,11 +1,12 @@
 
 import { combineReducers } from "@reduxjs/toolkit";
+import MovieSlice from "./Slice/admin/MovieSlice";
 import NavBarSlice from "./Slice/admin/NavBarSlice";
-import MoviesSlice from "./Slice/MoviesSlice";
+
 
 // combineReducer
 const rootReducer = combineReducers({
-  movie: MoviesSlice,
+  movieAdmin: MovieSlice,
   navbar: NavBarSlice,
 });
 export default rootReducer;

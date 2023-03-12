@@ -1,4 +1,5 @@
-import CustomTable from 'components/admin/search/CustomTable';
+
+import CustomTable from 'components/admin/table/CustomTable';
 import React from 'react';
 
 const columns = [

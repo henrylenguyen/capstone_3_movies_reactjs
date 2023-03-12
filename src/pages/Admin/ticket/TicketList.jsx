@@ -1,8 +1,12 @@
 import { Avatar, Image } from "antd";
-import CustomTable from "components/admin/search/CustomTable";
+import CustomTable from "components/admin/table/CustomTable";
+
 import removeVietnameseTones from "config/admin/convertVietnamese";
-import React from "react";
-const data = [
+import React, { useEffect } from "react";
+
+const TicketList = ({phim}) => {
+ console.log("props:", phim);
+ const data = [
   {
     maLichChieu: 44239,
     tenCumRap: "CGV - Aeon Tân Phú",
@@ -26,84 +30,61 @@ const data = [
     gioChieu: "07:09",
   },
 ];
-// 1. Lấy ra tất cả các key của object
-const keys = data && Object.keys(data[0]);
-console.log("keys:", keys);
-/* 2. Từ những key của object biến nó thành 1 mảng các đối tượng 
-  ví dụ: [
+  const keys = data && Object.keys(data[0]);
+
+  const dataIndexKey = keys?.map((item) => {
+    return {
+      dataIndex: item,
+      key: item,
+    };
+  });
+  console.log("dataIndexKey:", dataIndexKey);
+  // 3. Tạo ra mảng title chứa các đối tượng title khác nhau, do mình nhập
+  const dataTitle = [
+    { title: "Mã lịch chiếu" },
+    { title: "Tên phim" },
     {
-      dataIndex: "maLichChieu",
-      key: "maLichChieu"
+      title: "Hình ảnh",
+    },
+    { title: "Tên cụm rạp" },
+    { title: "Tên rạp" },
+    { title: "Địa chỉ" },
+    { title: "Ngày chiếu" },
+    { title: "Giờ chiếu" },
+  ];
+  console.log("dataTitle:", dataTitle);
+
+  const columns = dataTitle.map((title) => {
+    const removeTone = removeVietnameseTones(title.title);
+    const newTitle = removeTone.replace(/\s+/g, "").toLowerCase();
+
+    const dataIndexKeyItem = dataIndexKey.find(
+      (item) => item.key.toLowerCase() === newTitle
+    );
+    if (newTitle === "hinhanh") {
+      return {
+        title: title.title,
+        dataIndex: dataIndexKeyItem.dataIndex,
+        key: dataIndexKeyItem.key,
+        render: (text) => <Image src={text} width="100px"></Image>,
+      };
     }
-  ]
-*/
-const dataIndexKey = keys?.map((item) => {
-  return {
-    dataIndex: item,
-    key: item,
-  };
-});
-console.log("dataIndexKey:", dataIndexKey);
-// 3. Tạo ra mảng title chứa các đối tượng title khác nhau, do mình nhập
-const dataTitle = [
-  { title: "Mã lịch chiếu" },
-  { title: "Tên phim" },
-  {
-    title: "Hình ảnh",
-  },
-  { title: "Tên cụm rạp" },
-  { title: "Tên rạp" },
-  { title: "Địa chỉ" },
-  { title: "Ngày chiếu" },
-  { title: "Giờ chiếu" },
-];
-console.log("dataTitle:", dataTitle);
+    if (newTitle === "avatar") {
+      return {
+        title: title.title,
+        dataIndex: dataIndexKeyItem.dataIndex,
+        key: dataIndexKeyItem.key,
+        render: (text) => <Avatar src={text} size="large"></Avatar>,
+      };
+    }
+    return {
+      title: title.title,
+      dataIndex: dataIndexKeyItem.dataIndex,
+      key: dataIndexKeyItem.key,
+      width: 250,
+    };
+  });
 
-/**
- * 4. Từ mảng đối tượng (3) kết hợp với mảng các đối tượng (4) thành
- *  
- * const columns = [
- * {
- *   title: "Mã lịch chiếu",
- *   dataIndex: "maLichChieu",
-     key: "maLichChieu"  
- * }
- * ]
- */
-const columns = dataTitle.map((title) => {
-  const removeTone = removeVietnameseTones(title.title);
-  const newTitle = removeTone.replace(/\s+/g, "").toLowerCase();
-
-  const dataIndexKeyItem = dataIndexKey.find(
-    (item) => item.key.toLowerCase() === newTitle
-  );
-   if (newTitle === "hinhanh") {
-     return {
-       title: title.title,
-       dataIndex: dataIndexKeyItem.dataIndex,
-       key: dataIndexKeyItem.key,
-       render: (text) => <Image src={text} width="100px"></Image>,
-     };
-   }
-   if (newTitle === "avatar") {
-     return {
-       title: title.title,
-       dataIndex: dataIndexKeyItem.dataIndex,
-       key: dataIndexKeyItem.key,
-       render: (text) => <Avatar src={text} size="large"></Avatar>,
-     };
-   }
-  return {
-    title: title.title,
-    dataIndex: dataIndexKeyItem.dataIndex,
-    key: dataIndexKeyItem.key,
-    width: 250
-  };
-});
-
-console.log("columns:", columns);
-
-const TicketList = () => {
   return <CustomTable columns={columns} data={data}></CustomTable>;
 };
 

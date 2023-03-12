@@ -1,3 +1,4 @@
+import ChooseGroup from "components/admin/chooseGroup/ChooseGroup";
 import AdminHomePage from "pages/Admin/AdminHomePage";
 import AddNewCinema from "pages/Admin/cinema/AddNewCinema";
 import CinemaList from "pages/Admin/cinema/CinemaList";
@@ -6,9 +7,9 @@ import UserConfig from "pages/Admin/config/UserConfig";
 import AddNewFilm from "pages/Admin/films/AddNewFilm";
 import CreateNewShowtimes from "pages/Admin/films/CreateNewShowtimes";
 import FilmList from "pages/Admin/films/FilmList";
-
-
 import TicketList from "pages/Admin/ticket/TicketList";
+
+// import TicketList from "pages/Admin/ticket/TicketList";
 import ListUserPage from "pages/Admin/user/ListUserPage";
 import UserAuthorizationPage from "pages/Admin/user/UserAuthorizationPage";
 const routesAdmin = [
@@ -18,7 +19,7 @@ const routesAdmin = [
   },
   {
     path: "/admin/thong-tin-tai-khoan",
-    element: UserConfig ,
+    element: UserConfig,
   },
   {
     path: "/admin/danh-sach-nguoi-dung",
@@ -30,7 +31,7 @@ const routesAdmin = [
   },
   {
     path: "/admin/danh-sach-phong-ve",
-    element: TicketList,
+    element: ChooseGroup,
   },
   {
     path: "/admin/danh-sach-phim",
