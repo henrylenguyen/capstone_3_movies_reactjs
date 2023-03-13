@@ -17,14 +17,18 @@ export function fetchBannerList() {
   };
 }
 
-export function fetchMoviePagination(page) {
+export function fetchMoviePagination(page, searchName) {
   return async function (dispatch) {
     try {
-      const res = await movieAPI.getMoviePagination({
+      let params = {
         maNhom: MOVIE_GROUP,
         soTrang: page ?? 1,
         soPhanTuTrenTrang: TOTAL_MOVIE_PER_PAGE,
-      });
+      };
+
+      if (searchName) params = { ...params, tenPhim: searchName };
+
+      const res = await movieAPI.getMoviePagination(params);
 
       dispatch(loadingDone());
 

@@ -26,7 +26,7 @@ function HomePage() {
   }
 
   useEffect(() => {
-    dispatch(fetchMoviePagination(searchParams.get("page")));
+    dispatch(fetchMoviePagination(+searchParams.get("page")));
   }, [searchParams.get("page")]);
 
   useEffect(() => {

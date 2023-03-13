@@ -35,20 +35,16 @@ function TheaterMovie({ itemMovie }) {
             <p className="capitalize mb-2">Lịch chiếu phim hôm nay:</p>
             <div className="grid grid-cols-5 gap-2">
               {lstLichChieuTheoPhim.map((item) => {
-                if (
-                  moment(new Date()).format("dddd") ===
-                  moment(item.ngayChieuGioChieu).format("dddd")
-                )
-                  return (
-                    <div className="col-span-1" key={item.maLichChieu}>
-                      <Button
-                        variant="outlined"
-                        onClick={() => handleMoveToSeatPage(item.maLichChieu)}
-                      >
-                        {moment(item.ngayChieuGioChieu).format("DD/MM - hh:mm")}
-                      </Button>
-                    </div>
-                  );
+                return (
+                  <div className="col-span-1" key={item.maLichChieu}>
+                    <Button
+                      variant="outlined"
+                      onClick={() => handleMoveToSeatPage(item.maLichChieu)}
+                    >
+                      {moment(item.ngayChieuGioChieu).format("DD/MM - hh:mm")}
+                    </Button>
+                  </div>
+                );
               })}
             </div>
           </div>

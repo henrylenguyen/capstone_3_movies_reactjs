@@ -18,6 +18,7 @@ const movieSlice = createSlice({
     loadingDone(state) {
       state.isLoading = false;
     },
+
     setSelectedMovie(state, action) {
       state.selectedMovie = { ...action.payload };
     },
