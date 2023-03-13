@@ -20,8 +20,6 @@ function DetailMovie({ isLoading }) {
   const { tenPhim, trailer, hinhAnh, hot, danhGia, moTa, ngayKhoiChieu } =
     selectedMovie;
 
-  console.log(selectedMovie);
-
   useEffect(() => {
     timer.current = setInterval(() => {
       setProgress((prevState) => (prevState += 10));

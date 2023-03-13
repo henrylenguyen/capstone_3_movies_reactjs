@@ -16,6 +16,7 @@ function TheaterMovie({ itemMovie }) {
     if (scheduleId === null || scheduleId === undefined) return;
     navigate(`/seats/${scheduleId}`);
     document.documentElement.scrollTop = 0;
+    // reset state bookTicketList
     dispatch(removeAllBookedTicket());
   }
 
@@ -31,18 +32,24 @@ function TheaterMovie({ itemMovie }) {
             <h2 className="text-xl uppercase">{tenPhim}</h2>
           </div>
           <div className="my-4">
-            <p className="capitalize mb-2">Lịch chiếu phim</p>
+            <p className="capitalize mb-2">Lịch chiếu phim hôm nay:</p>
             <div className="grid grid-cols-5 gap-2">
-              {lstLichChieuTheoPhim.map((item) => (
-                <div className="col-span-1" key={item.maLichChieu}>
-                  <Button
-                    variant="outlined"
-                    onClick={() => handleMoveToSeatPage(item.maLichChieu)}
-                  >
-                    {moment(item.ngayChieuGioChieu).format("DD/MM - hh:mm")}
-                  </Button>
-                </div>
-              ))}
+              {lstLichChieuTheoPhim.map((item) => {
+                if (
+                  moment(new Date()).format("dddd") ===
+                  moment(item.ngayChieuGioChieu).format("dddd")
+                )
+                  return (
+                    <div className="col-span-1" key={item.maLichChieu}>
+                      <Button
+                        variant="outlined"
+                        onClick={() => handleMoveToSeatPage(item.maLichChieu)}
+                      >
+                        {moment(item.ngayChieuGioChieu).format("DD/MM - hh:mm")}
+                      </Button>
+                    </div>
+                  );
+              })}
             </div>
           </div>
         </div>

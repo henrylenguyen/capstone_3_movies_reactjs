@@ -56,12 +56,12 @@ function MovieItem(props) {
 
   return (
     <div
-      className="col-span-1 h-160 md:h-150 shadow-none hover:shadow-md"
+      className="col-span-1 h-72 md:h-150 shadow-none hover:shadow-md"
       style={{ overflow: "hidden" }}
       onMouseOver={() => handleActiveHover(idx)}
       onMouseOut={handleRemoveActive}
     >
-      <Card className="w-full movie__item">
+      <Card className="w-full movie__item hidden md:block">
         <div className="movie__item-container-img">
           <CardMedia
             component="img"
@@ -69,7 +69,7 @@ function MovieItem(props) {
             image={hinhAnh}
             alt={tenPhim}
           />
-          {hot && <Chip className="movie__item-chip" label="HOT" />}
+          {hot && <Chip className="movie__item-chip hot-label" label="HOT" />}
           <button
             className="movie__item-play-btn text-white hover:text-slate-200 hidden md:block"
             onClick={() => setOpenModal(true)}
@@ -118,6 +118,34 @@ function MovieItem(props) {
           </div>
         </CardContent>
       </Card>
+
+      <div className="movie__item-mobile grid grid-cols-4 gap-x-2 gap-y-4">
+        <div className="col-span-2">
+          <div className="movie__item-mobile-container relative overflow-hidden rounded-md">
+            {hot && (
+              <Chip
+                className="absolute top-[0.4rem] left-[0.4rem] movie__item-chip hot-label"
+                label="HOT"
+              />
+            )}
+            <img src={hinhAnh} alt={"movie_picture"} className="w-full h-72" />
+          </div>
+        </div>
+        <div className="col-span-2">
+          <div className="movie__item-mobile-container ">
+            <h2 className="movie__item-mobile-title text-xl font-medium capitalize">
+              {tenPhim}
+            </h2>
+            <p className="movie__item-mobile-des mt-2 mb-4">{moTa}</p>
+            <Button
+              variant="contained"
+              onClick={() => handleChangePage(maPhim, tenPhim)}
+            >
+              Mua vé
+            </Button>
+          </div>
+        </div>
+      </div>
 
       <ModalContent
         onClose={handleCloseModal}

@@ -42,6 +42,7 @@ function UserPage() {
     setHasUpdate(false);
   }
 
+  // close snackbar
   useEffect(() => {
     if (userLogin) {
       timeoutId.current = setTimeout(() => {
@@ -53,6 +54,9 @@ function UserPage() {
       clearTimeout(timeoutId.current);
     };
   });
+
+  // check if user hasn't login , then will return them to login
+  // only user has login can access to user page
 
   useEffect(() => {
     if (!userLogin || !accessToken) {
