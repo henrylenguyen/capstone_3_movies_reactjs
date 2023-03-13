@@ -1,19 +1,29 @@
 import MovieApi from "API/admin/MovieAPI";
-import { getCineplexInfor } from "reduxs/Slice/admin/MovieSlice";
-import { getMoviesShowtimeInfor } from "reduxs/Slice/admin/MovieSlice";
+import { LayDanhSachPhim } from "reduxs/Slice/admin/MovieSlice";
+import { LayThongTinCumRapTheoHeThong } from "reduxs/Slice/admin/MovieSlice";
+import { LayThongTinLichChieuHeThongRap } from "reduxs/Slice/admin/MovieSlice";
 
-export const fetchDataMovie = (maNhom) => async (dispatch) => {
+export const fetchLichChieuHeThongRap = (maNhom) => async (dispatch) => {
   try {
-    const res = await MovieApi.getMoviesShowtimeInfor(maNhom);
-    dispatch(getMoviesShowtimeInfor(res.data.content));
+    const res = await MovieApi.LayThongTinLichChieuHeThongRap(maNhom);
+    dispatch(LayThongTinLichChieuHeThongRap(res.data.content));
   } catch (error) {
     console.log(error);
   }
 };
-export const fetchComplex = (maHeThongRap) => async (dispatch) => {
+export const fetchThongTinCumRapTheoHeThong =
+  (maHeThongRap) => async (dispatch) => {
+    try {
+      const res = await MovieApi.LayThongTinCumRapTheoHeThong(maHeThongRap);
+      dispatch(LayThongTinCumRapTheoHeThong(res.data.content));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+export const fetchLayDanhSachPhim = (maNhom) => async (dispatch) => {
   try {
-    const res = await MovieApi.getCineplexInfor(maHeThongRap);
-    dispatch(getCineplexInfor(res.data.content));
+    const res = await MovieApi.LayDanhSachPhim(maNhom);
+    dispatch(LayDanhSachPhim(res.data.content));
   } catch (error) {
     console.log(error);
   }

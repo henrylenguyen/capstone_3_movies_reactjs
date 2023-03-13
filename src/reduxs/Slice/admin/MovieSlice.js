@@ -3,15 +3,16 @@ import { createSlice } from "@reduxjs/toolkit";
 const movieSlice = createSlice({
   name: "movies",
   initialState: {
-    movieList: [],
+    LichChieuHeThongRap: [],
     ticketList: [],
-    cineplex: [],
+    CumRapTheoHeThong: [],
+    DanhSachPhim: [],
   },
   reducers: {
-    getMoviesShowtimeInfor: (state, { payload }) => {
+    LayThongTinLichChieuHeThongRap: (state, { payload }) => {
       return {
         ...state,
-        movieList: payload,
+        LichChieuHeThongRap: payload,
       };
     },
     getSeatsByShowtimeCode: (state, { payload }) => {
@@ -20,14 +21,24 @@ const movieSlice = createSlice({
         ticketList: payload,
       };
     },
-    getCineplexInfor:(state,{payload})=>{
-       return {
-         ...state,
-         cineplex: payload,
-       };
-    }
+    LayThongTinCumRapTheoHeThong: (state, { payload }) => {
+      return {
+        ...state,
+        CumRapTheoHeThong: payload,
+      };
+    },
+    LayDanhSachPhim: (state, { payload }) => {
+      return {
+        ...state,
+        DanhSachPhim: payload,
+      };
+    },
   },
 });
-export const { getMoviesShowtimeInfor, getSeatsByShowtimeCode, getCineplexInfor } =
-  movieSlice.actions;
+export const {
+  LayThongTinLichChieuHeThongRap,
+  getSeatsByShowtimeCode,
+  LayThongTinCumRapTheoHeThong,
+  LayDanhSachPhim,
+} = movieSlice.actions;
 export default movieSlice.reducer;

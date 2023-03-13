@@ -1,59 +1,67 @@
 import { Avatar, Image } from "antd";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import Active from "components/admin/span/Active";
 import CustomTable from "components/admin/table/CustomTable";
-
 import removeVietnameseTones from "config/admin/convertVietnamese";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import InActive from "components/admin/span/InActive";
+import Pending from "components/admin/span/Pending";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
-const TicketList = ({phim}) => {
- console.log("props:", phim);
- const data = [
-  {
-    maLichChieu: 44239,
-    tenCumRap: "CGV - Aeon Tân Phú",
-    tenRap: "Rạp 5",
-    diaChi: "30 Bờ Bao Tân Thắng, Sơn Kỳ, Tân Phú",
-    tenPhim: "Lat mat 48h1234",
-    hinhAnh:
-      "https://movienew.cybersoft.edu.vn/hinhanh/lat-mat-48h123_gp01.jpg",
-    ngayChieu: "01/09/2021",
-    gioChieu: "07:09",
-  },
-  {
-    maLichChieu: 44239,
-    tenCumRap: "CGV - Aeon Tân Phú",
-    tenRap: "Rạp 5",
-    diaChi: "30 Bờ Bao Tân Thắng, Sơn Kỳ, Tân Phú",
-    tenPhim: "Lat mat 48h1234",
-    hinhAnh:
-      "https://movienew.cybersoft.edu.vn/hinhanh/lat-mat-48h123_gp01.jpg",
-    ngayChieu: "01/09/2021",
-    gioChieu: "07:09",
-  },
-];
+const TicketList = ({ phim }) => {
+  const arr = [];
+  const ListPhim = [];
+  const [index, setIndex] = useState("");
+  console.log("index:", index);
+  const [search, setSearch] = useSearchParams();
+  const chitietve = search.get("chitietvedadat");
+  console.log("chitietve:", chitietve);
+  const dispatch = useDispatch();
+
+  // Do phim là vòng lặp nên chỉ sử dụng mảng để push vào
+  phim?.map((item) => {
+    const { lstLichChieuTheoPhim, ...rest } = item;
+    arr.push({ ...rest, tuychinh: "Xem chi tiết" });
+    ListPhim.push(lstLichChieuTheoPhim);
+  });
+  let dataLichChieu;
+  ListPhim?.map((item, vitri) => {
+    if (vitri === index) {
+      dataLichChieu = item;
+    }
+  });
+  console.log("dataLichChieu:", dataLichChieu);
+
+  const data = arr;
   const keys = data && Object.keys(data[0]);
-
+  // -------------------------------Lấy key của data-------------------------------------
   const dataIndexKey = keys?.map((item) => {
     return {
       dataIndex: item,
       key: item,
     };
   });
-  console.log("dataIndexKey:", dataIndexKey);
-  // 3. Tạo ra mảng title chứa các đối tượng title khác nhau, do mình nhập
+  // ------------------------------Title của cột trong table----------------------------
   const dataTitle = [
-    { title: "Mã lịch chiếu" },
+    { title: "Mã phim" },
     { title: "Tên phim" },
     {
       title: "Hình ảnh",
     },
-    { title: "Tên cụm rạp" },
-    { title: "Tên rạp" },
-    { title: "Địa chỉ" },
-    { title: "Ngày chiếu" },
-    { title: "Giờ chiếu" },
+    { title: "Hot" },
+    { title: "Đang chiếu" },
+    { title: "Sắp chiếu" },
+    { title: "Tùy chỉnh" },
   ];
-  console.log("dataTitle:", dataTitle);
-
+  //----------------------- Xử lý sự kiện click tại ô cột "Tuỳ chỉnh"-----------------
+  const handleCellClick = (record, rowIndex) => {
+    setIndex(rowIndex);
+    const rap = search.get("rap");
+    setSearch({ rap, chitietvedadat: record.maPhim });
+    
+  };
+  // ---------------------- Dữ liệu trong table--------------------------------------
   const columns = dataTitle.map((title) => {
     const removeTone = removeVietnameseTones(title.title);
     const newTitle = removeTone.replace(/\s+/g, "").toLowerCase();
@@ -61,20 +69,45 @@ const TicketList = ({phim}) => {
     const dataIndexKeyItem = dataIndexKey.find(
       (item) => item.key.toLowerCase() === newTitle
     );
+    if (newTitle === "hot" || newTitle === "sapchieu") {
+      return {
+        title: title.title,
+        dataIndex: dataIndexKeyItem.dataIndex,
+        key: dataIndexKeyItem.key,
+        width: 150,
+        render: (text) => (text ? <Active /> : <InActive />),
+      };
+    }
+    if (newTitle === "dangchieu") {
+      return {
+        title: title.title,
+        dataIndex: dataIndexKeyItem.dataIndex,
+        key: dataIndexKeyItem.key,
+        width: 150,
+        align: "center",
+
+        render: (text) => (text ? <Pending /> : <InActive />),
+      };
+    }
     if (newTitle === "hinhanh") {
       return {
         title: title.title,
         dataIndex: dataIndexKeyItem.dataIndex,
         key: dataIndexKeyItem.key,
+        align: "center",
+
         render: (text) => <Image src={text} width="100px"></Image>,
       };
     }
-    if (newTitle === "avatar") {
+    if (newTitle === "tuychinh") {
       return {
         title: title.title,
         dataIndex: dataIndexKeyItem.dataIndex,
         key: dataIndexKeyItem.key,
-        render: (text) => <Avatar src={text} size="large"></Avatar>,
+        align: "center",
+        onCell: (record, rowIndex) => ({
+          onClick: () => handleCellClick(record, rowIndex),
+        }),
       };
     }
     return {
@@ -82,9 +115,9 @@ const TicketList = ({phim}) => {
       dataIndex: dataIndexKeyItem.dataIndex,
       key: dataIndexKeyItem.key,
       width: 250,
+      align: "center",
     };
   });
-
   return <CustomTable columns={columns} data={data}></CustomTable>;
 };
 

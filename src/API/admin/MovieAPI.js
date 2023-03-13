@@ -1,16 +1,22 @@
 import AdminRequest from "./requestAPIAdmin";
 
 const MovieApi = {
-  getMoviesShowtimeInfor: (maNhom) =>
+  LayThongTinLichChieuHeThongRap: (maNhom) =>
     AdminRequest.get("/QuanLyRap/LayThongTinLichChieuHeThongRap", {
       params: {
         maNhom,
       },
     }),
-  getCineplexInfor: (maHeThongRap) =>
+  LayThongTinCumRapTheoHeThong: (maHeThongRap) =>
     AdminRequest.get("/QuanLyRap/LayThongTinCumRapTheoHeThong", {
       params: {
         maHeThongRap,
+      },
+    }),
+  LayDanhSachPhim: (maNhom) =>
+    AdminRequest.get("/QuanLyPhim/LayDanhSachPhim", {
+      params: {
+        maNhom,
       },
     }),
 };

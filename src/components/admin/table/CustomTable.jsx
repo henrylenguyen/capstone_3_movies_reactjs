@@ -1,26 +1,30 @@
-import {
-  Select,
-  Button,
-  Input,
-  Space,
-  Table,
-} from "antd";
-import React, { useRef, useState } from "react";
+import { Select, Button, Input, Space, Table, Spin } from "antd";
+import React, { useEffect, useRef, useState } from "react";
 import { SearchOutlined, LoadingOutlined } from "@ant-design/icons";
 import Highlighter from "react-highlight-words";
 const { Option } = Select;
 
 const CustomTable = ({ columns, data, ...props }) => {
   const [searchText, setSearchText] = useState("");
+   const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState(data);
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
+  useEffect(() => {
+    if (filteredData.length > 0) {
+      setLoading(false);
+    }
+  }, [filteredData]);
   
   // --------------------------- TÌM KIẾM------------------------
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
+    setLoading(true);
     setSearchText(selectedKeys[0]);
-    setSearchedColumn(dataIndex);
+    setSearchedColumn(dataIndex);  
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
   };
   // --------------------------- NÚT RESET-----------------------
   const handleReset = (clearFilters) => {
@@ -122,21 +126,34 @@ const CustomTable = ({ columns, data, ...props }) => {
 
   return (
     <div className="usertable bg-adminPrimary p-5 flex-grow rounded-lg select-none overflow-auto">
-      <Table
-        columns={columns.map((col) => {
-          if(col.key.toLowerCase()==="hinhanh" || col.key.toLowerCase()==="avatar"){
-             return {
-               ...col,
-             };
-          }
-          return {
-            ...col,
-            ...getColumnSearchProps(col.dataIndex),
-          };
-        })}
-        dataSource={filteredData}
-        scroll={{ x: "max-content", y: 500 }}
-      />
+      <Spin spinning={loading} size="large" >
+        <Table
+          columns={columns.map((col) => {
+            if (
+              col.key.toLowerCase() === "hinhanh" ||
+              col.key.toLowerCase() === "avatar" ||
+              col.key.toLowerCase() === "hot" ||
+              col.key.toLowerCase() === "dangchieu" ||
+              col.key.toLowerCase() === "sapchieu" ||
+              col.key.toLowerCase() === "mota" ||
+              col.key.toLowerCase() === "bidanh" ||
+              col.key.toLowerCase() === "tuychinh" ||
+              col.key.toLowerCase() === "trailer"
+            ) {
+              return {
+                ...col,
+              };
+            }
+            return {
+              ...col,
+              ...getColumnSearchProps(col.dataIndex),
+            };
+          })}
+          dataSource={filteredData}
+          scroll={{ x: "max-content", y: 500 }}
+          align="center"
+        />
+      </Spin>
     </div>
   );
 };
