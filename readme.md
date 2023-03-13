@@ -219,5 +219,5 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ## react-bootstrap
 
 ```
-  npm install react-bootstrap
+  npm install react-bootstrap bootstrap
 ```

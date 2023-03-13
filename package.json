@@ -17,6 +17,7 @@
     "@redux-devtools/extension": "^3.2.5",
     "antd": "^5.2.2",
     "apexcharts": "^3.37.1",
+    "bootstrap": "^5.2.3",
     "chart.js": "^4.2.1",
     "clsx": "^1.2.1",
     "moment": "^2.29.4",
