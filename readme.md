@@ -221,3 +221,9 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm install react-bootstrap bootstrap
 ```
+## Chakra UI
+
+```
+  npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion
+
+```
