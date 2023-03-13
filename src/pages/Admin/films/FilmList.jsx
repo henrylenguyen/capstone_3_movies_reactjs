@@ -1,4 +1,5 @@
 
+import ModalComponent from "components/admin/modal/Modal";
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import useLocalStorage from "hooks/useLocalStorage";
@@ -6,7 +7,7 @@ import React from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 
 const handleEdit = (item)=>{
-  console.log(item)
+  <ModalComponent></ModalComponent>;
 }
 const handleDelete = (item)=>{
   console.log(item)
