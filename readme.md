@@ -233,3 +233,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i react-modal
 ```
+
+## mime-type (dùng để xác định kiểu dữ liệu)
+```
+  npm i mime-types
+```
