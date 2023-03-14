@@ -1,4 +1,5 @@
 
+import ModalForm from "components/admin/modal/Modal";
 import ModalComponent from "components/admin/modal/Modal";
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
@@ -58,11 +59,13 @@ const FilmList = ({ phim }) => {
       handleDelete
     );
   });
+  
   return (
-    <div className="left relative w-full">
-      {/* <div className="modal absolute top-1/2 -translate-y-1/2 left-[50%]  -translate-x-[50%] z-50 w-[500px] h-[400px] bg-blue-400"></div> */}
-      <CustomTable data={data} columns={columns}></CustomTable>
-    </div>
+    
+    <>
+      <ModalForm></ModalForm>
+      {/* <CustomTable data={data} columns={columns}></CustomTable> */}
+    </>
   );
   
 };
