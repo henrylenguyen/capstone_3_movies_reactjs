@@ -1,45 +1,61 @@
-import { Modal, Button, Form } from "react-bootstrap";
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+} from "@chakra-ui/react";
 
-function ModalComponent() {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+function ModalComponent(props) {
+  const [isOpen, setIsOpen] = useState(true);
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
+  const handleFinish = (e) => {
+    e.preventDefault();
     // Handle form submission here
+    setIsOpen(false);
   };
 
   return (
-    <>
-      <Button variant="primary" onClick={handleShow}>
-        Open Modal
-      </Button>
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Sign Up</ModalHeader>
+          <ModalCloseButton />
+          <form onSubmit={handleFinish}>
+            <ModalBody>
+              <FormControl id="email">
+                <FormLabel>Email</FormLabel>
+                <Input type="email" required />
+              </FormControl>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sign Up</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-            </Form.Group>
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <Input type="password" required />
+              </FormControl>
+            </ModalBody>
 
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Modal.Body>
+            <ModalFooter>
+              <Button colorScheme="blue" mr={3} onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button colorScheme="green" type="submit">
+                Sign Up
+              </Button>
+            </ModalFooter>
+          </form>
+        </ModalContent>
       </Modal>
-    </>
   );
 }
 

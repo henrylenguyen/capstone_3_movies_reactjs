@@ -3,17 +3,18 @@ import ModalComponent from "components/admin/modal/Modal";
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import useLocalStorage from "hooks/useLocalStorage";
-import React from "react";
+import React, { useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 
-const handleEdit = (item)=>{
-  <ModalComponent></ModalComponent>;
-}
+
 const handleDelete = (item)=>{
   console.log(item)
 }
 const FilmList = ({ phim }) => {
-  console.log("phim:", phim);
+  const [isOpen, setIsOpen] = useState(false);
+  const handleEdit = (item) => {
+   setIsOpen(true);
+  };
   const arr = [];
   phim?.map((item) => {
     const { maNhom, ...rest } = item;
@@ -28,7 +29,6 @@ const FilmList = ({ phim }) => {
       key: item,
     };
   });
-  console.log("dataIndexKey:", dataIndexKey);
   const dataTitle = [
     { title: "Mã phim" },
     { title: "Tên phim" },
@@ -58,8 +58,13 @@ const FilmList = ({ phim }) => {
       handleDelete
     );
   });
-  // từ đó truyền vào customTable
-  return <CustomTable data={data} columns={columns}></CustomTable>;
+  return (
+    <div className="left relative w-full">
+      <div className="modal absolute top-1/2 -translate-y-1/2 left-[50%]  -translate-x-[50%] z-50 w-[500px] h-[400px] bg-blue-400"></div>
+      <CustomTable data={data} columns={columns}></CustomTable>
+    </div>
+  );
+  
 };
 
 export default FilmList;
