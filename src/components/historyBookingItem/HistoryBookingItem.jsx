@@ -6,8 +6,6 @@ function HistoryBookingItem({ infoItem }) {
   const { giaVe, hinhAnh, ngayDat, tenPhim, thoiLuongPhim, danhSachGhe } =
     infoItem;
 
-  console.log(infoItem);
-
   return (
     <div className="historyBooking__item col-span-1">
       <div className="grid grid-cols-2 gap-x-2 gap-y-4">
@@ -30,7 +28,9 @@ function HistoryBookingItem({ infoItem }) {
           <div className="my-2">
             <p>{danhSachGhe[0].tenCumRap}</p>
             <p>
-              {danhSachGhe.length < 2 ? "Ghế đã đặt: " : "Hàng ghế đã đặt:"}
+              {danhSachGhe.length < 2
+                ? "Ghế đã đặt: "
+                : "Danh sách ghế đã đặt:"}
             </p>
             <div className="historyBooking__item-chair grid grid-cols-4 gap-2 h-28 p-1 overflow-x-hidden overflow-y-scroll">
               {danhSachGhe.map((item, idx) => (

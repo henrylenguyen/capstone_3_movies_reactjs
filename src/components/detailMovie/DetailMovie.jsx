@@ -4,12 +4,14 @@ import { RATING_LABEL } from "constants/constants";
 import moment from "moment";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetSelectedMovie } from "reduxs/Slice/MoviesSlice";
 
 import "./detailMovie.scss";
 
 function DetailMovie({ isLoading }) {
   const selectedMovie = useSelector((state) => state.movie.selectedMovie);
+  const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -42,6 +44,13 @@ function DetailMovie({ isLoading }) {
       setScore(score);
     }
   }, [progress]);
+
+  // Reset selected movie when user change page
+  useEffect(() => {
+    return () => {
+      dispatch(resetSelectedMovie());
+    };
+  }, []);
 
   function handleCloseModal() {
     setOpenModal(false);

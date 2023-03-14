@@ -4,7 +4,7 @@ import MoviePagination from "components/moviePagination/MoviePagination";
 import SearchMovieList from "components/searchMovieList/SearchMovieList";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { fetchMoviePagination } from "thunks/movieThunk";
 
@@ -69,6 +69,7 @@ function MovieList() {
             ))}
           </div>
         )}
+        {/* Show loading when movieList hasn't call api yet */}
         {!isLoading && movieList.items.length < 1 && (
           <div className="flex items-center gap-4 bg-blue-500 p-2 text-white rounded">
             <svg

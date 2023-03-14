@@ -33,8 +33,8 @@ function MovieItem(props) {
     setOpenModal(false);
   }
 
-  function handleChangePage(movieId, movieName) {
-    navigate(`/detail/${movieId}?movie=${movieName}`);
+  function handleChangePage() {
+    navigate(`/detail/${maPhim}?movie=${tenPhim}`);
     document.documentElement.scrollTop = 0;
   }
 
@@ -54,6 +54,15 @@ function MovieItem(props) {
       </Card>
     );
 
+  function handleClick(e) {
+    const { target } = e;
+    if (target.tagName === "button" || target.tagName === "svg") return;
+    else {
+      navigate(`/detail/${maPhim}?movie=${tenPhim}`);
+      document.documentElement.scrollTop = 0;
+    }
+  }
+
   return (
     <div
       className="col-span-1 h-72 md:h-150 shadow-none hover:shadow-md"
@@ -61,7 +70,11 @@ function MovieItem(props) {
       onMouseOver={() => handleActiveHover(idx)}
       onMouseOut={handleRemoveActive}
     >
-      <Card className="w-full movie__item hidden md:block">
+      <Card
+        className="w-full movie__item hidden md:block"
+        onClick={handleClick}
+        sx={{ cursor: "pointer" }}
+      >
         <div className="movie__item-container-img">
           <CardMedia
             component="img"
@@ -110,7 +123,7 @@ function MovieItem(props) {
               <Button
                 className="hidden md:block w-full h-24 text-3xl"
                 variant="contained"
-                onClick={() => handleChangePage(maPhim, tenPhim)}
+                onClick={handleChangePage}
               >
                 Mua vé
               </Button>

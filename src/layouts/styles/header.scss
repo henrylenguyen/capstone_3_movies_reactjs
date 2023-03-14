@@ -46,9 +46,6 @@
 
     .header__navbar-link {
       transition: all 0.34s;
-      &:hover {
-        color: $color-hover-0;
-      }
     }
 
     .header__user-auth {
@@ -56,9 +53,6 @@
 
       a {
         transition: all 0.34s;
-        &:hover {
-          color: $color-hover-0;
-        }
       }
 
       &:first-child::after {
@@ -124,7 +118,7 @@
     button {
       color: #000;
       &:hover {
-        color: $color-hover-0;
+        color: $color-hover-1;
       }
     }
 
@@ -134,7 +128,7 @@
 
     .header__user-login-menu-item {
       &:hover {
-        color: $color-hover-0;
+        color: $color-hover-1;
       }
     }
   }

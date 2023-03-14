@@ -3,7 +3,7 @@ import React from "react";
 
 function SearchMovieList({ onChange }) {
   return (
-    <div className="block md:hidden my-4">
+    <div className="block lg:hidden my-4">
       <TextField
         fullWidth
         label="Tìm kiếm phim"

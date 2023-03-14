@@ -22,6 +22,9 @@ const movieSlice = createSlice({
     setSelectedMovie(state, action) {
       state.selectedMovie = { ...action.payload };
     },
+    resetSelectedMovie(state) {
+      state.selectedMovie = {};
+    },
   },
 });
 export const {
@@ -29,5 +32,6 @@ export const {
   getMoviePagination,
   loadingDone,
   setSelectedMovie,
+  resetSelectedMovie,
 } = movieSlice.actions;
 export default movieSlice.reducer;

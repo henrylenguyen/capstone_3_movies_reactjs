@@ -108,11 +108,9 @@ function Header() {
             </div>
           </div>
           <div className="header__navbar flex items-center gap-6">
-            <div className="header_mobile-auth"></div>
-
             {navigateList.map((navigate) => (
               <a
-                className="header__navbar-link font-medium text-base"
+                className="header__navbar-link text-black hover:text-blue-400 font-medium text-base"
                 href={`${navigate.idPath}`}
                 key={navigate.id}
                 variant="a"
@@ -127,7 +125,7 @@ function Header() {
                 <div className="header__user-auth">
                   <Link
                     to="/signIn"
-                    className="font-medium text-sm md:text-base"
+                    className="text-black hover:text-blue-400 font-medium text-sm md:text-base"
                     onClick={() => {
                       document.documentElement.scrollTop = 0;
                     }}
@@ -138,7 +136,7 @@ function Header() {
                 <div className="header__user-auth">
                   <Link
                     to="/signUp"
-                    className="font-medium text-sm md:text-base"
+                    className="font-medium text-sm md:text-base text-black hover:text-blue-400"
                     onClick={() => {
                       document.documentElement.scrollTop = 0;
                     }}
