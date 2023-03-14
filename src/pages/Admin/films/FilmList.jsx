@@ -60,7 +60,7 @@ const FilmList = ({ phim }) => {
   });
   return (
     <div className="left relative w-full">
-      <div className="modal absolute top-1/2 -translate-y-1/2 left-[50%]  -translate-x-[50%] z-50 w-[500px] h-[400px] bg-blue-400"></div>
+      {/* <div className="modal absolute top-1/2 -translate-y-1/2 left-[50%]  -translate-x-[50%] z-50 w-[500px] h-[400px] bg-blue-400"></div> */}
       <CustomTable data={data} columns={columns}></CustomTable>
     </div>
   );
