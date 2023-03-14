@@ -238,3 +238,8 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i mime-types
 ```
+## @headlessui/react
+
+```
+  npm i @headlessui/react
+```
