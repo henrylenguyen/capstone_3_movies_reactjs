@@ -15,7 +15,10 @@ function TheaterList() {
   }
 
   return (
-    <section className="theater mb-16 hidden lg:block" id="theaterList">
+    <section
+      className="theater mb-16 hidden lg:block aspect-auto"
+      id="theaterList"
+    >
       <div className="theater__content container mx-auto">
         <h2 className="text-center text-4xl uppercase mb-4">Cụm rạp</h2>
 

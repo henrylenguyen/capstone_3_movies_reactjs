@@ -65,7 +65,7 @@ function MovieItem(props) {
 
   return (
     <div
-      className="col-span-1 h-72 md:h-150 shadow-none hover:shadow-md"
+      className="col-span-1 h-72 md:h-150 shadow-none hover:shadow-md "
       style={{ overflow: "hidden" }}
       onMouseOver={() => handleActiveHover(idx)}
       onMouseOut={handleRemoveActive}
@@ -93,7 +93,7 @@ function MovieItem(props) {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="w-12 h-12"
+              className="w-16 h-16"
             >
               <path
                 strokeLinecap="round"
@@ -121,9 +121,10 @@ function MovieItem(props) {
 
             {active && (
               <Button
-                className="hidden md:block w-full h-24 text-3xl"
+                className="hidden md:block w-full h-24"
                 variant="contained"
                 onClick={handleChangePage}
+                sx={{ fontSize: "1.02rem" }}
               >
                 Mua vé
               </Button>

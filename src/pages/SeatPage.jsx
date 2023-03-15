@@ -12,6 +12,7 @@ import TotalAndPaid from "components/totalAndPaid/TotalAndPaid";
 import Swal from "sweetalert2";
 import { ACCESS_TOKEN } from "constants/constants";
 import ScrollBtn from "components/scrollBtn/ScrollBtn";
+import { resetTicketData } from "reduxs/Slice/TicketSlice";
 
 function SeatPage() {
   const userLogin = useSelector((state) => state.user.userLogin);
@@ -26,6 +27,10 @@ function SeatPage() {
 
   useEffect(() => {
     dispatch(fetchTicketData(+scheduleId));
+
+    return () => {
+      dispatch(resetTicketData());
+    };
   }, []);
 
   useEffect(() => {

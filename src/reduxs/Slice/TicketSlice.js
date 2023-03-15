@@ -19,6 +19,9 @@ const ticketSlice = createSlice({
     removeAllBookedTicket(state) {
       state.bookedTicketList.splice(0);
     },
+    resetTicketData(state) {
+      state.ticketData = null;
+    },
   },
 });
 
@@ -28,5 +31,6 @@ export const {
   setBookedTicketList,
   removeBookedTicket,
   removeAllBookedTicket,
+  resetTicketData,
 } = actions;
 export default reducer;

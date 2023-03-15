@@ -24,7 +24,7 @@ function TheaterMovie({ itemMovie }) {
     <div className="theater__movie bg-white">
       <div className="grid grid-cols-12 gap-2">
         <div className="col-span-4">
-          <img src={hinhAnh} className="w-full" />
+          <img src={hinhAnh} className="w-full bg-cover" />
         </div>
         <div className="col-span-8">
           <div className="flex gap-1 items-center">

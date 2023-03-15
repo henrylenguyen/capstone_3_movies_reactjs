@@ -48,7 +48,7 @@ function Carousel() {
   }, [bannerList]);
 
   return (
-    <section className="hidden md:block carousel">
+    <section className="hidden md:block carousel aspect-auto">
       <Swiper
         spaceBetween={0}
         loop
