@@ -3,8 +3,6 @@ import { useEffect, useRef } from "react";
 
 
 const Modal = ({ isOpen, closeModal, children }) => {
-  console.log("closeModal:", closeModal);
-  console.log("children:", children);
   const modalRef = useRef(null);
   useOnClickOutside(modalRef, closeModal);
 

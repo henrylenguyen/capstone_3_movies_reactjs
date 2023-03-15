@@ -5,35 +5,34 @@ import ModalForm from "components/admin/modal/Modal";
 import ModalComponent from "components/admin/modal/Modal";
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
-import useLocalStorage from "hooks/useLocalStorage";
 import React, { useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 import useModalForm from "hooks/useModalForm";
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
+  tenPhim: yup.string().required(),
   email: yup.string().email().required(),
   password: yup.string().min(6).required(),
 });
 
 const fields = [
   {
-    label: "Name",
-    name: "name",
+    label: "Tên phim",
+    name: "tenPhim",
     type: "text",
-    placeholder: "Enter your name",
+    placeholder: "Nhập tên phim",
   },
   {
-    label: "Email",
-    name: "email",
-    type: "email",
-    placeholder: "Enter your email",
+    label: "Bí danh",
+    name: "biDanh",
+    type: "text",
+    placeholder: "Nhập bí danh",
   },
   {
-    label: "Password",
-    name: "password",
-    type: "password",
-    placeholder: "Enter your password",
+    label: "Trailer",
+    name: "trailer",
+    type: "text",
+    placeholder: "Nhập url trailer youtube",
   },
 ];
 
@@ -51,7 +50,7 @@ const FilmList = ({ phim }) => {
     title: "Chỉnh sửa Phim"
   });
 
-  const handleEdit = (item) => {
+  const handleEdit = () => {
     openModal();
   };
   const arr = [];
