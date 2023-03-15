@@ -7,8 +7,6 @@ import "./historyBooking.scss";
 function HistoryBookingList() {
   const userLogin = useSelector((state) => state.user.userLogin);
 
-  console.log(userLogin);
-
   return (
     <section className="historyBooking my-4 h-100 overflow-y-scroll overflow-x-hidden">
       {!userLogin && userLogin.thongTinDatVe?.length && (

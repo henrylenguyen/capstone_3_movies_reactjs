@@ -32,7 +32,9 @@ function TheaterMovie({ itemMovie }) {
             <h2 className="text-xl uppercase">{tenPhim}</h2>
           </div>
           <div className="my-4">
-            <p className="capitalize mb-2">Lịch chiếu phim hôm nay:</p>
+            <p className="capitalize mb-2 text-blue-500 font-medium ">
+              Lịch chiếu phim
+            </p>
             <div className="grid grid-cols-5 gap-2">
               {lstLichChieuTheoPhim.map((item) => {
                 return (

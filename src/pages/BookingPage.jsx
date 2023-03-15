@@ -25,8 +25,7 @@ const BookingPage = () => {
 
   useEffect(() => {
     function setDefaultParams() {
-      if (!searchParams.get("page"))
-        setSearchParams({ page: 1, ...searchParams });
+      if (!searchParams.get("page")) setSearchParams({ page: 1 });
     }
 
     setDefaultParams();

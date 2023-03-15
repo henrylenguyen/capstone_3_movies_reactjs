@@ -1,10 +1,11 @@
 import { CircularProgress } from "@mui/material";
+
 import MovieItem from "components/movieItem/MovieItem";
 import MoviePagination from "components/moviePagination/MoviePagination";
 import SearchMovieList from "components/searchMovieList/SearchMovieList";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { fetchMoviePagination } from "thunks/movieThunk";
 
@@ -46,8 +47,7 @@ function MovieList() {
   return (
     <section id="movieList" className="movie" style={{ overflow: "hidden" }}>
       <div className="movie__content container mx-auto py-20 md:py-12 px-3">
-        <h2 className="text-4xl uppercase text-center mb-4">Danh sách phim</h2>
-
+        <h2 className="text-center text-3xl uppercase my-4">Danh sách phim</h2>
         <SearchMovieList onChange={handleSearchMovie} />
 
         {isLoading && movieList.length < 1 && (

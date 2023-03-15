@@ -148,8 +148,11 @@ function DetailMovie({ isLoading }) {
                 <Button
                   variant="contained"
                   onClick={() => console.log("click")}
+                  fullWidth
                 >
-                  <a href="#theaterMovieList">Mua vé</a>
+                  <a href="#theaterMovieList" className="block w-full">
+                    Mua vé
+                  </a>
                 </Button>
               </div>
             </div>

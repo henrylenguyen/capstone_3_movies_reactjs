@@ -7,7 +7,7 @@ import { USER_TYPE } from "constants/constants";
 
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { logout } from "reduxs/Slice/UserSlice";
 import { logoutUser } from "reduxs/Slice/UserSlice";
 import Swal from "sweetalert2";
@@ -18,6 +18,7 @@ function Header() {
   const userLogin = useSelector((state) => state.user.userLogin);
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
 
   const dispatch = useDispatch();
 
@@ -37,6 +38,18 @@ function Header() {
 
   function handleCloseNavbar() {
     setShowNav(false);
+  }
+
+  function handleLinkClick(e, idPath) {
+    const { target } = e;
+
+    // return to home page
+    if (Object.keys(params).length > 0 || window.location.pathname !== "/") {
+      navigate("/");
+      return;
+    }
+    // if user have already stand on home page
+    target.href = `${idPath}`;
   }
 
   function handleLogout() {
@@ -111,9 +124,10 @@ function Header() {
             {navigateList.map((navigate) => (
               <a
                 className="header__navbar-link text-black hover:text-blue-400 font-medium text-base"
-                href={`${navigate.idPath}`}
                 key={navigate.id}
                 variant="a"
+                style={{ cursor: "pointer" }}
+                onClick={(e) => handleLinkClick(e, navigate.idPath)}
               >
                 {navigate.name}
               </a>

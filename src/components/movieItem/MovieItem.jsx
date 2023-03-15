@@ -16,7 +16,7 @@ import "./movieItem.scss";
 
 function MovieItem(props) {
   const { onActive, idx, active } = props;
-  const { hinhAnh, moTa, tenPhim, trailer, maPhim, hot } = props.movie;
+  const { hinhAnh, moTa, tenPhim, trailer, maPhim, hot, biDanh } = props.movie;
   const [openModal, setOpenModal] = useState(false);
   const isLoading = useSelector((state) => state.movie.isLoading);
   const navigate = useNavigate();
@@ -34,7 +34,7 @@ function MovieItem(props) {
   }
 
   function handleChangePage() {
-    navigate(`/detail/${maPhim}?movie=${tenPhim}`);
+    navigate(`/detail/${maPhim}?movie=${biDanh}`);
     document.documentElement.scrollTop = 0;
   }
 
