@@ -1,4 +1,6 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 
+import * as yup from "yup";
 import ModalForm from "components/admin/modal/Modal";
 import ModalComponent from "components/admin/modal/Modal";
 import CustomTable from "components/admin/table/CustomTable";
@@ -6,15 +8,51 @@ import removeVietnameseTones from "config/admin/convertVietnamese";
 import useLocalStorage from "hooks/useLocalStorage";
 import React, { useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
+import useModalForm from "hooks/useModalForm";
 
+const schema = yup.object().shape({
+  name: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+});
 
-const handleDelete = (item)=>{
-  console.log(item)
-}
+const fields = [
+  {
+    label: "Name",
+    name: "name",
+    type: "text",
+    placeholder: "Enter your name",
+  },
+  {
+    label: "Email",
+    name: "email",
+    type: "email",
+    placeholder: "Enter your email",
+  },
+  {
+    label: "Password",
+    name: "password",
+    type: "password",
+    placeholder: "Enter your password",
+  },
+];
+
+const handleDelete = (item) => {
+  console.log(item);
+};
+ const handleSubmitForm = (data) => {
+   console.log(data);
+ };
 const FilmList = ({ phim }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { ModalForm, openModal } = useModalForm({
+    schema,
+    fields,
+    handleSubmitForm,
+    title: "Chỉnh sửa Phim"
+  });
+
   const handleEdit = (item) => {
-   setIsOpen(true);
+    openModal();
   };
   const arr = [];
   phim?.map((item) => {
@@ -61,13 +99,11 @@ const FilmList = ({ phim }) => {
   });
   
   return (
-    
     <>
-      <ModalForm></ModalForm>
-      {/* <CustomTable data={data} columns={columns}></CustomTable> */}
+      <ModalForm />
+      <CustomTable data={data} columns={columns}></CustomTable>
     </>
   );
-  
 };
 
 export default FilmList;
