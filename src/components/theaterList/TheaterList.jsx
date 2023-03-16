@@ -16,7 +16,7 @@ function TheaterList() {
 
   return (
     <section
-      className="theater mb-16 hidden lg:block aspect-auto"
+      className="theater mb-16 hidden lg:block aspect-auto rounded"
       id="theaterList"
     >
       <div className="theater__content container mx-auto">

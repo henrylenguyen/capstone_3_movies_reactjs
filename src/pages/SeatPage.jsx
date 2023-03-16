@@ -66,7 +66,7 @@ function SeatPage() {
   }, []);
 
   return (
-    <section className="seat__container bg-[#021224] w-full h-full text-white pb-5 md:pb-0 ">
+    <section className="seat__container bg-[#021224] w-full h-full text-white pb-5 md:pb-0 aspect-auto">
       <div className="seat__content xl:flex xl:justify-between mx-auto pt-[5rem] xl:pb-[5rem] gap-7 xl:flex-row sm:container md:p-5">
         <div className="xl:w-[60%] w-[100%]">
           <div className="flex flex-col items-center">
@@ -100,7 +100,7 @@ function SeatPage() {
             ))}
           </div>
         </div>
-        <div className="w-full h-full rounded-[2rem] xl:w-[40%]  sm:w-[100%] bg-[#212F4F]  rounded-b-none p-[1.5rem] md:rounded-[2rem] mt-[6rem]">
+        <div className="w-full h-full rounded-[2rem] xl:w-[40%]  sm:w-[100%] bg-[#212F4F]  rounded-b-none p-[1.5rem] md:rounded-[2rem] mt-[6rem] aspect-auto">
           <BookingInfo />
           <BookingTicketDetail />
           <TotalAndPaid />

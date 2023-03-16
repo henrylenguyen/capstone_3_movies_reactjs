@@ -21,12 +21,12 @@ function TheaterMovie({ itemMovie }) {
   }
 
   return (
-    <div className="theater__movie bg-white">
-      <div className="grid grid-cols-12 gap-2">
-        <div className="col-span-4">
-          <img src={hinhAnh} className="w-full bg-cover" />
+    <div className="theater__movie bg-white rounded overflow-hidden">
+      <div className="grid grid-cols-12 gap-2 h-96">
+        <div className="col-span-3">
+          <img src={hinhAnh} className="w-full bg-cover h-96" />
         </div>
-        <div className="col-span-8">
+        <div className="col-span-9">
           <div className="flex gap-1 items-center">
             {hot && <span className="theater__movie-banner">HOT</span>}
             <h2 className="text-xl uppercase">{tenPhim}</h2>

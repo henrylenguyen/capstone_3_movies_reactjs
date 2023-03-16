@@ -29,6 +29,7 @@ function UserPage() {
       await userAPI.updateUser(values);
       setHasUpdate(true);
       dispatch(updateUserLogin(values));
+      setSwitchChange(false);
     } catch (error) {
       console.log(error);
     }
@@ -91,7 +92,12 @@ function UserPage() {
 
               <div>
                 <FormControlLabel
-                  control={<Switch onChange={handleChangeSwitch} />}
+                  control={
+                    <Switch
+                      checked={switchChange}
+                      onChange={handleChangeSwitch}
+                    />
+                  }
                   label={`${
                     switchChange ? "Cập nhật thông tin" : "Xem thông tin"
                   }`}

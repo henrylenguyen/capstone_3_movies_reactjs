@@ -50,7 +50,7 @@ function Carousel() {
   return (
     <section className="hidden md:block carousel aspect-auto">
       <Swiper
-        spaceBetween={0}
+        spaceBetween={-1}
         loop
         slidesPerView={1}
         speed={500}

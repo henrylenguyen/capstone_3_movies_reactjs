@@ -1,7 +1,8 @@
 import { CircularProgress, Tab, Tabs } from "@mui/material";
 import TheaterDetailItem from "components/theaterDetailItem/TheaterDetailItem";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { resetTheaterListByMovieId } from "reduxs/Slice/TheaterSlice";
 import "./theaterDetailList.scss";
 
 function TheaterDetailList({ isLoading }) {
@@ -10,12 +11,19 @@ function TheaterDetailList({ isLoading }) {
   const theaterListByMovieId = useSelector(
     (state) => state.theater.theaterListByMovieId
   );
+  const dispatch = useDispatch();
 
   function handleChange(event, newValue) {
     setIdxValue(newValue);
   }
 
-  if (isLoading || theaterListByMovieId.length < 1)
+  useEffect(() => {
+    return () => {
+      dispatch(resetTheaterListByMovieId());
+    };
+  }, []);
+
+  if (isLoading || !theaterListByMovieId)
     return (
       <div>
         <CircularProgress />

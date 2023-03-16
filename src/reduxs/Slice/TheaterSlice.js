@@ -5,7 +5,7 @@ const theaterSlice = createSlice({
   initialState: {
     theaterList: [],
     isLoading: true,
-    theaterListByMovieId: [],
+    theaterListByMovieId: null,
   },
   reducers: {
     getTheaterList(state, action) {
@@ -17,9 +17,17 @@ const theaterSlice = createSlice({
     getTheaterListByMovieId(state, action) {
       state.theaterListByMovieId = action.payload;
     },
+    resetTheaterListByMovieId(state) {
+      state.theaterListByMovieId = null;
+    },
   },
 });
 
 const { actions, reducer } = theaterSlice;
-export const { getTheaterList, doneLoading, getTheaterListByMovieId } = actions;
+export const {
+  getTheaterList,
+  doneLoading,
+  getTheaterListByMovieId,
+  resetTheaterListByMovieId,
+} = actions;
 export default reducer;

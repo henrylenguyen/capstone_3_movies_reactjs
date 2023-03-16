@@ -16,7 +16,7 @@ function BookingTicketDetail() {
   }
 
   return (
-    <div className="seat__info-booking mt-6 mb-4">
+    <div className="seat__info-booking mt-6 mb-4 aspect-auto">
       {bookedTicketList.length < 1 && (
         <div className="mt-6 mb-4 text-center">
           <h2>Bạn chưa chọn ghế! Vui lòng chọn ghế</h2>

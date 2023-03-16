@@ -115,7 +115,7 @@ function DetailMovie({ isLoading }) {
                       viewBox="0 0 24 24"
                       strokeWidth={1.5}
                       stroke="currentColor"
-                      className="w-14 h-14 text-gray-200 hover:text-white"
+                      className="w-16 h-16 text-gray-200 hover:text-white"
                     >
                       <path
                         strokeLinecap="round"

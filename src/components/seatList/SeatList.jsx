@@ -8,7 +8,7 @@ function SeatList() {
 
   if (!seatList)
     return (
-      <div className="flex items-center justify-center my-20">
+      <div className="flex items-center justify-center my-20 aspect-square">
         <CircularProgress />
       </div>
     );

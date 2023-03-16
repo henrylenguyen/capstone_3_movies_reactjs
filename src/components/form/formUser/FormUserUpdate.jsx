@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import InputField from "../form-controls/InputField";
 import { schemaUpdateUser } from "schemas";
-import { SIGNUP_VARIABLE } from "constants/constants";
+
 import { UPDATE_VARIABLE } from "constants/constants";
 import { Button } from "@mui/material";
 

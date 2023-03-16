@@ -22,7 +22,7 @@ function TheaterItem(props) {
       >
         {value === idx && (
           <div className="theater__item-container bg-white rounded">
-            <div className="grid grid-cols-8 gap-4">
+            <div className="grid grid-cols-8 gap-2">
               <div className="col-span-2 h-120 theater__item-movie overflow-y-scroll">
                 <Tabs
                   orientation="vertical"

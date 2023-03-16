@@ -56,11 +56,9 @@ function MovieItem(props) {
 
   function handleClick(e) {
     const { target } = e;
-    if (target.tagName === "button" || target.tagName === "svg") return;
-    else {
-      navigate(`/detail/${maPhim}?movie=${tenPhim}`);
-      document.documentElement.scrollTop = 0;
-    }
+    if (target.tagName !== "IMG") return;
+    navigate(`/detail/${maPhim}?movie=${biDanh}`);
+    document.documentElement.scrollTop = 0;
   }
 
   return (
@@ -72,8 +70,8 @@ function MovieItem(props) {
     >
       <Card
         className="w-full movie__item hidden md:block"
-        onClick={handleClick}
         sx={{ cursor: "pointer" }}
+        onClick={handleClick}
       >
         <div className="movie__item-container-img">
           <CardMedia
@@ -83,30 +81,32 @@ function MovieItem(props) {
             alt={tenPhim}
           />
           {hot && <Chip className="movie__item-chip hot-label" label="HOT" />}
-          <button
-            className="movie__item-play-btn text-white hover:text-slate-200 hidden md:block"
-            onClick={() => setOpenModal(true)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-16 h-16"
+          <div className="movie__item-play-btn p-4 z-10">
+            <button
+              className="movie__item-play-btn text-white hover:text-slate-200 hidden md:block"
+              onClick={() => setOpenModal(true)}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-              />
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
-              />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-16 h-16"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15.91 11.672a.375.375 0 010 .656l-5.603 3.113a.375.375 0 01-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112z"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
         <CardContent className="h-full">
           <div>

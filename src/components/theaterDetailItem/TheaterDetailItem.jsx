@@ -22,9 +22,10 @@ function TheaterDetailItem({ theaterList, value, idx }) {
             >
               <div className="flex items-center gap-2">
                 <img src={item.hinhAnh} className="w-14 rounded" />
-                <h2 className="text-sm md:text-base">
-                  {item.tenCumRap} - {item.diaChi}
-                </h2>
+                <div>
+                  <h2 className="text-sm md:text-base">{item.tenCumRap}</h2>
+                  <p>{item.diaChi}</p>
+                </div>
               </div>
               <h2 className="my-4 capitalize">Lịch chiếu:</h2>
               <div className="flex gap-4 mt-4 flex-wrap">

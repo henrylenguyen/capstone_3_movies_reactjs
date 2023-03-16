@@ -50,8 +50,14 @@ function Application() {
             </Button>
 
             <p className="my-6">
-              MovieTheater hiện có trên hai phiên bản <a href="#">IOS</a> &{" "}
-              <a href="#">Android</a>
+              MovieTheater hiện có trên hai phiên bản{" "}
+              <a target="_blank" href="https://www.apple.com/vn/app-store/">
+                IOS
+              </a>{" "}
+              &{" "}
+              <a target="_blank" href="https://play.google.com/">
+                Android
+              </a>
             </p>
           </div>
           <div className="col-span-1">

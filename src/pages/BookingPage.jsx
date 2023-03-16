@@ -5,6 +5,7 @@ import ScrollBtn from "components/scrollBtn/ScrollBtn";
 import TheaterList from "components/theaterList/TheaterList";
 
 import React, { useEffect, useState } from "react";
+
 import { useSearchParams } from "react-router-dom";
 
 const BookingPage = () => {

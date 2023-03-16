@@ -51,7 +51,6 @@ function MovieList() {
       style={{ overflow: "hidden" }}
     >
       <div className="movie__content container mx-auto py-20 md:py-12 px-3">
-        <h2 className="text-center text-3xl uppercase my-4">Danh sách phim</h2>
         <SearchMovieList onChange={handleSearchMovie} />
 
         {isLoading && movieList.length < 1 && (

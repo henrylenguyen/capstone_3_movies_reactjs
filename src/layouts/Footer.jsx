@@ -129,10 +129,18 @@ function Footer() {
             <div className="footer__item col-span-1 text-center lg:text-left">
               <h2 className="text-base text-white mb-4 uppercase">Ứng dụng</h2>
               <div className="flex justify-center lg:justify-start gap-4">
-                <a href="#" className="text-sm inline-block">
+                <a
+                  target="_blank"
+                  href="https://www.apple.com/vn/app-store/"
+                  className="text-sm inline-block"
+                >
                   <img className="w-6" src={appStore} />
                 </a>
-                <a href="#" src="#" className="text-sm inline-block">
+                <a
+                  target="_blank"
+                  href="https://play.google.com/"
+                  className="text-sm inline-block"
+                >
                   <img className="w-6" src={googlePlay} />
                 </a>
               </div>
