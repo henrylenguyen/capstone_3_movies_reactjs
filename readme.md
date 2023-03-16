@@ -243,3 +243,7 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i @headlessui/react
 ```
+## antd-img-crop (thư viện cắt ảnh của antd)
+```
+  npm i antd-img-crop
+```
