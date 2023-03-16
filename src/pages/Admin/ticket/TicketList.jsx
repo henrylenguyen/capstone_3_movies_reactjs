@@ -13,10 +13,10 @@ const TicketList = ({ phim }) => {
   const arr = [];
   const ListPhim = [];
   const [index, setIndex] = useState("");
-  console.log("index:", index);
+  
   const [search, setSearch] = useSearchParams();
   const chitietve = search.get("chitietvedadat");
-  console.log("chitietve:", chitietve);
+  
   const dispatch = useDispatch();
 
   // Do phim là vòng lặp nên chỉ sử dụng mảng để push vào

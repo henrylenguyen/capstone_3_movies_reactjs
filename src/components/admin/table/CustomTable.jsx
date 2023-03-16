@@ -5,6 +5,7 @@ import Highlighter from "react-highlight-words";
 const { Option } = Select;
 
 const CustomTable = ({ columns, data, ...props }) => {
+
   const [searchText, setSearchText] = useState("");
    const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState(data);
@@ -46,7 +47,7 @@ const CustomTable = ({ columns, data, ...props }) => {
         }}
         onKeyDown={(e) => e.stopPropagation()}
       >
-        .
+        
         <Input
           ref={searchInput}
           placeholder={`Search ${dataIndex}`}
@@ -126,8 +127,12 @@ const CustomTable = ({ columns, data, ...props }) => {
 
   return (
     <div className="usertable bg-adminPrimary p-5 flex-grow rounded-lg select-none overflow-auto">
-      <Spin spinning={loading} size="large" >
+      <Spin spinning={loading} size="large">
         <Table
+          // key={}
+          dataSource={filteredData}
+          scroll={{ x: "max-content", y: 500 }}
+          align="center"
           columns={columns.map((col) => {
             if (
               col.key.toLowerCase() === "hinhanh" ||
@@ -149,9 +154,6 @@ const CustomTable = ({ columns, data, ...props }) => {
               ...getColumnSearchProps(col.dataIndex),
             };
           })}
-          dataSource={filteredData}
-          scroll={{ x: "max-content", y: 500 }}
-          align="center"
         />
       </Spin>
     </div>

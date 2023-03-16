@@ -9,7 +9,7 @@ const getColumnConfig = (
   dataIndexKeyItem,
   newTitle,
   handleEdit,
-  handleDelete
+  handleDelete,
 ) => {
   const columnConfig = {
     title: title.title,
@@ -25,9 +25,6 @@ const getColumnConfig = (
     columnConfig.width = 150;
     columnConfig.sorter = (a, b) => a.danhGia - b.danhGia;
     columnConfig.align = "center";
-    columnConfig.render = (text)=>{
-      console.log(text)
-    }
   } else if (newTitle === "hot" || newTitle === "sapchieu") {
     columnConfig.width = 150;
     columnConfig.render = (text) => (text ? <Active /> : <InActive />);

@@ -1,16 +1,20 @@
+import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextArea from "../textArea/TextArea";
 import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
+import ImageUpload from "../uploadImage/ImageUpload";
 
 const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
   const {
-    register,
+    control,
     handleSubmit,
+    register,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
+    shouldUnregister: true,
   });
   return (
     <>
@@ -19,33 +23,44 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
       </h3>
       <form
         onSubmit={handleSubmit((data) => handleSubmitForm(data))}
-        className="flex flex-col gap-3"
+        className="flex flex-col gap-5"
       >
         {fields.map(({ label, name, type, placeholder, ...rest }) => (
-          <div key={name}>
+          <div key={name} className="flex flex-col">
             <label className="block font-medium text-gray-700" htmlFor={name}>
               {label}
             </label>
             {type === "textarea" ? (
               <TextArea
+                control={control}
                 placeholder={placeholder}
-                {...rest}
+                name={name}
                 errors={errors[name]}
               />
             ) : type === "checkbox" ? (
               <CheckboxGroup
-                label={label}
-                name={name}
+                control={control}
+                placeholder={placeholder}
                 options={rest.options}
-              ></CheckboxGroup>
+                name={name}
+                errors={errors[name]}
+              />
             ) : type === "radio" ? (
-              <Radio label={label} name={name} options={rest.options}></Radio>
+              <Radio
+                control={control}
+                placeholder={placeholder}
+                options={rest.options}
+                name={name}
+                errors={errors[name]}
+              />
+            ) : type === "file" ? (
+              <ImageUpload control={control} name={name} errors={errors} />
             ) : (
               <input
                 type={type}
                 placeholder={placeholder}
                 {...register(name)}
-                {...rest}
+                name={name}
                 className={`${
                   errors[name]
                     ? "border border-red-500"

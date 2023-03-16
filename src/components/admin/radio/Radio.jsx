@@ -1,26 +1,47 @@
-import { useState } from "react";
-
+import { useEffect, useState } from "react";
 import { Switch, FormControlLabel } from "@mui/material";
-const Radio = ({ options, label, name }) => {
+import { useController } from "react-hook-form";
+
+const Radio = ({ control, options, ...props }) => {
+  const { field } = useController({
+    control,
+    name: props.name,
+  });
+
   const [isChecked, setIsChecked] = useState();
 
+  useEffect(() => {
+    const selectedIndex = options.findIndex(
+      (option) => option.value === field.value
+    );
+    setIsChecked(selectedIndex);
+  }, [field.value, options]);
+
+  const handleSwitchChange = (index) => {
+    setIsChecked(index);
+    const selectedValue = options[index].value;
+    field.onChange(selectedValue);
+  };
+
   return (
-    <div className="select-none radio">
-      {options.map((option, index) => (
-        <FormControlLabel
-          key={index}
-          control={
-            <Switch
-              checked={isChecked === index}
-              onChange={() => setIsChecked(index)}
-              name={name}
-              color="secondary"
-            />
-          }
-          label={option.label}
-        />
-      ))}
-    </div>
+    <>
+      {options &&
+        options.map((option, index) => (
+          <FormControlLabel
+            key={index}
+            {...props}
+            control={
+              <Switch
+                checked={isChecked === index}
+                onChange={() => handleSwitchChange(index)}
+                color="secondary"
+              />
+            }
+            label={option.label}
+          />
+        ))}
+    </>
   );
 };
+
 export default Radio;

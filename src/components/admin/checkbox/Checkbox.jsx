@@ -1,36 +1,56 @@
 import { useState } from "react";
 import { Switch, FormControlLabel } from "@mui/material";
-const CheckboxGroup = ({ options, label, name }) => {
-  const [isChecked, setIsChecked] = useState([]);
+import { useController } from "react-hook-form";
 
-  const handleCheckboxChange = (id) => {
+const CheckboxGroup = ({ options, control, name, ...props }) => {
+  const { field } = useController({
+    control,
+    name,
+  });
+
+  const [isChecked, setIsChecked] = useState(() => {
+    return options.reduce((acc, option, index) => {
+      if (option.value) {
+        acc.push(index);
+      }
+      return acc;
+    }, []);
+  });
+
+  const handleCheckboxChange = (index) => {
     setIsChecked((prev) => {
-      const checked = isChecked.includes(id);
+      const checked = prev.includes(index);
       if (checked) {
-        return isChecked.filter((item) => item !== id);
+        return prev.filter((item) => item !== index);
       } else {
-        return [...prev, id];
+        return [...prev, index];
       }
     });
   };
 
   return (
-    <div className="checkbox select-none">
+    <div className="-mt-5">
       {options.map((option, index) => (
         <FormControlLabel
           key={index}
           control={
             <Switch
               checked={isChecked.includes(index)}
-              onChange={() => handleCheckboxChange(index)}
-              name={name}
+              onChange={() => {
+                handleCheckboxChange(index);
+                field.onChange(isChecked.includes(index) ? false : true);
+              }}
               color="secondary"
+              name={name}
+              value={option.value}
             />
           }
           label={option.label}
+          {...props}
         />
       ))}
     </div>
   );
 };
+
 export default CheckboxGroup;

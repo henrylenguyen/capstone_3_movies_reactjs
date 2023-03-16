@@ -1,18 +1,38 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 
 import * as yup from "yup";
-import ModalForm from "components/admin/modal/Modal";
-import ModalComponent from "components/admin/modal/Modal";
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import React, { useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 import useModalForm from "hooks/useModalForm";
 
-const schema = yup.object().shape({
-  tenPhim: yup.string().required(),
-  moTa: yup.string().min("Mô tả ít nhất 10 ký tự").required("Mô tả là bắt buộc"),
-});
+const schema = yup
+  .object()
+  .shape({
+    tenPhim: yup
+      .string()
+      .required("Tên phim là bắt buộc")
+      .min(5, "Tên phim ít nhất 5 ký tự"),
+    moTa: yup
+      .string()
+      .required("Mô tả là bắt buộc")
+      .min(10, "Mô tả ít nhất 10 ký tự"),
+    dangChieu: yup.boolean().required("Bạn phải chọn ít nhất một giá trị"),
+    trailer: yup
+      .string()
+      .required("Vui lòng nhập đường dẫn youtube")
+      .matches(
+        /^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/gm,
+        "Vui lòng nhập đường dẫn Youtube hợp lệ"
+      ),
+    biDanh: yup
+      .string()
+      .required("Bí danh là bắt buộc")
+      .matches(/^[a-zA-Z0-9._-]{3,}$/gm, "Vui lòng nhập bí danh hợp lệ"),
+    hot: yup.boolean(),
+  })
+  .required();
 
 const fields = [
   {
@@ -39,37 +59,41 @@ const fields = [
     type: "text",
     placeholder: "Nhập url trailer youtube",
   },
+  {
+    label: "Hình ảnh",
+    name: "hinhAnh",
+    type: "file",
+  },
 
   {
-    name: "TrangThai",
+    name: "dangChieu",
     label: "Trạng thái",
     type: "radio",
     options: [
-      { label: "Đang chiếu", value: "dangChieu", id: 1 },
-      { label: "Sắp chiếu", value: "sapChieu", id: 2 },
+      { label: "Đang chiếu", value: true, id: 1 },
+      { label: "Sắp chiếu", value: false, id: 2 },
     ],
   },
   {
     label: "",
     name: "hot",
     type: "checkbox",
-    options: [{ label: "Đang hot", value: "hot", id: 1 }],
+    options: [{ label: "Đang hot", value: false, id: 1 }],
   },
 ];
 
 const handleDelete = (item) => {
   console.log(item);
 };
- const handleSubmitForm = (data) => {
-   console.log(data);
- };
+const handleSubmitForm = (data) => {
+  console.log(data);
+};
 const FilmList = ({ phim }) => {
-  console.log("phim:", phim);
   const { ModalForm, openModal } = useModalForm({
     schema,
     fields,
     handleSubmitForm,
-    title: "Chỉnh sửa Phim"
+    title: "Chỉnh sửa Phim",
   });
 
   const handleEdit = () => {
@@ -109,16 +133,17 @@ const FilmList = ({ phim }) => {
     const dataIndexKeyItem = dataIndexKey.find(
       (item) => item.key.toLowerCase() === newTitle
     );
-
+    
     return getColumnConfig(
       title,
       dataIndexKeyItem,
       newTitle,
       handleEdit,
-      handleDelete
+      handleDelete,
     );
   });
-  
+  console.log("columns:", columns);
+
   return (
     <>
       <ModalForm />
