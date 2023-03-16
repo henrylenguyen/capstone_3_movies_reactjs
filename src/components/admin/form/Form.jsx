@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import TextArea from "../textArea/TextArea";
+import CheckboxGroup from "../checkbox/Checkbox";
+import Radio from "../radio/Radio";
 
-const Form = ({ schema, fields, closeModal, handleSubmitForm,title }) => {
+const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
   const {
     register,
     handleSubmit,
@@ -11,7 +14,9 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm,title }) => {
   });
   return (
     <>
-      <h3 className="font-semibold uppercase text-[30px] text-center">{title}</h3>
+      <h3 className="font-semibold uppercase text-[30px] text-center">
+        {title}
+      </h3>
       <form
         onSubmit={handleSubmit((data) => handleSubmitForm(data))}
         className="flex flex-col gap-3"
@@ -21,17 +26,34 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm,title }) => {
             <label className="block font-medium text-gray-700" htmlFor={name}>
               {label}
             </label>
-            <input
-              type={type}
-              placeholder={placeholder}
-              {...register(name)}
-              {...rest}
-              className={`${
-                errors[name]
-                  ? "border border-red-500"
-                  : "border border-gray-300"
-              } focus:outline-none focus:border-blue-400  focus:ring-2 focus:ring-blue-400 block w-full rounded-md  py-2 px-3 mt-2 text-black`}
-            />
+            {type === "textarea" ? (
+              <TextArea
+                placeholder={placeholder}
+                {...rest}
+                errors={errors[name]}
+              />
+            ) : type === "checkbox" ? (
+              <CheckboxGroup
+                label={label}
+                name={name}
+                options={rest.options}
+              ></CheckboxGroup>
+            ) : type === "radio" ? (
+              <Radio label={label} name={name} options={rest.options}></Radio>
+            ) : (
+              <input
+                type={type}
+                placeholder={placeholder}
+                {...register(name)}
+                {...rest}
+                className={`${
+                  errors[name]
+                    ? "border border-red-500"
+                    : "border border-gray-300"
+                } focus:outline-none focus:border-blue-400  focus:ring-2 focus:ring-blue-400 block w-full rounded-md  py-2 px-3 mt-2 text-black`}
+              />
+            )}
+
             {errors[name] && (
               <span className="text-red-500 text-sm italic">
                 {errors[name].message}
