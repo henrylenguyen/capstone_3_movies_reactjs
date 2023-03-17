@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextArea from "../textArea/TextArea";
@@ -7,6 +7,7 @@ import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 
 const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
+    const [imagePath, setImagePath] = useState("");
   const {
     control,
     handleSubmit,
@@ -16,15 +17,19 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
     resolver: yupResolver(schema),
     shouldUnregister: true,
   });
+  const handleUploadSuccess = (path) => {
+    setImagePath(path);
+  };
+  const onSubmit = (data) => {
+    handleSubmitForm({ ...data, imagePath: imagePath });
+  };
+
   return (
     <>
       <h3 className="font-semibold uppercase text-[30px] text-center">
         {title}
       </h3>
-      <form
-        onSubmit={handleSubmit((data) => handleSubmitForm(data))}
-        className="flex flex-col gap-5"
-      >
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         {fields.map(({ label, name, type, placeholder, ...rest }) => (
           <div key={name} className="flex flex-col">
             <label className="block font-medium text-gray-700" htmlFor={name}>
@@ -54,7 +59,12 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
                 errors={errors[name]}
               />
             ) : type === "file" ? (
-              <ImageUpload control={control} name={name} errors={errors} />
+              <ImageUpload
+                control={control}
+                name={name}
+                errors={errors}
+                onUploadSuccess={handleUploadSuccess}
+              />
             ) : (
               <input
                 type={type}

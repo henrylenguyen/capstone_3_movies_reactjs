@@ -31,6 +31,7 @@ const schema = yup
       .required("Bí danh là bắt buộc")
       .matches(/^[a-zA-Z0-9._-]{3,}$/gm, "Vui lòng nhập bí danh hợp lệ"),
     hot: yup.boolean(),
+    // hinhAnh:yup.,
   })
   .required();
 
@@ -89,6 +90,7 @@ const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
+  console.log("phim:", phim);
   const { ModalForm, openModal } = useModalForm({
     schema,
     fields,

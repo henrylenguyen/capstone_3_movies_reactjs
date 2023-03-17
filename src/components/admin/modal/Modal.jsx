@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 const Modal = ({ isOpen, closeModal, children }) => {
   const modalRef = useRef(null);
-  useOnClickOutside(modalRef, closeModal);
+  // useOnClickOutside(modalRef, closeModal);
 
   useEffect(() => {
     if (isOpen) {

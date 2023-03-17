@@ -1,91 +1,117 @@
-import React from "react";
-import { useController } from "react-hook-form";
-import { Upload, message } from "antd";
-import ImgCrop from "antd-img-crop";
+import React, { useState } from "react";
+import Dropzone from "react-dropzone";
+import AvatarEditor from "react-avatar-editor";
+import axios from "axios";
+import { useForm, useController } from "react-hook-form";
+import * as yup from "yup";
+import { Button, notification } from "antd";
 
-const ImageUpload = ({ name, control, errors, crop = true, aspect = 1 }) => {
-  const {
-    field: { value, onChange, onBlur, ref },
-  } = useController({
-    name,
-    control,
-    defaultValue: null,
+const schema = yup.object().shape({
+  avatar: yup
+    .mixed()
+    .test("fileType", "File must be of type jpg or png", (value) =>
+      value ? ["image/jpeg", "image/png"].includes(value.type) : true
+    )
+    .required("Avatar is required"),
+});
+
+const UploadAvatar = () => {
+  const [image, setImage] = useState(null);
+  const [editor, setEditor] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const { control, handleSubmit, formState } = useForm({
+    resolver: yup.resolver(schema),
   });
 
-  const handleChange = (event) => {
-    const selectedFile = event.target.files[0];
-    onChange(selectedFile);
+  const { field, fieldState } = useController({
+    name: "avatar",
+    control,
+  });
+
+  const onDrop = (acceptedFiles) => {
+    if (acceptedFiles.length) {
+      setImage(acceptedFiles[0]);
+    }
   };
 
-  const beforeUpload = (file) => {
-    const isImage = file.type.startsWith("image/");
-    if (!isImage) {
-      message.error("Only image files are allowed!");
+  const handleSave = async () => {
+    try {
+      setUploading(true);
+      const canvas = editor.getImageScaledToCanvas().toDataURL();
+      const response = await axios.post("http://localhost:3000/image", {
+        path: image.name.split(".").pop(),
+      });
+      const formData = new FormData();
+      formData.append("image", canvas);
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      await axios.put(
+        `http://localhost:3000/image/${response.data.id}/image.${response.data.path}`,
+        formData,
+        config
+      );
+      setImage(null);
+      setUploading(false);
+      notification.success({
+        message: "Upload Successful",
+        description: "Your image has been uploaded successfully.",
+      });
+    } catch (error) {
+      console.log(error);
+      setUploading(false);
+      notification.error({
+        message: "Upload Failed",
+        description:
+          "Your image could not be uploaded. Please try again later.",
+      });
     }
-    return isImage;
+  };
+
+  const handleCancel = () => {
+    setImage(null);
   };
 
   return (
-    <div className="flex flex-col">
-      <label className="block font-medium text-gray-700" htmlFor={name}>
-        Upload Image
-      </label>
-      {crop ? (
-        <ImgCrop aspect={aspect}>
-          <Upload
-            name={name}
-            id={name}
-            listType="picture-card"
-            showUploadList={false}
-            onChange={(info) => {
-              if (info.file.status === "done") {
-                onChange(info.file.originFileObj);
-              }
-            }}
-            beforeUpload={beforeUpload}
-            className={`${
-              errors[name] ? "border border-red-500" : "border border-gray-300"
-            } focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 block w-full rounded-md py-2 px-3 mt-2 text-black`}
-          >
-            {value ? (
-              <img
-                src={URL.createObjectURL(value)}
-                alt="avatar"
-                style={{ width: "100%" }}
-              />
-            ) : (
-              <div>
-                <div>+</div>
-                <div>Upload</div>
-              </div>
-            )}
-          </Upload>
-        </ImgCrop>
-      ) : (
-        <input
-          type="file"
-          id={name}
-          name={name}
-          onBlur={onBlur}
-          onChange={handleChange}
-          ref={ref}
-          className={`${
-            errors[name] ? "border border-red-500" : "border border-gray-300"
-          } focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 block w-full rounded-md py-2 px-3 mt-2 text-black`}
-        />
-      )}
-      {errors[name] && (
-        <span className="text-red-500 text-sm italic">
-          {errors[name].message}
-        </span>
-      )}
-      {value && !value.type.match("image") && (
-        <span className="text-red-500 text-sm italic">
-          Invalid file format. Only images are allowed.
-        </span>
-      )}
+    <div>
+      <form onSubmit={handleSubmit(handleSave)}>
+        <Dropzone onDrop={onDrop}>
+          {({ getRootProps, getInputProps }) => (
+            <div {...getRootProps()}>
+              <input {...getInputProps()} />
+              {image ? (
+                <AvatarEditor
+                  ref={(ref) => setEditor(ref)}
+                  image={image}
+                  width={250}
+                  height={250}
+                  border={50}
+                  color={[255, 255, 255, 0.6]}
+                  borderRadius={125}
+                  scale={1}
+                />
+              ) : (
+                <div>Drag and drop an image, or click to select file</div>
+              )}
+            </div>
+          )}
+        </Dropzone>
+        {image && (
+          <div>
+            <Button type="button" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={formState.isSubmitting}>
+              {uploading ? "Uploading..." : "Save"}
+            </Button>
+          </div>
+        )}
+        {fieldState.error && <div>{fieldState.error.message}</div>}
+      </form>
     </div>
   );
 };
 
-export default ImageUpload;
+export default UploadAvatar;
