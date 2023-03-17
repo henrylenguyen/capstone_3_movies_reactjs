@@ -16,11 +16,11 @@ function TheaterList() {
 
   return (
     <section
-      className="theater mb-16 hidden lg:block aspect-auto rounded"
+      className="theater pt-12 pb-16 hidden lg:block aspect-auto rounded"
       id="theaterList"
     >
       <div className="theater__content container mx-auto">
-        <h2 className="text-center text-4xl uppercase mb-4">Cụm rạp</h2>
+        <h2 className="text-center text-4xl uppercase mb-4">rạp chiếu phim</h2>
 
         {isLoading && (
           <div className="flex justify-center items-center">

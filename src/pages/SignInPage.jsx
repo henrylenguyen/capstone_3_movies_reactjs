@@ -73,7 +73,7 @@ const SignInPage = () => {
         dispatch(resetLogin());
 
         navigate("/");
-      }, 3000);
+      }, 2000);
     }
     return () => {
       clearTimeout(timeoutId.current);
@@ -123,7 +123,7 @@ const SignInPage = () => {
         type="success"
         message="Đăng nhập thành công"
         booleanState={hasLogin}
-        time={3000}
+        time={2000}
         onClose={handleCloseSnackbar}
       />
     </>

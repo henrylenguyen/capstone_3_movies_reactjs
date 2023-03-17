@@ -18,10 +18,20 @@ function FormUser(props) {
         <>
           <div className="mb-4">
             <TextField
+              label={"Email"}
+              InputProps={{ readOnly: true }}
+              value={userLogin?.email}
+              fullWidth
+              variant="standard"
+            />
+          </div>
+          <div className="mb-4">
+            <TextField
               label={"Họ tên"}
               InputProps={{ readOnly: true }}
               value={userLogin?.hoTen}
               fullWidth
+              variant="standard"
             />
           </div>
           <div className="mb-4">
@@ -30,6 +40,7 @@ function FormUser(props) {
               InputProps={{ readOnly: true }}
               value={userLogin?.soDT}
               fullWidth
+              variant="standard"
             />
           </div>
         </>

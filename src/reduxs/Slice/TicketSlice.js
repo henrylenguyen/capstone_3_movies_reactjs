@@ -21,6 +21,7 @@ const ticketSlice = createSlice({
     },
     resetTicketData(state) {
       state.ticketData = null;
+      state.bookedTicketList = [];
     },
   },
 });

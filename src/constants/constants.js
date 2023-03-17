@@ -74,6 +74,11 @@ export const ticketListBookingType = ["maGhe", "giaVe"];
 
 export const navigateList = [
   { id: 1, name: "Danh sách phim", idPath: "#movieList" },
-  { id: 2, name: "Cụm rạp", idPath: "#theaterList" },
+  { id: 2, name: "Rạp chiếu", idPath: "#theaterList" },
   { id: 3, name: "Ứng dụng", idPath: "#application" },
 ];
+
+export const CHANGE_PAGE_TYPE = {
+  NEXT_PAGE: "NEXT_PAGE",
+  PREV_PAGE: "PREV_PAGE",
+};

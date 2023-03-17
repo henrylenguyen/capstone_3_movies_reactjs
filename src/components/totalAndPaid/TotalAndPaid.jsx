@@ -77,6 +77,8 @@ function TotalAndPaid() {
             danhSachVe: [...filterBookedTicketList],
           };
 
+          // console.log(newValues);
+
           await ticketAPI.bookTicket(newValues);
 
           Swal.fire({

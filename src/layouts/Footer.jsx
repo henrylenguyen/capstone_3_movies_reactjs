@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/footer.scss";
-import appStore from "assets/images/logo/appStore.png";
-import googlePlay from "assets/images/logo/google.png";
+import appStore from "assets/images/appStore.jpg";
+import googlePlay from "assets/images/GooglePlay.jpg";
 import facebook from "assets/images/logo/facebook.png";
 import zalo from "assets/images/logo/zalo.png";
 import zion from "assets/images/logo/zionjfif.jfif";
@@ -65,61 +65,55 @@ function Footer() {
               <h2 className="text-base text-white mb-4 uppercase">Đối tác</h2>
               <div className="grid grid-cols-4 gap-x-4 gap-y-6">
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://www.cgv.vn/default/">
                     <img src={cgv} className="w-8" />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://www.galaxycine.vn/">
                     <img src={galaxy} className="w-8" />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="http://ddcinema.vn/">
                     <img src={dongda} className="w-8" />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://cinestar.com.vn/">
                     <img src={star} className="w-8" />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://www.bhdstar.vn/">
                     <img src={bhd} className="w-8" />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://www.betacinemas.vn/home.htm">
                     <img src={beta} className="w-8 rounded-full " />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
-                    <img src={beta} className="w-8 rounded-full " />
-                  </a>
-                </div>
-
-                <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://www.vietinbank.vn/">
                     <img src={vietinbank} className="w-8 rounded-full " />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://zalopay.vn/">
                     <img src={zalopay} className="w-8 rounded-full " />
                   </a>
                 </div>
 
                 <div className="footer__item-container col-span-1">
-                  <a href="#">
+                  <a target="_blank" href="https://www.lottecinemavn.com/">
                     <img src={lotte} className="w-8 rounded-full " />
                   </a>
                 </div>
@@ -134,14 +128,14 @@ function Footer() {
                   href="https://www.apple.com/vn/app-store/"
                   className="text-sm inline-block"
                 >
-                  <img className="w-6" src={appStore} />
+                  <img className="w-28" src={appStore} />
                 </a>
                 <a
                   target="_blank"
                   href="https://play.google.com/"
                   className="text-sm inline-block"
                 >
-                  <img className="w-6" src={googlePlay} />
+                  <img className="w-28" src={googlePlay} />
                 </a>
               </div>
             </div>

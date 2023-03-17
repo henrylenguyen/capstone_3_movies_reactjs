@@ -35,11 +35,11 @@ function InputField(props) {
             </InputLabel>
             <OutlinedInput
               error={invalid}
-              id="outlined-adornment-password"
               type={showPassword ? "text" : "password"}
               name={name}
               value={value}
               onChange={onChange}
+              autoComplete="new-password"
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton

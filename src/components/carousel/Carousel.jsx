@@ -67,7 +67,7 @@ function Carousel() {
             <div className="carousel-item">
               <img src={banner.hinhAnh} className="h-200" />
               <button
-                className="play-btn text-blue-500 opacity-100 hover:opacity-80 "
+                className="play-btn text-white opacity-100 hover:opacity-80 "
                 title={`Xem trailer phim`}
                 onClick={() => handleOpenModal(banner.link)}
               >

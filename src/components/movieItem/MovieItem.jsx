@@ -108,14 +108,19 @@ function MovieItem(props) {
             </button>
           </div>
         </div>
-        <CardContent className="h-full">
+        <CardContent
+          className="h-full movie__item-content"
+          sx={{ background: "transparent" }}
+        >
           <div>
             {!active && (
               <React.Fragment>
-                <h2 className="movie__item-title text-xl uppercase font-medium">
+                <h2 className="movie__item-title text-xl uppercase font-medium text-white">
                   {tenPhim}
                 </h2>
-                <p className="movie__item-des text-sm my-2 md:my-0">{moTa}</p>
+                <p className="movie__item-des text-sm my-2 md:my-0 text-[#9a9797]">
+                  {moTa}
+                </p>
               </React.Fragment>
             )}
 
@@ -147,10 +152,12 @@ function MovieItem(props) {
         </div>
         <div className="col-span-2">
           <div className="movie__item-mobile-container ">
-            <h2 className="movie__item-mobile-title text-xl font-medium capitalize">
+            <h2 className="movie__item-mobile-title text-xl font-medium capitalize text-white">
               {tenPhim}
             </h2>
-            <p className="movie__item-mobile-des mt-2 mb-4">{moTa}</p>
+            <p className="movie__item-mobile-des mt-2 mb-4 text-[#9a9797]">
+              {moTa}
+            </p>
             <Button
               variant="contained"
               onClick={() => handleChangePage(maPhim, tenPhim)}

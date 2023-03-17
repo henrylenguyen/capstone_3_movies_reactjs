@@ -1,5 +1,6 @@
 import Application from "components/application/Application";
 import Carousel from "components/carousel/Carousel";
+import Information from "components/information/Information";
 import MovieList from "components/movieList/MovieList";
 import ScrollBtn from "components/scrollBtn/ScrollBtn";
 import TheaterList from "components/theaterList/TheaterList";
@@ -37,6 +38,7 @@ const BookingPage = () => {
       <Carousel />
       <MovieList />
       <TheaterList />
+      <Information />
       <Application />
 
       {showScroll && <ScrollBtn />}

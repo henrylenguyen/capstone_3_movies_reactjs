@@ -1,7 +1,8 @@
-import { CircularProgress, Pagination } from "@mui/material";
+import { Pagination } from "@mui/material";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import "./moviePagination.scss";
 
 function MoviePagination() {
   const [params, setParams] = useSearchParams();
@@ -21,6 +22,8 @@ function MoviePagination() {
           color="primary"
           onChange={handleChangeParams}
           page={+params.get("page")}
+          variant="outlined"
+          sx={{ color: "#fff" }}
         />
       )}
     </section>
