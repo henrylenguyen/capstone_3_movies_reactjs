@@ -17,6 +17,7 @@
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.10",
     "@redux-devtools/extension": "^3.2.5",
+    "animate.css": "^4.1.1",
     "antd": "^5.2.2",
     "antd-img-crop": "^4.9.0",
     "apexcharts": "^3.37.1",
