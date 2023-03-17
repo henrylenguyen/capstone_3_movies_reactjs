@@ -247,3 +247,14 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i antd-img-crop
 ```
+
+##  react-avatar-editor
+
+```
+npm i react-avatar-editor
+```
+
+## react-dropzone (hỗ trợ upload file)
+```
+  npm install --save react-dropzone
+```
