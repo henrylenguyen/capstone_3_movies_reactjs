@@ -189,18 +189,21 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm i clsx
 ```
+
 ## install react-toastify (thư viện hiển thị alert dạng toast)
 
 ```
   npm install react-toastify
 ```
 
-##  @mui/icons-material (thư viện icon của MUI)
+## @mui/icons-material (thư viện icon của MUI)
+
 ```
   npm i @mui/icons-material
 ```
 
 ## react-chartjs (thư viện vẽ biểu đồ)
+
 ```
   npm install --save chart.js react-chartjs-2
 ```
@@ -212,6 +215,7 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
 
 ## react-apexcharts
+
 ```
   npm install react-apexcharts apexcharts
 ```
@@ -221,6 +225,7 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
   npm install react-bootstrap bootstrap
 ```
+
 ## Chakra UI
 
 ```
@@ -235,15 +240,43 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
 ```
 
 ## mime-type (dùng để xác định kiểu dữ liệu)
+
 ```
   npm i mime-types
 ```
+
 ## @headlessui/react
 
 ```
   npm i @headlessui/react
 ```
+
 ## antd-img-crop (thư viện cắt ảnh của antd)
+
 ```
   npm i antd-img-crop
+```
+
+## react-avatar-editor
+
+```
+npm i react-avatar-editor
+```
+
+## react-dropzone (hỗ trợ upload file)
+
+```
+  npm install --save react-dropzone
+```
+
+## animate.css (hỗ trợ upload file)
+
+```
+  npm install animate.css --save
+```
+## react-select
+
+```
+npm install react-select
+
 ```
