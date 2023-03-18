@@ -1,4 +1,5 @@
 import { CircularProgress } from "@mui/material";
+
 import MovieItem from "components/movieItem/MovieItem";
 import MoviePagination from "components/moviePagination/MoviePagination";
 import SearchMovieList from "components/searchMovieList/SearchMovieList";
@@ -36,6 +37,7 @@ function MovieList() {
   function handleSearchMovie(e) {
     const { value } = e.target;
     const debounceSearch = createDebounceSearch(value, 500);
+
     setSearchParams({ page: 1 });
     debounceSearch();
   }
@@ -55,6 +57,7 @@ function MovieList() {
     } else {
       if (+searchParams.get("page") >= 2) {
         setSearchParams({ page: +searchParams.get("page") - 1 });
+
         return;
       }
       setSearchParams({ page: movieList.totalPages });

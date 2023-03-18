@@ -33,7 +33,7 @@ function BookingTicketDetail() {
                   <button
                     key={idx}
                     className={clsx(
-                      `col-span-1 border rounded-lg relative  border-2`,
+                      `col-span-1 border rounded-lg relative border-2`,
                       {
                         ["border-blue-500"]:
                           bookedTicketList[idx].loaiGhe === "Thuong",

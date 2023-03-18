@@ -1,7 +1,7 @@
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import bill from "assets/images/bill.png";
 import { useDispatch, useSelector } from "react-redux";
-import { Button } from "@mui/material";
+import { Button, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { removeAllBookedTicket } from "reduxs/Slice/TicketSlice";
 import Swal from "sweetalert2";
 import "animate.css";
@@ -18,10 +18,18 @@ function TotalAndPaid() {
   const { scheduleId } = params;
   const timerId = useRef();
   const navigate = useNavigate();
+  const [combo, setCombo] = useState({
+    isChecked: false,
+    price: 100000,
+  });
 
   const totalMoney = useMemo(() => {
-    return bookedTicketList.reduce((total, value) => total + value.giaVe, 0);
-  }, [bookedTicketList]);
+    return bookedTicketList.reduce((total, value) => {
+      if (combo.isChecked) total = total + value.giaVe + combo.price;
+      else total += value.giaVe;
+      return total;
+    }, 0);
+  }, [bookedTicketList, combo]);
 
   function handleRemoveBookedTicket() {
     dispatch(removeAllBookedTicket());
@@ -121,29 +129,50 @@ function TotalAndPaid() {
   }
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="">
       {bookedTicketList.length < 1 && null}
       {bookedTicketList.length > 0 && (
         <>
-          <div className="flex items-center">
-            <img src={bill} className="w-28" />
-            <p className="text-3xl">{totalMoney.toLocaleString()} đ</p>
+          <div>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={() =>
+                      setCombo((prevState) => ({
+                        ...prevState,
+                        isChecked: !prevState.isChecked,
+                      }))
+                    }
+                    checked={combo.isChecked}
+                  />
+                }
+                label="Thêm combo nước và bắp rang (100.000đ)"
+              />
+            </FormGroup>
           </div>
-          <div className="flex flex-col gap-4">
-            <Button
-              variant="outlined"
-              className="text-2xl"
-              onClick={handleRemoveBookedTicket}
-            >
-              Đặt lại
-            </Button>
-            <Button
-              onClick={handleCheckUp}
-              variant="contained"
-              className="text-2xl"
-            >
-              Tiếp tục
-            </Button>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <img src={bill} className="w-28" />
+              <p className="text-3xl">{totalMoney.toLocaleString()} đ</p>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <Button
+                variant="outlined"
+                className="text-2xl"
+                onClick={handleRemoveBookedTicket}
+              >
+                Đặt lại
+              </Button>
+              <Button
+                onClick={handleCheckUp}
+                variant="contained"
+                className="text-2xl"
+              >
+                Tiếp tục
+              </Button>
+            </div>
           </div>
         </>
       )}
