@@ -274,3 +274,9 @@ npm i react-avatar-editor
 ```
   npm install animate.css --save
 ```
+## react-select
+
+```
+npm install react-select
+
+```
