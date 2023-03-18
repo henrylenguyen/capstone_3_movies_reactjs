@@ -90,7 +90,7 @@ const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
-  console.log("phim:", phim);
+
   const { ModalForm, openModal } = useModalForm({
     schema,
     fields,
@@ -144,7 +144,6 @@ const FilmList = ({ phim }) => {
       handleDelete,
     );
   });
-  console.log("columns:", columns);
 
   return (
     <>

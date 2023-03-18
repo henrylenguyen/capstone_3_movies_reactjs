@@ -1,7 +1,6 @@
 import useOnClickOutside from "hooks/useClickOutside";
 import { useEffect, useRef } from "react";
 
-
 const Modal = ({ isOpen, closeModal, children }) => {
   const modalRef = useRef(null);
   // useOnClickOutside(modalRef, closeModal);
@@ -17,7 +16,7 @@ const Modal = ({ isOpen, closeModal, children }) => {
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto text-black">
+        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden text-black ">
           <div
             className="fixed inset-0 transition-opacity"
             onClick={closeModal}
@@ -25,8 +24,9 @@ const Modal = ({ isOpen, closeModal, children }) => {
             <div className="absolute inset-0 bg-gray-800 opacity-75"></div>
           </div>
           <div
-            className="bg-white rounded-lg z-10 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full"
+            className="modal-box bg-white rounded-lg z-10 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full max-h-[90vh] overflow-y-auto"
             ref={modalRef}
+            
           >
             {children}
           </div>

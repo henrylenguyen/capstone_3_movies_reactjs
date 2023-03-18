@@ -1,59 +1,96 @@
-
 import CustomTable from "components/admin/table/CustomTable";
+import removeVietnameseTones from "config/admin/convertVietnamese";
+import useModalForm from "hooks/useModalForm";
 import React from "react";
+import getColumnConfig from "utils/admin/dataColumn";
 
-const data = [
+import * as yup from "yup";
+const handleDelete = (item) => {
+  console.log(item);
+};
+const handleSubmitForm = (data) => {
+  console.log(data);
+};
+const schema = yup.object().shape({}).required();
+
+const fields = [
   {
-    key: "1",
-    taikhoan: "Thail",
-    hoten: "Lê nguyễn phương thái",
-    ngaysinh: "1990-01-01",
-    email: "abs@gmail.com",
-    SDT: "0789130321",
-    diachi: "Jav",
-    quyen: "Người dùng",
-    ngaytao: "20/02/2022",
-    ngaychinhsua: "20/02/2022",
-  }
+    label: "Họ tên",
+    name: "hoTen",
+    type: "text",
+    placeholder: "Nhập Họ Tên",
+  },
+  {
+    label: "Email",
+    name: "email",
+    type: "email",
+    placeholder: "Nhập Email",
+  },
+  {
+    label: "Số điện thoại",
+    name: "soDT",
+    type: "tel",
+    placeholder: "Nhập Số Điện Thoại",
+  },
+  {
+    label: "Trailer",
+    name: "trailer",
+    type: "text",
+    placeholder: "Nhập url trailer youtube",
+  },
 ];
 
-const columns = [
-  { title: "Tài Khoản", dataIndex: "taikhoan", key: "taikhoan" ,width: 150},
-  {
-    title: "Họ Và Tên",
-    dataIndex: "hoten",
-    key: "hoten",
-    sorter: (a, b) => a.hoten.length - b.hoten.length,
-    sortDirections: ["descend", "ascend"],
-  },
-  { title: "Tuổi", dataIndex: "ngaysinh", key: "ngaysinh" },
-  { title: "Email", dataIndex: "email", key: "email" },
-  { title: "Số Điện Thoại", dataIndex: "SDT", key: "SDT", width: 200 },
-  { title: "Quyền", dataIndex: "quyen", key: "quyen" },
-  {
-    title: "Ngày Tạo",
-    dataIndex: "ngaytao",
-    key: "ngaytao",
-    sorter: (a, b) => a.ngaytao.length - b.ngaytao.length,
-    sortDirections: ["descend", "ascend"],
-    width: 150,
-  },
-  {
-    title: "Ngày Chỉnh Sửa",
-    dataIndex: "ngaytao",
-    key: "ngaytao",
-    width: 200,
-    sorter: (a, b) => a.ngaytao.length - b.ngaytao.length,
-    sortDirections: ["descend", "ascend"],
-  },
-  {
-    title: "Ðịa Chỉ",
-    dataIndex: "diachi",
-    key: "diachi",
-    sorter: (a, b) => a.diachi.length - b.diachi.length,
-    sortDirections: ["descend", "ascend"],
-  },
-];
-export default function ListUserPage() {
-  return <CustomTable columns={columns} data={data}></CustomTable>;
+export default function ListUserPage({ user }) {
+  const { ModalForm, openModal } = useModalForm({
+    schema,
+    fields,
+    handleSubmitForm,
+    title: "Chỉnh sửa Người dùng",
+  });
+  const handleEdit = () => {
+    openModal();
+  };
+  const arr = [];
+  user?.map((item) => {
+    const { maNhom, ...rest } = item;
+    arr.push({ ...rest, tuyChinh: "hành động" });
+  });
+  const data = arr;
+  // 1. Lấy ra tất cả các key của object
+  const keys = data && Object.keys(data[0]);
+  const dataIndexKey = keys?.map((item) => {
+    return {
+      dataIndex: item,
+      key: item,
+    };
+  });
+  const dataTitle = [
+    { title: "Tài khoản" },
+    { title: "Họ tên" },
+    { title: "Email" },
+    { title: "Số ĐT" },
+    { title: "Mã loại người dùng" },
+    { title: "Tùy chỉnh" },
+  ];
+
+  const columns = dataTitle.map((title) => {
+    const removeTone = removeVietnameseTones(title.title);
+    const newTitle = removeTone.replace(/\s+/g, "").toLowerCase();
+    const dataIndexKeyItem = dataIndexKey.find(
+      (item) => item.key.toLowerCase() === newTitle
+    );
+
+    return getColumnConfig(
+      title,
+      dataIndexKeyItem,
+      newTitle,
+      handleEdit,
+      handleDelete
+    );
+  });
+
+  return <>
+  <ModalForm></ModalForm>
+    <CustomTable columns={columns} data={data}></CustomTable>
+  </>;
 }

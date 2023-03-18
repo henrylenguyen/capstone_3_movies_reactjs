@@ -143,6 +143,7 @@ const CustomTable = ({ columns, data, ...props }) => {
               col.key.toLowerCase() === "mota" ||
               col.key.toLowerCase() === "bidanh" ||
               col.key.toLowerCase() === "tuychinh" ||
+              col.key.toLowerCase() === "maloainguoidung"||
               col.key.toLowerCase() === "trailer"
             ) {
               return {

@@ -9,6 +9,7 @@ import CreateNewShowtimes from "pages/Admin/films/CreateNewShowtimes";
 import FilmList from "pages/Admin/films/FilmList";
 import ChooseInforTicket from "pages/Admin/ticket/ChooseInforTicket";
 import TicketList from "pages/Admin/ticket/TicketList";
+import ChooseInforUser from "pages/Admin/user/ChooseInforUser";
 
 // import TicketList from "pages/Admin/ticket/TicketList";
 import ListUserPage from "pages/Admin/user/ListUserPage";
@@ -24,7 +25,7 @@ const routesAdmin = [
   },
   {
     path: "/admin/danh-sach-nguoi-dung",
-    element: ListUserPage,
+    element: ChooseInforUser,
   },
   {
     path: "/admin/phan-quyen-nguoi-dung",

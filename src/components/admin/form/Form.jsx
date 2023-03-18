@@ -7,7 +7,7 @@ import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 
 const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
-    const [imagePath, setImagePath] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const {
     control,
     handleSubmit,
@@ -17,12 +17,11 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
     resolver: yupResolver(schema),
     shouldUnregister: true,
   });
-  const handleUploadSuccess = (path) => {
-    setImagePath(path);
-  };
   const onSubmit = (data) => {
-    handleSubmitForm({ ...data, imagePath: imagePath });
+    console.log("Hình ảnh", imageUrl);
+    console.log("Dữ liệu form", data);
   };
+
 
   return (
     <>
@@ -63,7 +62,7 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
                 control={control}
                 name={name}
                 errors={errors}
-                onUploadSuccess={handleUploadSuccess}
+                setImageUrl={setImageUrl}
               />
             ) : (
               <input

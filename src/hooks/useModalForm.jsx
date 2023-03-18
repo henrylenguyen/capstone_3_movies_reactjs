@@ -2,10 +2,9 @@ import { useState } from "react";
 import Modal from "../components/admin/modal/Modal";
 import Form from "../components/admin/form/Form";
 
-
-const useModalForm = ({ schema, fields, handleSubmitForm,title }) => {
+const useModalForm = ({ schema, fields, handleSubmitForm, title }) => {
   const [isOpen, setIsOpen] = useState(false);
- 
+
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 

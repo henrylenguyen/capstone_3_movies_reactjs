@@ -1,117 +1,89 @@
 import React, { useState } from "react";
-import Dropzone from "react-dropzone";
-import AvatarEditor from "react-avatar-editor";
-import axios from "axios";
-import { useForm, useController } from "react-hook-form";
-import * as yup from "yup";
-import { Button, notification } from "antd";
+import { Upload, Modal, message } from "antd";
+import { PlusOutlined } from "@ant-design/icons";
+import { useController } from "react-hook-form";
 
-const schema = yup.object().shape({
-  avatar: yup
-    .mixed()
-    .test("fileType", "File must be of type jpg or png", (value) =>
-      value ? ["image/jpeg", "image/png"].includes(value.type) : true
-    )
-    .required("Avatar is required"),
-});
-
-const UploadAvatar = () => {
-  const [image, setImage] = useState(null);
-  const [editor, setEditor] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const { control, handleSubmit, formState } = useForm({
-    resolver: yup.resolver(schema),
-  });
-
-  const { field, fieldState } = useController({
-    name: "avatar",
+const ImageUpload = ({ control, name, errors, setImageUrl }) => {
+  const [fileList, setFileList] = useState([]);
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  // const [imageUrl, setImageUrl] = useState("");
+  const { field } = useController({
     control,
+    name,
+    rules: {
+      required: "Ảnh là bắt buộc",
+      validate: {
+        validateFileType: (value) => {
+          const fileType = value && value[0] && value[0].type;
+          return (
+            fileType === "image/png" ||
+            fileType === "image/jpeg" ||
+            fileType === "image/jpg"
+          );
+        },
+      },
+    },
   });
 
-  const onDrop = (acceptedFiles) => {
-    if (acceptedFiles.length) {
-      setImage(acceptedFiles[0]);
-    }
+  const handlePreview = (file) => {
+    setPreviewImage(file.url || file.preview);
+    setPreviewVisible(true);
   };
 
-  const handleSave = async () => {
-    try {
-      setUploading(true);
-      const canvas = editor.getImageScaledToCanvas().toDataURL();
-      const response = await axios.post("http://localhost:3000/image", {
-        path: image.name.split(".").pop(),
-      });
-      const formData = new FormData();
-      formData.append("image", canvas);
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
-      await axios.put(
-        `http://localhost:3000/image/${response.data.id}/image.${response.data.path}`,
-        formData,
-        config
-      );
-      setImage(null);
-      setUploading(false);
-      notification.success({
-        message: "Upload Successful",
-        description: "Your image has been uploaded successfully.",
-      });
-    } catch (error) {
-      console.log(error);
-      setUploading(false);
-      notification.error({
-        message: "Upload Failed",
-        description:
-          "Your image could not be uploaded. Please try again later.",
-      });
+  const handleCancelPreview = () => setPreviewVisible(false);
+
+  const handleChange = ({ fileList }) => {
+    setFileList(fileList);
+    if (fileList.length > 0) {
+      const reader = new FileReader();
+      reader.readAsDataURL(fileList[0].originFileObj);
+      reader.onload = () => setImageUrl(reader.result);
+    } else {
+      setImageUrl("");
     }
   };
-
-  const handleCancel = () => {
-    setImage(null);
-  };
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div style={{ marginTop: 8 }}>Tải lên</div>
+    </div>
+  );
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleSave)}>
-        <Dropzone onDrop={onDrop}>
-          {({ getRootProps, getInputProps }) => (
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
-              {image ? (
-                <AvatarEditor
-                  ref={(ref) => setEditor(ref)}
-                  image={image}
-                  width={250}
-                  height={250}
-                  border={50}
-                  color={[255, 255, 255, 0.6]}
-                  borderRadius={125}
-                  scale={1}
-                />
-              ) : (
-                <div>Drag and drop an image, or click to select file</div>
-              )}
-            </div>
-          )}
-        </Dropzone>
-        {image && (
-          <div>
-            <Button type="button" onClick={handleCancel}>
-              Cancel
-            </Button>
-            <Button type="submit" disabled={formState.isSubmitting}>
-              {uploading ? "Uploading..." : "Save"}
-            </Button>
-          </div>
-        )}
-        {fieldState.error && <div>{fieldState.error.message}</div>}
-      </form>
+      <Upload
+        listType="picture-card"
+        fileList={fileList}
+        beforeUpload={() => false}
+        onPreview={handlePreview}
+        onChange={handleChange}
+      >
+        {fileList.length >= 1 ? null : uploadButton}
+      </Upload>
+      <Modal
+        open={previewVisible}
+        title="Xem trước ảnh"
+        onCancel={handleCancelPreview}
+        footer={null}
+      >
+        <img alt="example" style={{ width: "100%" }} src={previewImage} />
+      </Modal>
+      {errors[name] && (
+        <span className="text-red-500 text-sm italic">
+          {errors[name].message}
+        </span>
+      )}
+      {field.value && fileList.length === 0 && (
+        <span className="text-red-500 text-sm italic">Ảnh là bắt buộc</span>
+      )}
+      {fileList.length > 0 && (
+        <span className="text-green-500 text-sm italic">
+          Tải lên thành công {fileList.length} tệp...
+        </span>
+      )}
     </div>
   );
 };
 
-export default UploadAvatar;
+export default ImageUpload;

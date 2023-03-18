@@ -34,108 +34,122 @@ button {
   cursor: pointer;
 }
 //Loading skeleton giao diện sáng
-.skeleton{
+.skeleton {
   background-color: #eee;
-  background-image: linear-gradient(110deg,#ececec 8%,#f5f5f5 18%,#ececec 33%);
+  background-image: linear-gradient(
+    110deg,
+    #ececec 8%,
+    #f5f5f5 18%,
+    #ececec 33%
+  );
   background-size: 200% 100%;
   animation: 1.5s shine linear infinite;
 }
 @keyframes shine {
-  to{
+  to {
     background-position-x: -200%;
   }
 }
 //Loading skeleton giao diện tối
-.skeleton-dark{
+.skeleton-dark {
   background-color: #4d4b4b;
-  background-image: linear-gradient(110deg,#4d4b4b 8%,#585858 18%,#4d4b4b 33%);
+  background-image: linear-gradient(
+    110deg,
+    #4d4b4b 8%,
+    #585858 18%,
+    #4d4b4b 33%
+  );
   background-size: 200% 100%;
   animation: 1.5s shinedark linear infinite;
 }
 @keyframes shinedark {
-  to{
+  to {
     background-position-x: -200%;
   }
 }
-.full-width{
+.full-width {
   @apply flex-100;
 }
-.css-o4b71y-MuiAccordionSummary-content{
+.css-o4b71y-MuiAccordionSummary-content {
   align-items: center;
 }
-.navbarTransition{
+.navbarTransition {
   width: 0px;
   animation: animatedNav 2s linear forwards;
-  @keyframes animatedNav{
-    0%{
+  @keyframes animatedNav {
+    0% {
       left: 0;
       opacity: 1;
     }
-    100%{
+    100% {
       left: -100%;
       opacity: 0;
     }
   }
 }
 
-
-.statistical{
+.statistical {
   border-radius: 12px;
   padding: 20px;
 }
-.ticket-book-in-month{
-  background: linear-gradient(89.69deg, #F39034 2.03%, #FF2727 99.73%);
+.ticket-book-in-month {
+  background: linear-gradient(89.69deg, #f39034 2.03%, #ff2727 99.73%);
 }
-.affiliate-theater-system{
-  background: linear-gradient(270deg, #003AD2 0%, #0097EC 100%);
+.affiliate-theater-system {
+  background: linear-gradient(270deg, #003ad2 0%, #0097ec 100%);
 }
-.is-playing{
-  background: linear-gradient(270.23deg, #00A843 0.19%, #1FD071 99.8%);
+.is-playing {
+  background: linear-gradient(270.23deg, #00a843 0.19%, #1fd071 99.8%);
 }
-.number-of-new-subscribers{
-  background: linear-gradient(269.97deg, #5900C9 0.02%, #9852F0 99.98%);
-
+.number-of-new-subscribers {
+  background: linear-gradient(269.97deg, #5900c9 0.02%, #9852f0 99.98%);
 }
 .apexcharts-legend-text {
-  color: #fff!important;
-
+  color: #fff !important;
 }
-.ant-table,td.ant-table-cell.ant-table-column-sort{
-  background: transparent!important;
+.ant-table,
+td.ant-table-cell.ant-table-column-sort {
+  background: transparent !important;
   min-height: 450px;
-   color: #fff!important;
-   cursor: pointer;
+  color: #fff !important;
+  cursor: pointer;
 }
 button.ant-pagination-item-link {
-    color: #fff!important;
+  color: #fff !important;
 }
-.ant-table-cell-row-hover{
-  background: #93959c5b!important;
+.ant-table-cell-row-hover {
+  background: #93959c5b !important;
 }
 .table-container {
   overflow-x: auto;
 }
 /* width */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-  .upcomming::-webkit-scrollbar-track,.upcomming::-webkit-scrollbar-thumb{
-    display: none;
-  }
-  .leftHomePage::-webkit-scrollbar-track,.leftHomePage::-webkit-scrollbar-thumb{
-    display: none;
-  }
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
+::-webkit-scrollbar {
+  width: 10px;
+}
+.upcomming::-webkit-scrollbar-track,
+.upcomming::-webkit-scrollbar-thumb {
+  display: none;
+}
+.leftHomePage::-webkit-scrollbar-track,
+.leftHomePage::-webkit-scrollbar-thumb {
+  display: none;
+}
+.modal-box::-webkit-scrollbar-track,
+.modal-box::-webkit-scrollbar-thumb {
+  display: none;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
