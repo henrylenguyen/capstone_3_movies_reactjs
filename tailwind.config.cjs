@@ -3,6 +3,15 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      colors: {
+        adminPrimary: "#2B2B4B",
+        adminSecondary: "#000033",
+        adminThirdary: "#8D91A0",
+      },
+      flex: {
+        100: "1 0 100%",
+      },
+    
       screens: {
         sm: "640px",
         // => @media (min-width: 640px) { ... }

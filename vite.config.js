@@ -21,6 +21,7 @@ export default defineConfig({
       thunks: `${path.resolve(__dirname, "./src/thunks")}`,
       schemas: `${path.resolve(__dirname, "./src/schemas")}`,
       API: `${path.resolve(__dirname, "./src/API")}`,
+      HOCS: `${path.resolve(__dirname, "./src/HOCS")}`,
     },
   },
 });

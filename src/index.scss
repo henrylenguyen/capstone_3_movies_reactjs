@@ -80,3 +80,89 @@ button {
     background-position-x: -200%;
   }
 }
+.full-width {
+  @apply flex-100;
+}
+.css-o4b71y-MuiAccordionSummary-content {
+  align-items: center;
+}
+.navbarTransition {
+  width: 0px;
+  animation: animatedNav 2s linear forwards;
+  @keyframes animatedNav {
+    0% {
+      left: 0;
+      opacity: 1;
+    }
+    100% {
+      left: -100%;
+      opacity: 0;
+    }
+  }
+}
+
+.statistical {
+  border-radius: 12px;
+  padding: 20px;
+}
+.ticket-book-in-month {
+  background: linear-gradient(89.69deg, #f39034 2.03%, #ff2727 99.73%);
+}
+.affiliate-theater-system {
+  background: linear-gradient(270deg, #003ad2 0%, #0097ec 100%);
+}
+.is-playing {
+  background: linear-gradient(270.23deg, #00a843 0.19%, #1fd071 99.8%);
+}
+.number-of-new-subscribers {
+  background: linear-gradient(269.97deg, #5900c9 0.02%, #9852f0 99.98%);
+}
+.apexcharts-legend-text {
+  color: #fff !important;
+}
+.ant-table,
+td.ant-table-cell.ant-table-column-sort {
+  background: transparent !important;
+  min-height: 450px;
+  color: #fff !important;
+  cursor: pointer;
+}
+button.ant-pagination-item-link {
+  color: #fff !important;
+}
+.ant-table-cell-row-hover {
+  background: #93959c5b !important;
+}
+.table-container {
+  overflow-x: auto;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+.upcomming::-webkit-scrollbar-track,
+.upcomming::-webkit-scrollbar-thumb {
+  display: none;
+}
+.leftHomePage::-webkit-scrollbar-track,
+.leftHomePage::-webkit-scrollbar-thumb {
+  display: none;
+}
+.modal-box::-webkit-scrollbar-track,
+.modal-box::-webkit-scrollbar-thumb {
+  display: none;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

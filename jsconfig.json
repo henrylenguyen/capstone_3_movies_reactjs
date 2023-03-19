@@ -16,7 +16,8 @@
       "reduxs/*": ["src/reduxs/*"],
       "routes/*": ["src/routes/*"],
       "utils/*": ["src/utils/*"],
-      "thunks/*": ["src/thunks/*"]
+      "thunks/*": ["src/thunks/*"],
+      "HOCS/*": ["src/HOCS/*"]
     }
   }
 }
