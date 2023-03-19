@@ -58,7 +58,7 @@ const fields = [
     name: "hinhAnh",
     type: "file",
   },
-
+  { label: "Ngày giờ", name: "dateTime", type: "datetime" },
   {
     name: "dangChieu",
     label: "Trạng thái",

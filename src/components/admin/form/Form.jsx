@@ -6,6 +6,7 @@ import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
+import DateTimePickerField from "../datetime/DateTimePickerField";
 
 const Form = ({
   schema,
@@ -75,6 +76,13 @@ const Form = ({
               />
             ) : type === "select" ? (
               <Dropdown control={control} name={name} options={rest.options} />
+            ) : type === "datetime" ? (
+              <DateTimePickerField
+                label={label}
+                name={name}
+                control={control}
+                errors={errors}
+              />
             ) : (
               <input
                 type={type}
