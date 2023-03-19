@@ -28,7 +28,7 @@ const Form = ({
   });
   const onSubmit = (data) => {
     // console.log("Hình ảnh", imageUrl);
-    // console.log("Dữ liệu form", data);
+    console.log("Dữ liệu form", data);
     handleSubmitForm(data);
   };
 
