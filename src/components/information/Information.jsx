@@ -24,7 +24,7 @@ function Information() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-x-2 gap-y-4 md:px-2">
             <div className="col-span-1">
               <h2 className="text-xl text-center md:text-left lg:text-3xl text-blue-500 font-medium">
-                Bạn hỏi, MovieTheater trả lời
+                MovieTheater FAQ (Câu hỏi thường gặp)
               </h2>
             </div>
             <div className="col-span-1 md:col-span-2">
@@ -323,12 +323,14 @@ function Information() {
                 </ListItemButton>
                 <Collapse in={openId === 5 && open}>
                   <List component="div">
-                    <p>
-                      Vui lòng liên hệ bộ phận Chăm Sóc Khách Hàng của
-                      MovieTheater qua Hotline 1900 545 xxx hoặc gửi hỗ trợ tại
-                      mục Trợ Giúp trong VÍ CỦA TÔI tại trên ứng dụng nếu bạn
-                      cần thêm thông tin
-                    </p>
+                    <ListItem sx={{ display: "block" }}>
+                      <p>
+                        Vui lòng liên hệ bộ phận Chăm Sóc Khách Hàng của
+                        MovieTheater qua Hotline 1900 545 xxx hoặc gửi hỗ trợ
+                        tại mục Trợ Giúp trong VÍ CỦA TÔI tại trên ứng dụng nếu
+                        bạn cần thêm thông tin
+                      </p>
+                    </ListItem>
                   </List>
                 </Collapse>
               </List>

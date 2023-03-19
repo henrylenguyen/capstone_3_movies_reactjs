@@ -126,7 +126,7 @@ function MovieList() {
       </div>
 
       <button
-        className="movie__button movie__button-next text-white absolute"
+        className="movie__button movie__button-next text-white absolute hidden lg:block"
         onClick={() => handleChangePage(CHANGE_PAGE_TYPE.NEXT_PAGE)}
       >
         <svg
@@ -146,7 +146,7 @@ function MovieList() {
       </button>
 
       <button
-        className="movie__button movie__button-prev text-white absolute"
+        className="movie__button movie__button-prev text-white absolute hidden lg:block"
         onClick={() => handleChangePage(CHANGE_PAGE_TYPE.PREV_PAGE)}
       >
         <svg

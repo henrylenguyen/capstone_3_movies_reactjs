@@ -24,10 +24,7 @@ const routes = [
         path: "/detail/:movieId",
         component: DetailsPage,
       },
-      {
-        path: "/news",
-        component: NewsPage,
-      },
+
       {
         path: "/seats/:scheduleId",
         component: SeatPage,
