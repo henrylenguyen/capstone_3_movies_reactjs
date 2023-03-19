@@ -1,14 +1,10 @@
-import { yupResolver } from "@hookform/resolvers/yup";
-
-import * as yup from "yup";
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import React, { useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 import useModalForm from "HOCS/useModalForm";
-
-
-const schema = yup
+import * as yup from "yup"
+const schema =  yup
   .object()
   .shape({
     tenPhim: yup
@@ -34,8 +30,7 @@ const schema = yup
     hot: yup.boolean(),
     // hinhAnh:yup.,
   })
-  .required();
-
+  .required()
 const fields = [
   {
     label: "Tên phim",
@@ -91,7 +86,6 @@ const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
-
   const { ModalForm, openModal } = useModalForm({
     schema,
     fields,
@@ -136,13 +130,13 @@ const FilmList = ({ phim }) => {
     const dataIndexKeyItem = dataIndexKey.find(
       (item) => item.key.toLowerCase() === newTitle
     );
-    
+
     return getColumnConfig(
       title,
       dataIndexKeyItem,
       newTitle,
       handleEdit,
-      handleDelete,
+      handleDelete
     );
   });
 

@@ -1,5 +1,5 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-
+import PageNotFound from "assets/images/PageNotFound.png";
 import { Avatar, Button, Image, Tooltip } from "antd";
 import Active from "components/admin/span/Active";
 import InActive from "components/admin/span/InActive";
@@ -9,7 +9,7 @@ const getColumnConfig = (
   dataIndexKeyItem,
   newTitle,
   handleEdit,
-  handleDelete,
+  handleDelete
 ) => {
   const columnConfig = {
     title: title.title,
@@ -20,7 +20,14 @@ const getColumnConfig = (
   };
 
   if (newTitle === "hinhanh") {
-    columnConfig.render = (text) => <Image src={text} width="100px"></Image>;
+    columnConfig.render = (text, record) => (
+      <Image
+        src={text}
+        width="100px"
+        alt={record}
+       
+      ></Image>
+    );
   } else if (newTitle === "danhgia") {
     columnConfig.width = 150;
     columnConfig.sorter = (a, b) => a.danhGia - b.danhGia;

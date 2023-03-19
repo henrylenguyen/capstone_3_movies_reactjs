@@ -7,7 +7,14 @@ import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
 
-const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
+const Form = ({
+  schema,
+  fields,
+  closeModal,
+  handleSubmitForm,
+  title,
+  color = "text-gray-700",
+}) => {
   const [imageUrl, setImageUrl] = useState("");
   const {
     control,
@@ -33,7 +40,7 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         {fields.map(({ label, name, type, placeholder, ...rest }) => (
           <div key={name} className="flex flex-col">
-            <label className="block font-medium text-gray-700" htmlFor={name}>
+            <label className={`block font-medium ${color}`} htmlFor={name}>
               {label}
             </label>
             {type === "textarea" ? (
@@ -67,11 +74,7 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
                 setImageUrl={setImageUrl}
               />
             ) : type === "select" ? (
-              <Dropdown
-                control={control}
-                name={name}
-                options={rest.options}
-              />
+              <Dropdown control={control} name={name} options={rest.options} />
             ) : (
               <input
                 type={type}
