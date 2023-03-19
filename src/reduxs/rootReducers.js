@@ -3,10 +3,10 @@ import MoviesSlice from "./Slice/MoviesSlice";
 import TheaterSlice from "./Slice/TheaterSlice";
 import UserSlice from "./Slice/UserSlice";
 import TicketSlice from "./Slice/TicketSlice";
-import movieSliceAdmin from "./Slice/admin/movieSliceAdmin";
 import NavBarSlice from "./Slice/admin/NavBarSlice";
 import TicketSliceAdmin from "./Slice/admin/TicketSliceAdmin";
 import UserSliceAdmin from "./Slice/admin/UserSliceAdmin";
+import MovieSliceAdmin from "./Slice/admin/MovieSliceAdmin";
 
 // combineReducer
 const rootReducer = combineReducers({
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   user: UserSlice,
   ticket: TicketSlice,
   //admin
-  movieAdmin: movieSliceAdmin,
+  movieAdmin: MovieSliceAdmin,
   navbar: NavBarSlice,
   TicketAdmin: TicketSliceAdmin,
   user: UserSliceAdmin,
