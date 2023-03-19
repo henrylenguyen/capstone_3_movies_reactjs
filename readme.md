@@ -191,11 +191,6 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
   npm install clsx
 ```
 
-# install animate.css
-
-```
-  npm install animate.css
-```
 
 ## install react-toastify (thư viện hiển thị alert dạng toast)
 
@@ -276,7 +271,7 @@ npm i react-avatar-editor
   npm install --save react-dropzone
 ```
 
-## animate.css (hỗ trợ upload file)
+## animate.css (hỗ trợ animation động)
 
 ```
   npm install animate.css --save
@@ -285,5 +280,11 @@ npm i react-avatar-editor
 
 ```
 npm install react-select
+
+```
+
+## react-datetime-picker (thư viện tạo lịch)
+```
+  npm install react-datetime-picker
 
 ```

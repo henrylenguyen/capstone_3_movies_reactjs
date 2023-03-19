@@ -33,6 +33,7 @@
     "react-avatar-editor": "^13.0.0",
     "react-bootstrap": "^2.7.2",
     "react-chartjs-2": "^5.2.0",
+    "react-datetime-picker": "^4.2.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-highlight-words": "^0.20.0",
