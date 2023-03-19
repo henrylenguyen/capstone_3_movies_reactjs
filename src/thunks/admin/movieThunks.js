@@ -1,7 +1,7 @@
 import MovieApi from "API/admin/MovieAPI";
-import { LayDanhSachPhim } from "reduxs/Slice/admin/movieSliceAdmin";
-import { LayThongTinCumRapTheoHeThong } from "reduxs/Slice/admin/movieSliceAdmin";
-import { LayThongTinLichChieuHeThongRap } from "reduxs/Slice/admin/movieSliceAdmin";
+import { LayThongTinCumRapTheoHeThong } from "reduxs/Slice/admin/MovieSliceAdmin";
+import { LayThongTinLichChieuHeThongRap } from "reduxs/Slice/admin/MovieSliceAdmin";
+import { LayDanhSachPhim } from "reduxs/Slice/admin/MovieSliceAdmin";
 
 export const fetchLichChieuHeThongRap = (maNhom) => async (dispatch) => {
   try {
