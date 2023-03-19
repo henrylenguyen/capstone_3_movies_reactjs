@@ -1,5 +1,11 @@
 import clsx from "clsx";
-import React from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeBookedTicket } from "reduxs/Slice/TicketSlice";
 import "./bookingTicketDetail.scss";
@@ -9,11 +15,53 @@ function BookingTicketDetail() {
   const bookedTicketList = useSelector(
     (state) => state.ticket.bookedTicketList
   );
+  const [showScroll, setShowScroll] = useState(() => false);
+  const bookingContainerRef = useRef();
 
   function handleRemoveBookedTicket(idx) {
     if (idx === null || idx === undefined) return;
     dispatch(removeBookedTicket(idx));
   }
+
+  function handleScrollToBottom() {
+    const { current: bookingContainer } = bookingContainerRef;
+
+    bookingContainer.scrollTo(
+      bookingContainer.scrollTop,
+      bookingContainer.scrollHeight
+    );
+    setShowScroll(false);
+  }
+
+  useLayoutEffect(() => {
+    if (bookedTicketList.length < 1) return;
+    const { current: bookingContainer } = bookingContainerRef;
+
+    setShowScroll(
+      Math.ceil(bookingContainer.clientHeight + bookingContainer.scrollTop) <
+        bookingContainer.scrollHeight
+    );
+
+    function handleScroll(e) {
+      const { target } = e;
+
+      setShowScroll(
+        Math.ceil(bookingContainer.clientHeight + target.scrollTop) <
+          bookingContainer.scrollHeight
+      );
+
+      bookingContainer.addEventListener("scroll", handleScroll);
+
+      return () => {
+        bookingContainer.removeEventListener("scroll", handleScroll);
+      };
+    }
+
+    bookingContainer.addEventListener("scroll", handleScroll);
+    return () => {
+      bookingContainer.removeEventListener("scroll", handleScroll);
+    };
+  }, [bookedTicketList]);
 
   return (
     <div className="seat__info-booking mt-6 mb-4 aspect-auto">
@@ -24,9 +72,12 @@ function BookingTicketDetail() {
       )}
 
       {bookedTicketList.length > 0 && (
-        <>
-          <h2 className="text-2xl uppercase mb-4">Danh sách ghế đã đặt</h2>
-          <div className="seat__info-booking-container h-40 p-2 overflow-y-scroll overflow-x-hidden">
+        <div className="relative">
+          <h2 className="text-2xl uppercase mb-4 ">Danh sách ghế đã đặt</h2>
+          <div
+            ref={bookingContainerRef}
+            className="seat__info-booking-container h-40 p-2 overflow-y-scroll overflow-x-hidden"
+          >
             <div className=" grid w-full grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-6 ">
               {bookedTicketList.length > 0 &&
                 bookedTicketList.map((bookedTicketItem, idx) => (
@@ -71,8 +122,30 @@ function BookingTicketDetail() {
                   </button>
                 ))}
             </div>
+
+            {showScroll && (
+              <button
+                className="seat__info-button-scroll absolute bg-blue-500 p-1 rounded"
+                onClick={handleScrollToBottom}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                  />
+                </svg>
+              </button>
+            )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );

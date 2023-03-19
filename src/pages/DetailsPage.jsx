@@ -36,7 +36,7 @@ const DetailsPage = () => {
   }, []);
 
   return (
-    <section className="detail py-32">
+    <section className="detail pt-32 pb-4">
       <div className="detail__content container mx-auto">
         <DetailMovie isLoading={isLoading} />
 

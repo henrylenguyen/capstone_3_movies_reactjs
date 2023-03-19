@@ -63,6 +63,7 @@ function Header() {
       confirmButtonText: "Đăng xuất",
     }).then((result) => {
       if (result.isConfirmed) {
+        setOpenMenu(false);
         dispatch(logoutUser());
         dispatch(logout());
         localStorage.removeItem(ACCESS_TOKEN);

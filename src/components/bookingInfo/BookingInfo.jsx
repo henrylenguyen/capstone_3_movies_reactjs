@@ -25,7 +25,7 @@ function BookingInfo() {
         </h2>
       </div>
 
-      <div className="seat__booking-info text-sm md:text-base">
+      <div className="seat__booking-info text-sm md:text-base hidden lg:block">
         <div className="flex justify-between  border-b-2 py-4">
           <h2 className="capitalize ">Cụm rạp:</h2>
           <p>{tenCumRap}</p>
