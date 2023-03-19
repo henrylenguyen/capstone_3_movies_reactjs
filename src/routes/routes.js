@@ -3,7 +3,7 @@ import SignUpPage from "pages/SignUpPage";
 import SignInPage from "pages/SignInPage.jsx";
 import BookingPage from "pages/BookingPage";
 import DetailsPage from "pages/DetailsPage.jsx";
-import NewsPage from "pages/NewsPage.jsx";
+
 import UserPage from "pages/UserPage";
 import SeatPage from "pages/SeatPage";
 
