@@ -5,7 +5,8 @@ import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import React, { useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
-import useModalForm from "hooks/useModalForm";
+import useModalForm from "HOCS/useModalForm";
+
 
 const schema = yup
   .object()

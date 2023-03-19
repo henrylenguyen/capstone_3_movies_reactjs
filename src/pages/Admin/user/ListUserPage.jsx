@@ -1,6 +1,6 @@
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
-import useModalForm from "hooks/useModalForm";
+import useModalForm from "HOCS/useModalForm";
 import React from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 
@@ -33,10 +33,13 @@ const fields = [
     placeholder: "Nhập Số Điện Thoại",
   },
   {
-    label: "Trailer",
-    name: "trailer",
-    type: "text",
-    placeholder: "Nhập url trailer youtube",
+    label: "Loại khách hàng",
+    name: "maLoaiNguoiDung",
+    type: "select",
+    options: [
+      { label: "Khách hàng", value: "KhachHang" },
+      { label: "Quản trị", value: "QuanTri" },
+    ],
   },
 ];
 
@@ -89,8 +92,10 @@ export default function ListUserPage({ user }) {
     );
   });
 
-  return <>
-  <ModalForm></ModalForm>
-    <CustomTable columns={columns} data={data}></CustomTable>
-  </>;
+  return (
+    <>
+      <ModalForm></ModalForm>
+      <CustomTable columns={columns} data={data}></CustomTable>
+    </>
+  );
 }

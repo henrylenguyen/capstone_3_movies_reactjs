@@ -5,6 +5,7 @@ import TextArea from "../textArea/TextArea";
 import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
+import Dropdown from "../select/Dropdown";
 
 const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
   const [imageUrl, setImageUrl] = useState("");
@@ -13,15 +14,16 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
     handleSubmit,
     register,
     formState: { errors },
+    watch,
   } = useForm({
     resolver: yupResolver(schema),
     shouldUnregister: true,
   });
   const onSubmit = (data) => {
-    console.log("Hình ảnh", imageUrl);
-    console.log("Dữ liệu form", data);
+    // console.log("Hình ảnh", imageUrl);
+    // console.log("Dữ liệu form", data);
+    handleSubmitForm(data);
   };
-
 
   return (
     <>
@@ -63,6 +65,12 @@ const Form = ({ schema, fields, closeModal, handleSubmitForm, title }) => {
                 name={name}
                 errors={errors}
                 setImageUrl={setImageUrl}
+              />
+            ) : type === "select" ? (
+              <Dropdown
+                control={control}
+                name={name}
+                options={rest.options}
               />
             ) : (
               <input

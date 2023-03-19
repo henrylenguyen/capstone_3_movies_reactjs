@@ -20,6 +20,7 @@ export default defineConfig({
       utils: `${path.resolve(__dirname, "./src/utils")}`,
       thunks: `${path.resolve(__dirname, "./src/thunks")}`,
       API: `${path.resolve(__dirname, "./src/API")}`,
+      HOCS: `${path.resolve(__dirname, "./src/HOCS")}`,
     },
   },
 });
