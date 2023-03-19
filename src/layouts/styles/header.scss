@@ -1,0 +1,135 @@
+@import "../../styles/root.scss";
+
+.header {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $header-height;
+  background-color: $bg-white;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba($color: #000000, $alpha: 0.2);
+
+  .header__mobile-bar {
+    display: none;
+  }
+
+  .header__container {
+    height: 100%;
+
+    .header__content {
+      height: 100%;
+    }
+
+    .header__logo {
+      height: 100%;
+    }
+
+    @media screen and (max-width: $mobile-width) {
+      .header__navbar {
+        display: none;
+      }
+
+      .header__mobile-bar {
+        display: block;
+      }
+
+      .header__user {
+        display: none;
+      }
+    }
+
+    @media screen and (min-width: $pc-width) {
+      .header__mobile-bar {
+        display: none;
+      }
+    }
+
+    .header__navbar-link {
+      transition: all 0.34s;
+    }
+
+    .header__user-auth {
+      position: relative;
+
+      a {
+        transition: all 0.34s;
+      }
+
+      &:first-child::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 50%;
+        transform: (translateY(-50%));
+        right: -10px;
+        width: 1px;
+        height: calc(100% / 2);
+        background-color: #dbdbdb;
+      }
+    }
+  }
+
+  .header__modal-mobile {
+    &.open {
+      .header__modal-mobile-overlay {
+        display: block;
+      }
+
+      .header__modal-mobile-menu {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  }
+
+  .header__modal-mobile-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: none;
+    background-color: rgba($color: #000000, $alpha: 0.6);
+  }
+
+  .header__modal-mobile-menu {
+    position: fixed;
+    top: 0;
+    height: 100vh;
+    left: 0;
+    width: 48%;
+    background-color: $bg-white;
+    z-index: 11;
+    border-right: thin solid #dbdbdb;
+    box-shadow: 0 1rem 2rem rgb(0 0 0 / 10%);
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: transform linear 0.4s, opacity linear 0.4s;
+  }
+
+  .header__user-login {
+    position: relative;
+    &-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+    }
+
+    button {
+      color: #000;
+      &:hover {
+        color: $color-hover-1;
+      }
+    }
+
+    &-menu.open {
+      display: block;
+    }
+
+    .header__user-login-menu-item {
+      &:hover {
+        color: $color-hover-1;
+      }
+    }
+  }
+}

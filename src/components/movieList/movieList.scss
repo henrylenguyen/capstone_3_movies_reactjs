@@ -1,0 +1,22 @@
+.movie {
+  &__content {
+    background-image: url("../../assets/images/background-movie-list.jpg");
+    background-repeat: repeat;
+    background-position: top center;
+    background-size: cover;
+  }
+
+  &__button {
+    top: 50%;
+    position: absolute;
+    transform: translateY(-50%);
+  }
+
+  &__button-next {
+    right: 1rem;
+  }
+
+  &__button-prev {
+    left: 1rem;
+  }
+}
