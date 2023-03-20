@@ -10,6 +10,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import vi from "date-fns/locale/vi";
+import moment from "moment";
 
 registerLocale("vi", vi); // Đăng ký ngôn ngữ tiếng Việt cho DatePicker
 
@@ -32,10 +33,11 @@ const Form = ({
     shouldUnregister: true,
   });
   const onSubmit = (data) => {
-    // console.log("Hình ảnh", imageUrl);
-    console.log("Dữ liệu form", data);
-    // handleSubmitForm(data);
-    console.log("Ngày giờ đã chọn", selectedDate);
+    handleSubmitForm({
+      ...data,
+      ngayKhoiChieu: moment(selectedDate).format("DD/MM/YYYY"),
+    });
+    // handleSubmitForm;
   };
   const disabledDate = (date) => {
     // Lấy thời gian hiện tại
@@ -81,17 +83,12 @@ const Form = ({
                 errors={errors[name]}
               />
             ) : type === "file" ? (
-              <ImageUpload
-                name="image"
-                control={control}
-                errors={errors}
-               
-              />
+              <ImageUpload name={name} control={control} errors={errors} />
             ) : type === "select" ? (
               <Dropdown control={control} name={name} options={rest.options} />
             ) : type === "datetime" ? (
               <DatePicker
-                className="bg-white text-black px-5 py-2"
+                className="bg-white text-black px-5 py-2 mt-4"
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
                 showTimeSelect

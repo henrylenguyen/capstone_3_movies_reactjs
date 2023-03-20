@@ -28,6 +28,12 @@ const schema = yup
     // hinhAnh:yup.,
   })
   .required();
+  let gr=[];
+  
+  for(let i = 0;i<10;i++){
+    gr.push({ label: `GP0${i}`, value: `GP${i}`, id: i });
+  }
+
 const fields = [
   {
     label: "Tên phim",
@@ -58,7 +64,16 @@ const fields = [
     name: "hinhAnh",
     type: "file",
   },
-  { label: "Ngày khởi chiếu", name: "dateTime", type: "datetime" },
+  { label: "Ngày khởi chiếu", name: "ngayKhoiChieu", type: "datetime" },
+  {
+    name: "maNhom",
+    label: "Mã nhóm",
+    type: "select",
+    options: [
+      { label: "GP00", value: "GP00", id: 1 },
+      { label: "Sắp chiếu", value: false, id: 2 },
+    ],
+  },
   {
     name: "dangChieu",
     label: "Trạng thái",
@@ -68,6 +83,7 @@ const fields = [
       { label: "Sắp chiếu", value: false, id: 2 },
     ],
   },
+
   {
     label: "",
     name: "hot",
@@ -75,6 +91,19 @@ const fields = [
     options: [{ label: "Đang hot", value: false, id: 1 }],
   },
 ];
+const handleSubmitForm = (data) => {
+  let formData = new FormData();
+  console.log(data);
+  for (let key in data) {
+    console.log("key:", key);
+    if (key !== "hinhAnh") {
+      formData.append(key, data[key]);
+    } else {
+      formData.append(key, data.hinhAnh[0], data.hinhAnh[0].name);
+    }
+  }
+  console.log(formData.get("hinhAnh"));
+};
 const AddNewFilm = () => {
   return (
     <div className="p-10 bg-adminPrimary w-full">
@@ -82,7 +111,7 @@ const AddNewFilm = () => {
         schema={schema}
         fields={fields}
         // closeModal={closeModal}
-        // handleSubmitForm={handleSubmitForm}
+        handleSubmitForm={handleSubmitForm}
         // title={title}
         color="text-white"
       />

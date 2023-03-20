@@ -19,6 +19,6 @@ const rootReducer = combineReducers({
   movieAdmin: MovieSliceAdmin,
   navbar: NavBarSlice,
   TicketAdmin: TicketSliceAdmin,
-  user: UserSliceAdmin,
+  userAdmin: UserSliceAdmin,
 });
 export default rootReducer;
