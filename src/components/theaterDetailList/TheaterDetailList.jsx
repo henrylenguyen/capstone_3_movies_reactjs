@@ -39,7 +39,7 @@ function TheaterDetailList({ isLoading }) {
         Rạp hiện đang chiếu
       </h2>
       <div className="grid grid-cols-4 bg-white rounded">
-        <div className="col-span-1 detail__theater-list-right h-52 overflow-y-scroll">
+        <div className="col-span-1 detail__theater-list-right h-80 overflow-y-scroll">
           <Tabs
             value={idxValue}
             centered
@@ -55,7 +55,7 @@ function TheaterDetailList({ isLoading }) {
             ))}
           </Tabs>
         </div>
-        <div className="col-span-3 p-4 detail__theater-list-right h-52 overflow-y-scroll">
+        <div className="col-span-3 p-4 detail__theater-list-right h-80 overflow-y-scroll">
           {theaterListByMovieId.heThongRapChieu?.map((theater, idx) => (
             <TheaterDetailItem
               key={theater.maHeThongRap}

@@ -293,4 +293,9 @@ npm install react-select
 ```
   npm install react-datepicker
 
+
+## date-fns (đăng kí vùng)
+
+```
+  npm i date-fns
 ```
