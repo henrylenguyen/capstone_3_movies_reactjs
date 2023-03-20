@@ -288,3 +288,9 @@ npm install react-select
   npm install react-datetime-picker
 
 ```
+
+## date-fns (đăng kí vùng)
+
+```
+  npm i date-fns
+```
