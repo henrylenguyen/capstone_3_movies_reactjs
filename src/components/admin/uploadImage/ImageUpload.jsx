@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Upload, Modal, message } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { useController } from "react-hook-form";
+import * as yup from "yup";
 
-const ImageUpload = ({ control, name, errors, setImageUrl }) => {
+const ImageUpload = ({ control, register, name, errors, setImageUrl }) => {
   const [fileList, setFileList] = useState([]);
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
-  // const [imageUrl, setImageUrl] = useState("");
   const { field } = useController({
     control,
     name,
@@ -22,9 +22,17 @@ const ImageUpload = ({ control, name, errors, setImageUrl }) => {
             fileType === "image/jpg"
           );
         },
+        validateFileSize: (value) => {
+          const fileSize = value && value[0] && value[0].size;
+          return fileSize <= 1048576;
+        },
       },
     },
+    defaultValue: "",
   });
+  useEffect(() => {
+    register(name, field);
+  }, [register, name, field]);
 
   const handlePreview = (file) => {
     setPreviewImage(file.url || file.preview);
@@ -33,7 +41,11 @@ const ImageUpload = ({ control, name, errors, setImageUrl }) => {
 
   const handleCancelPreview = () => setPreviewVisible(false);
 
-  const handleChange = ({ fileList }) => {
+  const handleChange = ({ file, fileList }) => {
+    if (file.status === "error") {
+      message.error("Định dạng tệp không hợp lệ!");
+      return;
+    }
     setFileList(fileList);
     if (fileList.length > 0) {
       const reader = new FileReader();
@@ -43,6 +55,7 @@ const ImageUpload = ({ control, name, errors, setImageUrl }) => {
       setImageUrl("");
     }
   };
+
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -58,6 +71,7 @@ const ImageUpload = ({ control, name, errors, setImageUrl }) => {
         beforeUpload={() => false}
         onPreview={handlePreview}
         onChange={handleChange}
+        accept=".png,.jpg,.jpeg"
       >
         {fileList.length >= 1 ? null : uploadButton}
       </Upload>
@@ -85,5 +99,4 @@ const ImageUpload = ({ control, name, errors, setImageUrl }) => {
     </div>
   );
 };
-
 export default ImageUpload;

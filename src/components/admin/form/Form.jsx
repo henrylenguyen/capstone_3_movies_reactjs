@@ -8,6 +8,10 @@ import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import vi from "date-fns/locale/vi";
+
+registerLocale("vi", vi); // Đăng ký ngôn ngữ tiếng Việt cho DatePicker
 
 const Form = ({
   schema,
@@ -84,11 +88,13 @@ const Form = ({
                 name={name}
                 errors={errors}
                 setImageUrl={setImageUrl}
+                
               />
             ) : type === "select" ? (
               <Dropdown control={control} name={name} options={rest.options} />
             ) : type === "datetime" ? (
               <DatePicker
+                className="bg-white text-black px-5 py-2"
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
                 showTimeSelect
@@ -97,6 +103,8 @@ const Form = ({
                 placeholderText={placeholder}
                 minDate={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
                 filterDate={disabledDate}
+                locale="vi" // Thêm thuộc tính locale để sử dụng ngôn ngữ tiếng Việt
+                timeIntervals={15} // Thêm prop timeIntervals với giá trị 15
               />
             ) : (
               <input
