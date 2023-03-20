@@ -1,102 +1,139 @@
-import React, { useEffect, useState } from "react";
-import { Upload, Modal, message } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import React, { useCallback, useEffect, useState, useRef } from "react";
 import { useController } from "react-hook-form";
-import * as yup from "yup";
+import { useDropzone } from "react-dropzone";
+import { message, Modal, Button } from "antd";
+import AvatarEditor from "react-avatar-editor";
 
-const ImageUpload = ({ control, register, name, errors, setImageUrl }) => {
-  const [fileList, setFileList] = useState([]);
-  const [previewVisible, setPreviewVisible] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const { field } = useController({
-    control,
+const ImageUpload = ({ name, control, errors }) => {
+  const {
+    field: { value, onChange },
+    fieldState: { invalid },
+  } = useController({
     name,
-    rules: {
-      required: "Ảnh là bắt buộc",
-      validate: {
-        validateFileType: (value) => {
-          const fileType = value && value[0] && value[0].type;
-          return (
-            fileType === "image/png" ||
-            fileType === "image/jpeg" ||
-            fileType === "image/jpg"
-          );
-        },
-        validateFileSize: (value) => {
-          const fileSize = value && value[0] && value[0].size;
-          return fileSize <= 1048576;
-        },
-      },
-    },
-    defaultValue: "",
+    control,
+    defaultValue: [],
   });
-  useEffect(() => {
-    register(name, field);
-  }, [register, name, field]);
 
-  const handlePreview = (file) => {
-    setPreviewImage(file.url || file.preview);
+  const [preview, setPreview] = useState(
+    value[0] ? URL.createObjectURL(value[0]) : null
+  );
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [editorVisible, setEditorVisible] = useState(false);
+  const [editorImage, setEditorImage] = useState(null);
+  const [editorScale, setEditorScale] = useState(1);
+  const editorRef = useRef();
+
+  const handlePreview = useCallback(() => {
     setPreviewVisible(true);
-  };
+  }, []);
 
-  const handleCancelPreview = () => setPreviewVisible(false);
+  const handleEdit = useCallback(() => {
+    setEditorImage(preview);
+    setEditorVisible(true);
+  }, [preview]);
 
-  const handleChange = ({ file, fileList }) => {
-    if (file.status === "error") {
-      message.error("Định dạng tệp không hợp lệ!");
+  const handleEditorCancel = useCallback(() => {
+    setEditorVisible(false);
+  }, []);
+
+  const handleEditorSave = useCallback(() => {
+    if (editorRef.current) {
+      const canvas = editorRef.current.getImage();
+      const blob = canvas.toDataURL();
+      const file = dataURLtoFile(blob, "image.png");
+      onChange([file]);
+      setPreview(URL.createObjectURL(file));
+      setEditorVisible(false);
+    }
+  }, [onChange]);
+
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+
+    if (!file) {
       return;
     }
-    setFileList(fileList);
-    if (fileList.length > 0) {
-      const reader = new FileReader();
-      reader.readAsDataURL(fileList[0].originFileObj);
-      reader.onload = () => setImageUrl(reader.result);
-    } else {
-      setImageUrl("");
+
+    if (
+      file.type !== "image/png" &&
+      file.type !== "image/jpeg" &&
+      file.type !== "image/jpg"
+    ) {
+      message.error("Only PNG, JPEG and JPG image files are allowed.");
+      return;
     }
+
+    const newFile = Object.assign(file, {
+      preview: URL.createObjectURL(file),
+    });
+
+    onChange([newFile]);
+    setPreview(newFile.preview);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    multiple: false,
+    accept: "image/png, image/jpeg, image/jpg",
+  });
+
+  const dataURLtoFile = (dataurl, filename) => {
+    const arr = dataurl.split(",");
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
   };
 
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Tải lên</div>
-    </div>
-  );
-
   return (
-    <div>
-      <Upload
-        listType="picture-card"
-        fileList={fileList}
-        beforeUpload={() => false}
-        onPreview={handlePreview}
-        onChange={handleChange}
-        accept=".png,.jpg,.jpeg"
+    <div className="flex flex-col">
+      <div
+        {...getRootProps()}
+        className="border-2 border-gray-300 border-dashed rounded-lg p-5"
       >
-        {fileList.length >= 1 ? null : uploadButton}
-      </Upload>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop the files here...</p>
+        ) : (
+          <p>Drag and drop a file here, or click to select a file</p>
+        )}
+      </div>
+      {preview && (
+        <div className="flex flex-col mt-5">
+          <img
+            src={preview}
+            alt="Preview"
+            className="w-[100px] h-auto"
+            onClick={handlePreview}
+          />
+          <button
+            type="button"
+            className="mt-2 px-4 py-2 bg-red-500 text-white rounded-md shadow-sm hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            onClick={() => {
+              onChange([]);
+              setPreview(null);
+            }}
+          >
+            Remove
+          </button>
+        </div>
+      )}
+      {invalid && errors[name] && (
+        <p className="text-red-500 text-sm italic">{errors[name].message}</p>
+      )}
       <Modal
         open={previewVisible}
-        title="Xem trước ảnh"
-        onCancel={handleCancelPreview}
         footer={null}
+        onCancel={() => setPreviewVisible(false)}
       >
-        <img alt="example" style={{ width: "100%" }} src={previewImage} />
+        <img alt="Preview" style={{ width: "100%" }} src={preview} />
       </Modal>
-      {errors[name] && (
-        <span className="text-red-500 text-sm italic">
-          {errors[name].message}
-        </span>
-      )}
-      {field.value && fileList.length === 0 && (
-        <span className="text-red-500 text-sm italic">Ảnh là bắt buộc</span>
-      )}
-      {fileList.length > 0 && (
-        <span className="text-green-500 text-sm italic">
-          Tải lên thành công {fileList.length} tệp...
-        </span>
-      )}
     </div>
   );
 };
+
 export default ImageUpload;

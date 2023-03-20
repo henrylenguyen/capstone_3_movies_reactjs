@@ -21,14 +21,12 @@ const Form = ({
   title,
   color = "text-gray-700",
 }) => {
-  const [imageUrl, setImageUrl] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
   const {
     control,
     handleSubmit,
     register,
     formState: { errors },
-    watch,
   } = useForm({
     resolver: yupResolver(schema),
     shouldUnregister: true,
@@ -84,11 +82,10 @@ const Form = ({
               />
             ) : type === "file" ? (
               <ImageUpload
+                name="image"
                 control={control}
-                name={name}
                 errors={errors}
-                setImageUrl={setImageUrl}
-                
+               
               />
             ) : type === "select" ? (
               <Dropdown control={control} name={name} options={rest.options} />
