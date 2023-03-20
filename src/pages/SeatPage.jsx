@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import { ACCESS_TOKEN } from "constants/constants";
 import ScrollBtn from "components/scrollBtn/ScrollBtn";
 import { resetTicketData } from "reduxs/Slice/TicketSlice";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
 
 function SeatPage() {
   const userLogin = useSelector((state) => state.user.userLogin);
@@ -67,8 +68,8 @@ function SeatPage() {
 
   return (
     <section className="seat__container bg-[#021224] w-full h-full text-white pb-5 md:pb-0 aspect-auto">
-      <div className="seat__content xl:flex xl:justify-between mx-auto pt-[5rem] xl:pb-[5rem] gap-7 xl:flex-row sm:container md:p-5">
-        <div className="xl:w-[60%] w-[100%]">
+      <div className="seat__content xl:flex xl:justify-between mx-auto pt-[5rem] xl:pb-[5rem] gap-7 xl:flex-row sm:container md:p-5 ">
+        <div className="xl:w-[60%] w-[100%] pb-10 lg:pb-0">
           <div className="flex flex-col items-center">
             <img
               src={Line}
@@ -100,7 +101,7 @@ function SeatPage() {
             ))}
           </div>
         </div>
-        <div className="w-full h-full rounded-[2rem] xl:w-[40%]  sm:w-[100%] bg-[#212F4F]  rounded-b-none p-[1.5rem] md:rounded-[2rem] mt-[6rem] aspect-auto">
+        <div className="w-full h-full rounded-[2rem] xl:w-[40%]  sm:w-[100%] bg-[#212F4F]  rounded-b-none p-[1.5rem] md:rounded-[2rem] mt-[6rem] aspect-auto hidden lg:block">
           <BookingInfo />
           <BookingTicketDetail />
           <TotalAndPaid />
@@ -108,6 +109,34 @@ function SeatPage() {
       </div>
 
       {showScrollBtn && <ScrollBtn />}
+      <div className="seat-mobile-checkout w-full rounded-t-[2rem] w-[100%] bg-[#212F4F] block lg:hidden p-[0.4rem] text-white">
+        <Accordion>
+          <AccordionSummary
+            expandIcon={
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 text-white"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 8.25l-7.5 7.5-7.5-7.5"
+                />
+              </svg>
+            }
+          >
+            <BookingInfo />
+          </AccordionSummary>
+          <AccordionDetails>
+            <BookingTicketDetail />
+            <TotalAndPaid />
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </section>
   );
 }

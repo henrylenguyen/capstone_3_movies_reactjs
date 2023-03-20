@@ -2,4 +2,23 @@
 
 .seat__container {
   margin-top: $header-height;
+
+  .seat-mobile-checkout {
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+  }
+}
+
+.css-1elwnq4-MuiPaper-root-MuiAccordion-root {
+  background-color: transparent !important;
+  box-shadow: none !important;
+
+  h2 {
+    color: #fff;
+  }
+}
+
+.MuiAccordionDetails-root.css-15v22id-MuiAccordionDetails-root {
+  color: #fff;
 }

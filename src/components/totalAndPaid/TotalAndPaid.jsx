@@ -59,8 +59,9 @@ function TotalAndPaid() {
       showCloseButton: true,
       showCancelButton: true,
       focusConfirm: false,
+
       confirmButtonText: "Thanh toán",
-      cancelButtonText: "Không thanh toán",
+      cancelButtonText: "Hủy",
     }).then(async (result) => {
       try {
         if (result.isConfirmed) {
@@ -84,8 +85,6 @@ function TotalAndPaid() {
             maLichChieu: +scheduleId,
             danhSachVe: [...filterBookedTicketList],
           };
-
-          // console.log(newValues);
 
           await ticketAPI.bookTicket(newValues);
 
