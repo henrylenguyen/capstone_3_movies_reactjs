@@ -6,7 +6,8 @@ import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
-import DateTimePickerField from "../datetime/DateTimePickerField";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Form = ({
   schema,
@@ -17,6 +18,7 @@ const Form = ({
   color = "text-gray-700",
 }) => {
   const [imageUrl, setImageUrl] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
   const {
     control,
     handleSubmit,
@@ -30,9 +32,18 @@ const Form = ({
   const onSubmit = (data) => {
     // console.log("Hình ảnh", imageUrl);
     console.log("Dữ liệu form", data);
-    handleSubmitForm(data);
+    // handleSubmitForm(data);
+    console.log("Ngày giờ đã chọn", selectedDate);
   };
-
+  const disabledDate = (date) => {
+    // Lấy thời gian hiện tại
+    const now = new Date();
+    // Lấy thời gian 30 ngày sau thời gian hiện tại
+    const after30Days = new Date();
+    after30Days.setDate(now.getDate() + 30);
+    // So sánh với ngày được chọn
+    return date < after30Days || date > now;
+  };
   return (
     <>
       <h3 className="font-semibold uppercase text-[30px] text-center">
@@ -77,11 +88,15 @@ const Form = ({
             ) : type === "select" ? (
               <Dropdown control={control} name={name} options={rest.options} />
             ) : type === "datetime" ? (
-              <DateTimePickerField
-                label={label}
-                name={name}
-                control={control}
-                errors={errors}
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                showTimeSelect
+                dateFormat="dd/MM/yyyy HH:mm"
+                timeFormat="HH:mm"
+                placeholderText={placeholder}
+                minDate={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
+                filterDate={disabledDate}
               />
             ) : (
               <input
