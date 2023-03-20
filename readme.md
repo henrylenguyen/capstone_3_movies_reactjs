@@ -259,6 +259,12 @@ Vitejs là 1 công cụ build web cực kỳ nhanh và cập nhật nhanh chóng
   npm i antd-img-crop
 ```
 
+## react-image-crop
+```
+   npm install react-image-crop
+
+```
+
 ## react-avatar-editor
 
 ```
