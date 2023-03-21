@@ -1,51 +1,72 @@
-import { DatePicker, TimePicker } from "antd";
-import moment from "moment";
-import { Controller } from "react-hook-form";
-import DatePicker from "react-persian-datepicker";
+import { useState } from "react";
+import { useFormContext, useController } from "react-hook-form";
+import { DatePicker, LocalizationProvider, TimePicker } from "@mui/lab";
+import { TextField } from "@mui/material";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import * as yup from "yup";
 
-const DateTimePickerField = ({ control, ...props }) => {
+const DateTimePicker = ({ name, label, defaultValue, ...rest }) => {
+  const { control } = useFormContext();
+  const {
+    field: { onChange, value },
+    fieldState: { error },
+  } = useController({ name, control, defaultValue });
+
+  const [selectedDate, setSelectedDate] = useState(defaultValue ?? null);
+
+  const handleChangeDate = (date) => {
+    setSelectedDate(date);
+    onChange(date);
+  };
+
+  const validate = async (value) => {
+    const schema = yup.object().shape({
+      [name]: yup.date().required("Bạn cần chọn ngày giờ"),
+    });
+
+    try {
+      await schema.validate({ [name]: value });
+      return true;
+    } catch (err) {
+      return err.errors[0];
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-3">
-      <Controller
-        control={control}
-        {...props}
-        defaultValue={null}
-        rules={{ required: true }}
-        render={({ field: { onChange, value }, fieldState: { error } }) => (
-          <div>
-            <DatePicker
-              defaultValue={moment().add(1, "months")}
-              value={value ? moment(value) : null}
-              onChange={(date) => onChange(date ? moment(date).toDate() : null)}
-              allowClear
-            />
-            <TimePicker
-              value={value ? moment(value) : null}
-              onChange={(time) =>
-                onChange(
-                  time
-                    ? moment(
-                        `${moment(value).format("DD/MM/YYYY")} ${moment(
-                          time
-                        ).format("HH:mm:ss")}`,
-                        "DD/MM/YYYY HH:mm:ss"
-                      ).toDate()
-                    : null
-                )
-              }
-              format="HH:mm"
-              allowClear
-            />
-            {error && (
-              <span className="text-red-500 text-sm italic">
-                {error.message}
-              </span>
-            )}
-          </div>
+    <LocalizationProvider dateAdapter={AdapterDateFns}>
+      <DatePicker
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            name={name}
+            label={label}
+            error={Boolean(error)}
+            helperText={error?.message}
+          />
         )}
+        value={selectedDate}
+        onChange={handleChangeDate}
+        inputFormat="dd/MM/yyyy"
+        maxDate={new Date().setMonth(new Date().getMonth() + 1)}
+        {...rest}
       />
-    </div>
+      <TimePicker
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            name={name}
+            label="Thời gian"
+            error={Boolean(error)}
+            helperText={error?.message}
+          />
+        )}
+        value={selectedDate}
+        onChange={handleChangeDate}
+        inputFormat="HH:mm"
+        {...rest}
+      />
+    </LocalizationProvider>
   );
 };
 
-export default DateTimePickerField;
+export default DateTimePicker;
