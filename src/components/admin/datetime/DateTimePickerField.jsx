@@ -1,47 +1,51 @@
-import { useState } from "react";
-import { useController } from "react-hook-form";
-import { MuiPickersUtilsProvider, DateTimePicker } from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
-import viLocale from "date-fns/locale/vi";
+import { DatePicker, TimePicker } from "antd";
+import moment from "moment";
+import { Controller } from "react-hook-form";
+import DatePicker from "react-persian-datepicker";
 
-
-const DateTimePickerField = ({ control, name, label, defaultValue }) => {
-  const [selectedDate, setSelectedDate] = useState(defaultValue || null);
-
-  const {
-    field: { ref, value, onChange, ...inputProps },
-    fieldState: { invalid, error },
-  } = useController({
-    control,
-    name,
-    defaultValue: selectedDate,
-    rules: { required: true },
-  });
-
+const DateTimePickerField = ({ control, ...props }) => {
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={viLocale}>
-      <DateTimePicker
-        inputRef={ref}
-        renderInput={(props) => (
-          <TextField
-            {...props}
-            fullWidth
-            label={label}
-            error={invalid}
-            helperText={error?.message}
-          />
+    <div className="flex flex-col gap-3">
+      <Controller
+        control={control}
+        {...props}
+        defaultValue={null}
+        rules={{ required: true }}
+        render={({ field: { onChange, value }, fieldState: { error } }) => (
+          <div>
+            <DatePicker
+              defaultValue={moment().add(1, "months")}
+              value={value ? moment(value) : null}
+              onChange={(date) => onChange(date ? moment(date).toDate() : null)}
+              allowClear
+            />
+            <TimePicker
+              value={value ? moment(value) : null}
+              onChange={(time) =>
+                onChange(
+                  time
+                    ? moment(
+                        `${moment(value).format("DD/MM/YYYY")} ${moment(
+                          time
+                        ).format("HH:mm:ss")}`,
+                        "DD/MM/YYYY HH:mm:ss"
+                      ).toDate()
+                    : null
+                )
+              }
+              format="HH:mm"
+              allowClear
+            />
+            {error && (
+              <span className="text-red-500 text-sm italic">
+                {error.message}
+              </span>
+            )}
+          </div>
         )}
-        value={selectedDate}
-        onChange={(date) => {
-          setSelectedDate(date);
-          onChange(date);
-        }}
-        format="dd/MM/yyyy HH:mm"
-        cancelLabel="Hủy"
-        ampm={false}
-        maxDate={new Date().setMonth(new Date().getMonth() + 1)}
       />
-    </MuiPickersUtilsProvider>
+    </div>
   );
 };
+
 export default DateTimePickerField;

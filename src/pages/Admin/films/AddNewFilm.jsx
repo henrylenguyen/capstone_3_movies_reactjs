@@ -45,13 +45,8 @@ const schema = yup
         "Giá trị đã chọn không hợp lệ"
       )
       .required("Bạn phải chọn một nhóm"),
-      ngayKhoiChieu: yup.object().shape({
-      date: yup.date().transform(function(value, originalValue) {
-        const parsedDate = moment(originalValue, 'DD/MM/YYYY HH:mm', true);
-        return parsedDate.isValid() ? parsedDate.toDate() : new Date('');
-      }).required('Please enter a valid date')
+    ngayKhoiChieu: yup.date().required("Ngày là bắt buộc"),
   })
-})
   .required();
 let option = [];
 

@@ -79,9 +79,9 @@ const Form = ({
               />
             ) : type === "datetime" ? (
               <DateTimePickerField
-                control={control}
                 name={name}
-                label={label}
+                control={control}
+                errors={errors[name]}
               />
             ) : (
               <input
