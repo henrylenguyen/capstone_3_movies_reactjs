@@ -1,3 +1,4 @@
+import { ACCESS_TOKEN } from "constants/constants";
 import axiosClient from "./requestAPI";
 
 const ticketAPI = {
@@ -11,7 +12,11 @@ const ticketAPI = {
   },
   bookTicket(data) {
     const url = `/QuanLyDatVe/DatVe`;
-    return axiosClient.post(url, data);
+    return axiosClient.post(url, data, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+    });
   },
 };
 
