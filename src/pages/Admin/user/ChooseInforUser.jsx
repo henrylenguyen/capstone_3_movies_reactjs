@@ -8,7 +8,7 @@ import ListUserPage from "./ListUserPage";
 
 const ChooseInforUser = () => {
   const dispatch = useDispatch();
-  const { danhSachNguoiDung } = useSelector((state) => state.user);
+  const { danhSachNguoiDung } = useSelector((state) => state.userAdmin);
   const [searchParam, setUseSearchParam] = useSearchParams();
   const [Nhom, setNhom] = useState("");
   // useLocalStorage

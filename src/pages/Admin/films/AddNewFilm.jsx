@@ -1,4 +1,5 @@
 import Form from "components/admin/form/Form";
+import moment from "moment";
 import React, { useState } from "react";
 import * as yup from "yup";
 const schema = yup
@@ -25,15 +26,40 @@ const schema = yup
       .required("Bí danh là bắt buộc")
       .matches(/^[a-zA-Z0-9._-]{3,}$/gm, "Vui lòng nhập bí danh hợp lệ"),
     hot: yup.boolean(),
-    // hinhAnh:yup.,
+    hinhAnh: yup.array().min(1, "Hình ảnh không được bỏ trống"),
+    maNhom: yup
+      .string()
+      .oneOf(
+        [
+          "GP00",
+          "GP01",
+          "GP02",
+          "GP03",
+          "GP04",
+          "GP05",
+          "GP06",
+          "GP07",
+          "GP08",
+          "GP09",
+        ],
+        "Giá trị đã chọn không hợp lệ"
+      )
+      .required("Bạn phải chọn một nhóm"),
+      ngayKhoiChieu: yup.object().shape({
+      date: yup.date().transform(function(value, originalValue) {
+        const parsedDate = moment(originalValue, 'DD/MM/YYYY HH:mm', true);
+        return parsedDate.isValid() ? parsedDate.toDate() : new Date('');
+      }).required('Please enter a valid date')
   })
+})
   .required();
-  let gr=[];
-  
-  for(let i = 0;i<10;i++){
-    gr.push({ label: `GP0${i}`, value: `GP${i}`, id: i });
-  }
+let option = [];
 
+for (let i = 0; i < 10; i++) {
+  option.push({ label: `GP0${i}`, value: `GP0${i}`, id: i });
+}
+
+console.log("gr:", option);
 const fields = [
   {
     label: "Tên phim",
@@ -69,10 +95,7 @@ const fields = [
     name: "maNhom",
     label: "Mã nhóm",
     type: "select",
-    options: [
-      { label: "GP00", value: "GP00", id: 1 },
-      { label: "Sắp chiếu", value: false, id: 2 },
-    ],
+    options: option,
   },
   {
     name: "dangChieu",
@@ -112,7 +135,7 @@ const AddNewFilm = () => {
         fields={fields}
         // closeModal={closeModal}
         handleSubmitForm={handleSubmitForm}
-        // title={title}
+        title={"Thêm mới phim"}
         color="text-white"
       />
     </div>

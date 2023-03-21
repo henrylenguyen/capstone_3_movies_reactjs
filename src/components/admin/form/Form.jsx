@@ -6,13 +6,9 @@ import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale } from "react-datepicker";
-import vi from "date-fns/locale/vi";
-import moment from "moment";
+import DateTimePickerField from "../datetime/DateTimePickerField";
 
-registerLocale("vi", vi); // Đăng ký ngôn ngữ tiếng Việt cho DatePicker
 
 const Form = ({
   schema,
@@ -22,7 +18,6 @@ const Form = ({
   title,
   color = "text-gray-700",
 }) => {
-  const [selectedDate, setSelectedDate] = useState(null);
   const {
     control,
     handleSubmit,
@@ -33,20 +28,7 @@ const Form = ({
     shouldUnregister: true,
   });
   const onSubmit = (data) => {
-    handleSubmitForm({
-      ...data,
-      ngayKhoiChieu: moment(selectedDate).format("DD/MM/YYYY"),
-    });
-    // handleSubmitForm;
-  };
-  const disabledDate = (date) => {
-    // Lấy thời gian hiện tại
-    const now = new Date();
-    // Lấy thời gian 30 ngày sau thời gian hiện tại
-    const after30Days = new Date();
-    after30Days.setDate(now.getDate() + 30);
-    // So sánh với ngày được chọn
-    return date < after30Days || date > now;
+    console.log("data:", data);
   };
   return (
     <>
@@ -55,7 +37,7 @@ const Form = ({
       </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         {fields.map(({ label, name, type, placeholder, ...rest }) => (
-          <div key={name} className="flex flex-col">
+          <div key={name} className="flex flex-col gap-3">
             <label className={`block font-medium ${color}`} htmlFor={name}>
               {label}
             </label>
@@ -83,22 +65,23 @@ const Form = ({
                 errors={errors[name]}
               />
             ) : type === "file" ? (
-              <ImageUpload name={name} control={control} errors={errors} />
+              <ImageUpload
+                name={name}
+                control={control}
+                errors={errors[name]}
+              />
             ) : type === "select" ? (
-              <Dropdown control={control} name={name} options={rest.options} />
+              <Dropdown
+                control={control}
+                name={name}
+                options={rest.options}
+                errors={errors[name]}
+              />
             ) : type === "datetime" ? (
-              <DatePicker
-                className="bg-white text-black px-5 py-2 mt-4"
-                selected={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                showTimeSelect
-                dateFormat="dd/MM/yyyy HH:mm"
-                timeFormat="HH:mm"
-                placeholderText={placeholder}
-                minDate={new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)}
-                filterDate={disabledDate}
-                locale="vi" // Thêm thuộc tính locale để sử dụng ngôn ngữ tiếng Việt
-                timeIntervals={15} // Thêm prop timeIntervals với giá trị 15
+              <DateTimePickerField
+                control={control}
+                name={name}
+                label={label}
               />
             ) : (
               <input
@@ -128,12 +111,14 @@ const Form = ({
           >
             Lưu
           </button>
-          <button
-            onClick={() => closeModal()}
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 w-full"
-          >
-            Hủy
-          </button>
+          {closeModal && (
+            <button
+              onClick={() => closeModal()}
+              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-400 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-400 w-full"
+            >
+              Hủy
+            </button>
+          )}
         </div>
       </form>
     </>
