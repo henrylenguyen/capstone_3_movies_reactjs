@@ -81,6 +81,16 @@ const getColumnConfig = (
     columnConfig.width = 150;
     columnConfig.render = (text) => <Avatar src={text} size="large"></Avatar>;
   }
+  else if (newTitle === "mota") {
+    columnConfig.render = (text) => {
+      const sanitizedText = DOMPurify.sanitize(text);
+      const plainText = new DOMParser().parseFromString(
+        sanitizedText,
+        "text/html"
+      ).documentElement.textContent;
+      return plainText;
+    },
+  }
 
   return columnConfig;
 };

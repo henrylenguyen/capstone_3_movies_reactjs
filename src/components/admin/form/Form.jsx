@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import TextArea from "../textArea/TextArea";
+import TextArea from "../textArea/CKTextArea";
 import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
 import DateTimePickerField from "../datetime/DateTimePickerField";
+import CKTextArea from "../textArea/CKTextArea";
 
 const Form = ({
   schema,
@@ -40,10 +41,10 @@ const Form = ({
               {label}
             </label>
             {type === "textarea" ? (
-              <TextArea
+              <CKTextArea
                 control={control}
-                placeholder={placeholder}
                 name={name}
+                placeholder={placeholder}
                 errors={errors[name]}
               />
             ) : type === "checkbox" ? (
