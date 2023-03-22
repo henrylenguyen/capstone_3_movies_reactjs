@@ -310,3 +310,9 @@ npm install react-select
 ``` 
 npm i @mui/lab
 ```
+
+## @mui/x-date-pickers
+
+```
+  npm i @mui/x-date-pickers
+```
