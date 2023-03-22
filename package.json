@@ -29,6 +29,7 @@
     "chart.js": "^4.2.1",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
+    "dompurify": "^3.0.1",
     "framer-motion": "^10.2.5",
     "mime-types": "^2.1.35",
     "moment": "^2.29.4",
