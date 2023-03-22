@@ -1,69 +1,55 @@
-import { useState } from "react";
-import { useFormContext, useController } from "react-hook-form";
-import { DatePicker, LocalizationProvider, TimePicker } from "@mui/lab";
-import { TextField } from "@mui/material";
+import React from "react";
+import { Controller } from "react-hook-form";
+import { DatePicker, TimePicker } from "@mui/x-data-pickers";
+import { LocalizationProvider } from "@mui/lab";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import * as yup from "yup";
-
-const DateTimePicker = ({ name, label, defaultValue, ...rest }) => {
-  const { control } = useFormContext();
-  const {
-    field: { onChange, value },
-    fieldState: { error },
-  } = useController({ name, control, defaultValue });
-
-  const [selectedDate, setSelectedDate] = useState(defaultValue ?? null);
-
-  const handleChangeDate = (date) => {
-    setSelectedDate(date);
-    onChange(date);
-  };
-
-  const validate = async (value) => {
-    const schema = yup.object().shape({
-      [name]: yup.date().required("Bạn cần chọn ngày giờ"),
-    });
-
-    try {
-      await schema.validate({ [name]: value });
-      return true;
-    } catch (err) {
-      return err.errors[0];
-    }
-  };
-
+import { vi } from "date-fns/locale";
+const DateTimePicker = ({ control, name, errors }) => {
   return (
-    <LocalizationProvider dateAdapter={AdapterDateFns}>
-      <DatePicker
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            name={name}
-            label={label}
-            error={Boolean(error)}
-            helperText={error?.message}
-          />
+    <LocalizationProvider dateAdapter={AdapterDateFns} locale={vi}>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { onChange, onBlur, value } }) => (
+          <div>
+            <DatePicker
+              label="Ngày"
+              value={value}
+              minDate={new Date(new Date().setMonth(new Date().getMonth() + 1))}
+              onChange={onChange}
+              onBlur={onBlur}
+              inputFormat="dd/MM/yyyy"
+              renderInput={(params) => (
+                <input
+                  {...params}
+                  className={`${
+                    errors ? "border-red-500" : "border-gray-300"
+                  } border focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 block w-full rounded-md py-2 px-3 mt-2 text-black`}
+                />
+              )}
+            />
+            {errors && (
+              <span className="text-red-500 text-sm italic">
+                {errors.message}
+              </span>
+            )}
+            <TimePicker
+              label="Thời gian"
+              value={value}
+              onChange={onChange}
+              onBlur={onBlur}
+              renderInput={(params) => (
+                <input
+                  {...params}
+                  className={`${
+                    errors ? "border-red-500" : "border-gray-300"
+                  } border focus:outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-400 block w-full rounded-md py-2 px-3 mt-2 text-black`}
+                />
+              )}
+            />
+          </div>
         )}
-        value={selectedDate}
-        onChange={handleChangeDate}
-        inputFormat="dd/MM/yyyy"
-        maxDate={new Date().setMonth(new Date().getMonth() + 1)}
-        {...rest}
-      />
-      <TimePicker
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            name={name}
-            label="Thời gian"
-            error={Boolean(error)}
-            helperText={error?.message}
-          />
-        )}
-        value={selectedDate}
-        onChange={handleChangeDate}
-        inputFormat="HH:mm"
-        {...rest}
+        rules={{ required: true }}
       />
     </LocalizationProvider>
   );

@@ -78,10 +78,11 @@ const Form = ({
                 errors={errors[name]}
               />
             ) : type === "datetime" ? (
-              <DateTimePickerField
-                name={name}
+              <DateTimePicker
                 control={control}
-                errors={errors[name]}
+                name={name}
+                error={errors[name]}
+                {...rest}
               />
             ) : (
               <input
