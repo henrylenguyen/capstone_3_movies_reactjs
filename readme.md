@@ -323,3 +323,8 @@ npm i @mui/lab
   npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
 
 ```
+
+## dompurify (thư viện chuyển mã html sang văn bản thuần)
+```
+npm i dompurify
+```
