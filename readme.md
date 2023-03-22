@@ -316,3 +316,10 @@ npm i @mui/lab
 ```
   npm i @mui/x-date-pickers
 ```
+
+## Ck editor
+
+```
+  npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+
+```
