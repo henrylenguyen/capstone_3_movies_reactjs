@@ -9,6 +9,7 @@ const CustomTable = ({ columns, data, ...props }) => {
   const [searchText, setSearchText] = useState("");
    const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState(data);
+  
   const [searchedColumn, setSearchedColumn] = useState("");
   const searchInput = useRef(null);
   useEffect(() => {
@@ -129,7 +130,7 @@ const CustomTable = ({ columns, data, ...props }) => {
     <div className="usertable bg-adminPrimary p-5 flex-grow rounded-lg select-none overflow-auto">
       <Spin spinning={loading} size="large">
         <Table
-          // key={}
+          rowKey={props.Key}
           dataSource={filteredData}
           scroll={{ x: "max-content", y: 500 }}
           align="center"

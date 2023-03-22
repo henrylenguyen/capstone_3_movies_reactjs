@@ -19,7 +19,7 @@ const CKTextArea = ({ control, ...props }) => {
         editor.editing.view.change((writer) => {
           writer.setStyle(
             "height",
-            "150px",
+            "350px",
             editor.editing.view.document.getRoot()
           );
         });

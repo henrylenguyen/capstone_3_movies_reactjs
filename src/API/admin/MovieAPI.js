@@ -19,5 +19,9 @@ const MovieApi = {
         maNhom,
       },
     }),
+  ThemMoiPhim: (frm) =>
+    AdminRequest.post("/QuanLyPhim/ThemPhimUploadHinh", {
+      frm,
+    }),
 };
 export default MovieApi;

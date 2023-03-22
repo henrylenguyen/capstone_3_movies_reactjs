@@ -39,9 +39,10 @@ const ImageUpload = ({ name, control, ...props }) => {
     if (
       file.type !== "image/png" &&
       file.type !== "image/jpeg" &&
-      file.type !== "image/jpg"
+      file.type !== "image/jpg" &&
+      file.type !== "image/gif"
     ) {
-      message.error("Chỉ có ảnh PNG, JPEG and JPG mới được phép tải lên.");
+      message.error("Chỉ có ảnh PNG, GIF, JPEG và JPG mới được phép tải lên.");
       return;
     }
 
@@ -57,7 +58,7 @@ const ImageUpload = ({ name, control, ...props }) => {
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
-    accept: "image/png, image/jpeg, image/jpg",
+    accept: "image/png, image/jpeg, image/jpg,  image/gif",
   });
 
   return (

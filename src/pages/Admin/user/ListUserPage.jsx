@@ -95,7 +95,7 @@ export default function ListUserPage({ user }) {
   return (
     <>
       <ModalForm></ModalForm>
-      <CustomTable columns={columns} data={data}></CustomTable>
+      <CustomTable columns={columns} data={data} Key={"hoTen"}></CustomTable>
     </>
   );
 }

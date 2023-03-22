@@ -1,6 +1,8 @@
 import Form from "components/admin/form/Form";
 import moment from "moment";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { ThemPhimUploadHinh } from "thunks/admin/movieThunks";
 import * as yup from "yup";
 const schema = yup
   .object()
@@ -107,20 +109,27 @@ const fields = [
     options: [{ label: "Đang hot", value: false, id: 1 }],
   },
 ];
-const handleSubmitForm = (data) => {
-  let formData = new FormData();
-  console.log(data);
-  for (let key in data) {
-    console.log("key:", key);
-    if (key !== "hinhAnh") {
-      formData.append(key, data[key]);
-    } else {
-      formData.append(key, data.hinhAnh[0], data.hinhAnh[0].name);
-    }
-  }
-  console.log(formData.get("hinhAnh"));
-};
+
 const AddNewFilm = () => {
+  const dispatch = useDispatch();
+
+  const handleSubmitForm = (data) => {
+    data.danhGia = 0;
+    let formData = new FormData();
+    console.log(data);
+    for (let key in data) {
+      if (key === "ngayKhoiChieu") {
+        formData.append(key, moment(data[key]).format("DD/MM/YYYY"));
+      } else if (key === "hinhAnh") {
+        formData.append("File", data.hinhAnh[0], data.hinhAnh[0].name);
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
+    console.log(formData.get("File"));
+    // Gửi dữ liệu về backend
+    dispatch(ThemPhimUploadHinh(formData));
+  };
   return (
     <div className="p-10 bg-adminPrimary w-full">
       <Form

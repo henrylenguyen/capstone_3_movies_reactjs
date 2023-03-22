@@ -27,7 +27,7 @@ const Form = ({
     shouldUnregister: true,
   });
   const onSubmit = (data) => {
-    console.log("data:", data);
+    handleSubmitForm(data);
   };
   return (
     <>

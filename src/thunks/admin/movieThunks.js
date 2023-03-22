@@ -2,7 +2,7 @@ import MovieApi from "API/admin/MovieAPI";
 import { LayThongTinCumRapTheoHeThong } from "reduxs/Slice/admin/MovieSliceAdmin";
 import { LayThongTinLichChieuHeThongRap } from "reduxs/Slice/admin/MovieSliceAdmin";
 import { LayDanhSachPhim } from "reduxs/Slice/admin/MovieSliceAdmin";
-
+import { message } from "antd";
 export const fetchLichChieuHeThongRap = (maNhom) => async (dispatch) => {
   try {
     const res = await MovieApi.LayThongTinLichChieuHeThongRap(maNhom);
@@ -27,4 +27,15 @@ export const fetchLayDanhSachPhim = (maNhom) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const ThemPhimUploadHinh = (formData) => {
+  return async (dispatch) => {
+    try {
+      const res = await MovieApi.ThemMoiPhim(formData);
+       message.success("Thêm mới phim thành công!");
+      console.log(res.data.content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };

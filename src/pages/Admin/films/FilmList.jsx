@@ -136,14 +136,15 @@ const FilmList = ({ phim }) => {
       dataIndexKeyItem,
       newTitle,
       handleEdit,
-      handleDelete
+      handleDelete,
+
     );
   });
 
   return (
     <>
       <ModalForm />
-      <CustomTable data={data} columns={columns}></CustomTable>
+      <CustomTable data={data} columns={columns} Key={"maPhim"}></CustomTable>
     </>
   );
 };
