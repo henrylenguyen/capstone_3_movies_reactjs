@@ -6,9 +6,7 @@ import CheckboxGroup from "../checkbox/Checkbox";
 import Radio from "../radio/Radio";
 import ImageUpload from "../uploadImage/ImageUpload";
 import Dropdown from "../select/Dropdown";
-import "react-datepicker/dist/react-datepicker.css";
 import DateTimePickerField from "../datetime/DateTimePickerField";
-
 
 const Form = ({
   schema,
@@ -77,12 +75,19 @@ const Form = ({
                 options={rest.options}
                 errors={errors[name]}
               />
-            ) : type === "datetime" ? (
-              <DateTimePicker
+            ) : type === "date" ? (
+              <DateTimePickerField
                 control={control}
                 name={name}
-                error={errors[name]}
-                {...rest}
+                errors={errors}
+                type="date"
+              />
+            ) : type === "time" ? (
+              <DateTimePickerField
+                control={control}
+                name={name}
+                errors={errors}
+                type="time"
               />
             ) : (
               <input

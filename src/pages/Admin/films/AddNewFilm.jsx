@@ -45,7 +45,7 @@ const schema = yup
         "Giá trị đã chọn không hợp lệ"
       )
       .required("Bạn phải chọn một nhóm"),
-    ngayKhoiChieu: yup.date().required("Ngày là bắt buộc"),
+    ngayKhoiChieu: yup.string().required("Ngày là bắt buộc"),
   })
   .required();
 let option = [];
@@ -53,8 +53,6 @@ let option = [];
 for (let i = 0; i < 10; i++) {
   option.push({ label: `GP0${i}`, value: `GP0${i}`, id: i });
 }
-
-console.log("gr:", option);
 const fields = [
   {
     label: "Tên phim",
@@ -85,7 +83,7 @@ const fields = [
     name: "hinhAnh",
     type: "file",
   },
-  { label: "Ngày khởi chiếu", name: "ngayKhoiChieu", type: "datetime" },
+  { label: "Ngày khởi chiếu", name: "ngayKhoiChieu", type: "date" },
   {
     name: "maNhom",
     label: "Mã nhóm",
