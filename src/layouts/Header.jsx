@@ -410,9 +410,10 @@ function Header() {
             {navigateList.map((navigate) => (
               <a
                 className="header__navbar-link block my-3 font-medium text-base"
-                href={navigate.idPath}
-                key={navigate.id}
+                key={navigate.idPath}
                 variant="a"
+                onClick={(e) => handleLinkClick(e, navigate.idPath)}
+                style={{ cursor: "pointer" }}
               >
                 {navigate.name}
               </a>

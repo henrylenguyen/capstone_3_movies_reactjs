@@ -15,7 +15,7 @@ function SeatList() {
 
   return (
     <div className="md:p-[2rem] p-[1rem]">
-      <div className="grid grid-cols-12 md:gap-4 gap-3">
+      <div className="grid grid-cols-12 md:gap-4 gap-2">
         {seatList &&
           seatList.danhSachGhe?.map((seatItem, idx) => (
             <div className="col-span-1" key={seatItem.maGhe}>

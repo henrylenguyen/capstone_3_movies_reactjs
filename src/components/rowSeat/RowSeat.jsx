@@ -6,7 +6,6 @@ import { setBookedTicketList } from "reduxs/Slice/TicketSlice";
 import { removeBookedTicket } from "reduxs/Slice/TicketSlice";
 
 function RowSeat({ seatItem }) {
-  // console.log(seatItem);
   const dispatch = useDispatch();
   const bookedTicketList = useSelector(
     (state) => state.ticket.bookedTicketList
@@ -25,7 +24,7 @@ function RowSeat({ seatItem }) {
     <button
       disabled={seatItem.daDat}
       className={clsx(
-        `text-[0.6rem] md:text-[1.1rem] lg:text-[1.4rem] w-full p-1 rounded`,
+        `text-[0.6rem] md:text-[1.12rem] lg:text-[1.4rem] w-full p-1 rounded`,
         {
           ["bg-[#DF0E0E]"]: seatItem.loaiGhe === "Vip" && !seatItem.daDat,
           ["bg-[#0E16DF]"]: seatItem.loaiGhe === "Thuong" && !seatItem.daDat,
