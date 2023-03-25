@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import moment from "moment/moment";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { removeAllBookedTicket } from "reduxs/Slice/TicketSlice";
@@ -16,13 +16,18 @@ function TheaterMovie({ itemMovie }) {
     if (scheduleId === null || scheduleId === undefined) return;
     navigate(`/seats/${scheduleId}`);
     document.documentElement.scrollTop = 0;
-    // reset state bookTicketList
-    dispatch(removeAllBookedTicket());
   }
 
+  useEffect(() => {
+    return () => {
+      // reset state bookTicketList
+      dispatch(removeAllBookedTicket());
+    };
+  }, []);
+
   return (
-    <div className="theater__movie bg-white rounded overflow-hidden">
-      <div className="grid grid-cols-12 gap-2 h-96">
+    <div className="theater__movie h-96 bg-white rounded overflow-hidden">
+      <div className="grid grid-cols-12 gap-2">
         <div className="col-span-3">
           <img src={hinhAnh} className="w-full bg-cover h-96" />
         </div>

@@ -11,6 +11,7 @@ function SearchMovieList({ onChange }) {
         onChange={onChange}
         sx={{ background: "#fff" }}
         variant="filled"
+        className="rounded"
       />
     </div>
   );

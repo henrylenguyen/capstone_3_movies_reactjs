@@ -2,6 +2,7 @@ import { Box, Tab, Tabs } from "@mui/material";
 import TheaterMovie from "components/theaterMovie/TheaterMovie";
 import TheaterPanel from "components/theaterPanel/TheaterPanel";
 import React, { useState } from "react";
+
 import "./theaterItem.scss";
 
 function TheaterItem(props) {
@@ -38,7 +39,7 @@ function TheaterItem(props) {
                   ))}
                 </Tabs>
               </div>
-              <div className="col-span-6 h-120 theater__item-movie overflow-y-scroll">
+              <div className="col-span-6 relative h-120 theater__item-movie overflow-y-scroll">
                 {theaterList.map((item, valueIdx) => (
                   <Box key={item.maCumRap}>
                     {item.danhSachPhim?.map((itemMovie) => (

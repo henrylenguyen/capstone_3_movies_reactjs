@@ -89,7 +89,7 @@ function MovieList() {
         )}
 
         {!isLoading && movieList.items.length > 0 && (
-          <div className="grid grid-cols-1 lg:grid-cols-5 md:grid-cols-3 gap-x-4 gap-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-5 lg:h-[75rem] md:grid-cols-3 gap-x-4 gap-y-6">
             {movieList.items?.map((movie, idx) => (
               <MovieItem
                 key={movie.maPhim}

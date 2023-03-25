@@ -6,9 +6,8 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
-  useFormControl,
 } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 
 function InputField(props) {
@@ -25,7 +24,7 @@ function InputField(props) {
         name={name}
         control={form.control}
         render={({
-          field: { onChange, value, name },
+          field: { onChange, onBlur, value, name },
           fieldState: { invalid },
           formState,
         }) => (
@@ -39,6 +38,7 @@ function InputField(props) {
               name={name}
               value={value}
               onChange={onChange}
+              onBlur={onBlur}
               autoComplete="new-password"
               endAdornment={
                 <InputAdornment position="end">
@@ -102,7 +102,7 @@ function InputField(props) {
       name={name}
       control={form.control}
       render={({
-        field: { onChange, value, name },
+        field: { onChange, onBlur, value, name },
         fieldState: { invalid, isTouched, isDirty, error },
         formState,
       }) => (
@@ -114,6 +114,7 @@ function InputField(props) {
           fullWidth
           value={value}
           onChange={onChange}
+          onBlur={onBlur}
           helperText={formState.errors[name] && formState.errors[name].message}
           inputProps={{
             readOnly: readonly,

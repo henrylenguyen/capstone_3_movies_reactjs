@@ -11,6 +11,7 @@ function FormSignIn({ onSubmit }) {
       taiKhoan: "",
       matKhau: "",
     },
+    mode: "all",
     resolver: yupResolver(schemaSignIn),
   });
 
