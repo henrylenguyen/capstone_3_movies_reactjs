@@ -2,6 +2,7 @@ import Form from "components/admin/form/Form";
 import moment from "moment";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { ThemPhimUploadHinh } from "thunks/admin/movieThunks";
 import * as yup from "yup";
 const schema = yup
@@ -112,7 +113,7 @@ const fields = [
 
 const AddNewFilm = () => {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const handleSubmitForm = (data) => {
     data.danhGia = 0;
     let formData = new FormData();
@@ -126,9 +127,10 @@ const AddNewFilm = () => {
         formData.append(key, data[key]);
       }
     }
-    console.log(formData.get("File"));
     // Gửi dữ liệu về backend
-    dispatch(ThemPhimUploadHinh(formData));
+    dispatch(ThemPhimUploadHinh(formData, navigate));
+
+
   };
   return (
     <div className="p-10 bg-adminPrimary w-full">

@@ -1,8 +1,9 @@
+import { message } from "antd";
 import MovieApi from "API/admin/MovieAPI";
 import { LayThongTinCumRapTheoHeThong } from "reduxs/Slice/admin/MovieSliceAdmin";
 import { LayThongTinLichChieuHeThongRap } from "reduxs/Slice/admin/MovieSliceAdmin";
 import { LayDanhSachPhim } from "reduxs/Slice/admin/MovieSliceAdmin";
-import { message } from "antd";
+
 export const fetchLichChieuHeThongRap = (maNhom) => async (dispatch) => {
   try {
     const res = await MovieApi.LayThongTinLichChieuHeThongRap(maNhom);
@@ -28,13 +29,17 @@ export const fetchLayDanhSachPhim = (maNhom) => async (dispatch) => {
     console.log(error);
   }
 };
-export const ThemPhimUploadHinh = (formData) => {
+export const ThemPhimUploadHinh = (formData, navigate) => {
   return async (dispatch) => {
     try {
       const res = await MovieApi.ThemMoiPhim(formData);
-       message.success("Thêm mới phim thành công!");
-      console.log(res.data.content);
+      console.log(res);
+      if (res.data.statusCode === 200) {
+        message.success("Thêm mới phim thành công!");
+        navigate("/admin/danh-sach-phim");
+      }
     } catch (error) {
+      message.error("Thêm mới phim thất bại!");
       console.log(error);
     }
   };

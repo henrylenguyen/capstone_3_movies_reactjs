@@ -19,9 +19,12 @@ const MovieApi = {
         maNhom,
       },
     }),
-  ThemMoiPhim: (frm) =>
-    AdminRequest.post("/QuanLyPhim/ThemPhimUploadHinh", {
-      frm,
-    }),
+  ThemMoiPhim: (data) =>
+    AdminRequest.post("/QuanLyPhim/ThemPhimUploadHinh", 
+      data,
+    ),
+  LayThongTinPhim: () => {
+    return AdminRequest.get("/QuanLyPhim/LayThongTinPhim");
+  },
 };
 export default MovieApi;

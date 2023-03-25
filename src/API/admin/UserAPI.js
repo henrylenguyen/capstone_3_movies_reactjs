@@ -6,7 +6,8 @@ const userAPI = {
       params: {
         MaNhom,
       },
-    })
+    }),
+    dangNhap: (data) => AdminRequest.post("/QuanLyNguoiDung/DangNhap", data)
   };
 
 export default userAPI;
