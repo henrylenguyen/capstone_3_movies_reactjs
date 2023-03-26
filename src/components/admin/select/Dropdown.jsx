@@ -2,7 +2,7 @@ import React from "react";
 import Select from "react-select";
 import { useController } from "react-hook-form";
 
-const Dropdown = ({ control, name, options }) => {
+const Dropdown = ({ control, name, options, ...props }) => {
   const {
     field: { value, onChange },
   } = useController({
@@ -20,6 +20,11 @@ const Dropdown = ({ control, name, options }) => {
       options={selectOptions}
       value={selectOptions.find((option) => option.value === value)}
       onChange={(selectedOption) => onChange(selectedOption.value)}
+      {...props}
+      className={`${
+        props.errors ? "border border-red-500" : "border border-gray-300"
+      } focus:outline-none focus:border-blue-400  focus:ring-2 focus:ring-blue-400 block w-full rounded-md  mt-2 text-black`}
+      
     />
   );
 };

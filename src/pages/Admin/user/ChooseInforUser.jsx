@@ -3,12 +3,12 @@ import useLocalStorage from "hooks/useLocalStorage";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
-import { fetchLayThongTinUser } from "thunks/admin/userThunks";
+import { fetchLayThongTinDanhSachUser } from "thunks/admin/userThunks";
 import ListUserPage from "./ListUserPage";
 
 const ChooseInforUser = () => {
   const dispatch = useDispatch();
-  const { danhSachNguoiDung } = useSelector((state) => state.user);
+  const { danhSachNguoiDung } = useSelector((state) => state.userAdmin);
   const [searchParam, setUseSearchParam] = useSearchParams();
   const [Nhom, setNhom] = useState("");
   // useLocalStorage
@@ -18,7 +18,7 @@ const ChooseInforUser = () => {
   );
 
   const handleClickGroup = (item) => {
-    dispatch(fetchLayThongTinUser(item.maNhom));
+    dispatch(fetchLayThongTinDanhSachUser(item.maNhom));
     setNhom(item.maNhom);
   };
   useEffect(() => {

@@ -1,9 +1,9 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import PageNotFound from "assets/images/PageNotFound.png";
 import { Avatar, Button, Image, Tooltip } from "antd";
 import Active from "components/admin/span/Active";
 import InActive from "components/admin/span/InActive";
 import Pending from "components/admin/span/Pending";
+import DOMPurify from "dompurify";
 const getColumnConfig = (
   title,
   dataIndexKeyItem,
@@ -80,6 +80,17 @@ const getColumnConfig = (
   } else if (newTitle === "avatar") {
     columnConfig.width = 150;
     columnConfig.render = (text) => <Avatar src={text} size="large"></Avatar>;
+  }
+  else if (newTitle === "mota") {
+
+    columnConfig.render = (text) => {
+      const sanitizedText = DOMPurify.sanitize(text);
+      const plainText = new DOMParser().parseFromString(
+        sanitizedText,
+        "text/html"
+      ).documentElement.textContent;
+      return plainText;
+    }
   }
 
   return columnConfig;

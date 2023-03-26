@@ -5,7 +5,7 @@ import { message, Modal } from "antd";
 import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 
-const ImageUpload = ({ name, control, errors }) => {
+const ImageUpload = ({ name, control, ...props }) => {
   const {
     field: { value, onChange },
     fieldState: { invalid },
@@ -14,7 +14,6 @@ const ImageUpload = ({ name, control, errors }) => {
     control,
     defaultValue: [],
   });
-
   const [preview, setPreview] = useState(
     value[0] ? URL.createObjectURL(value[0]) : null
   );
@@ -23,66 +22,72 @@ const ImageUpload = ({ name, control, errors }) => {
   const handlePreview = useCallback(() => {
     setPreviewVisible(true);
   }, []);
+
   useEffect(() => {
     if (value[0]) {
       setPreview(URL.createObjectURL(value[0]));
     }
   }, [value]);
 
-  const onDrop = useCallback(
-    (acceptedFiles) => {
-      const file = acceptedFiles[0];
+  const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
 
-      if (!file) {
-        return;
-      }
+    if (!file) {
+      return;
+    }
 
-      if (
-        file.type !== "image/png" &&
-        file.type !== "image/jpeg" &&
-        file.type !== "image/jpg"
-      ) {
-        message.error("Chỉ có ảnh PNG, JPEG and JPG mới được phép tải lên.");
-        return;
-      }
+    if (
+      file.type !== "image/png" &&
+      file.type !== "image/jpeg" &&
+      file.type !== "image/jpg" &&
+      file.type !== "image/gif"
+    ) {
+      message.error("Chỉ có ảnh PNG, GIF, JPEG và JPG mới được phép tải lên.");
+      return;
+    }
 
-      const newFile = Object.assign(file, {
-        preview: URL.createObjectURL(file),
-      });
+    const newFile = Object.assign(file, {
+      preview: URL.createObjectURL(file),
+    });
 
-      onChange([newFile]);
-      setPreview(newFile.preview);
-      message.success("Tải ảnh lên thành công!");
-    },
-    []
-  );
+    onChange([newFile]);
+    setPreview(newFile.preview);
+    message.success("Tải ảnh lên thành công!");
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
     multiple: false,
-    accept: "image/png, image/jpeg, image/jpg",
+    accept: "image/png, image/jpeg, image/jpg,  image/gif",
   });
 
   return (
-    <div className="flex flex-col gap-4 mt-4">
+    <div className="flex flex-col gap-4 mt-4 relative">
       <div
         {...getRootProps()}
-        className="border-2 border-gray-300 border-dashed rounded-lg p-5"
+        className={` h-[300px] flex items-center justify-center border-2 border-gray-300 border-dashed rounded-lg p-4 ${
+          props.errors ? "border-red-500" : ""
+        }`}
       >
-        <input {...getInputProps()} />
+        <input
+          {...getInputProps()}
+          id={name}
+          {...props}
+         
+        />
         {isDragActive ? (
-          <p>Drop the files here...</p>
+          <p>Thả ảnh vào đây...</p>
         ) : (
-          <p>Kéo và thả ảnh tại đây, hoặc click để chọn ảnh</p>
+          <p>Chọn ảnh hoặc kéo và thả vào đây</p>
         )}
       </div>
       {preview && (
-        <div className="flex flex-col mt-5">
+        <div className="flex flex-col absolute w-full h-full">
           <div className="w-full h-[300px] relative">
             <img
               src={preview}
               alt="Preview"
-              className="w-full h-full object-cover "
+              className="w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black opacity-50"></div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex gap-5">
@@ -111,9 +116,7 @@ const ImageUpload = ({ name, control, errors }) => {
           </div>
         </div>
       )}
-      {invalid && errors[name] && (
-        <p className="text-red-500 text-sm italic">{errors[name].message}</p>
-      )}
+
       <Modal
         open={previewVisible}
         footer={null}

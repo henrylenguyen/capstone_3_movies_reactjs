@@ -2,12 +2,13 @@ import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import useModalForm from "HOCS/useModalForm";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { fetchLayThongTinDanhSachUser } from "thunks/admin/userThunks";
+import { XoaNguoiDungAction } from "thunks/admin/userThunks";
 import getColumnConfig from "utils/admin/dataColumn";
 
 import * as yup from "yup";
-const handleDelete = (item) => {
-  console.log(item);
-};
+
 const handleSubmitForm = (data) => {
   console.log(data);
 };
@@ -50,8 +51,16 @@ export default function ListUserPage({ user }) {
     handleSubmitForm,
     title: "Chỉnh sửa Người dùng",
   });
+  const dispatch = useDispatch();
   const handleEdit = () => {
     openModal();
+  };
+  const handleDelete = (id) => {
+    console.log("id:", id);
+    const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
+    dispatch(XoaNguoiDungAction(id.taiKhoan)).then(() => {
+      dispatch(fetchLayThongTinDanhSachUser(Nhom));
+    });
   };
   const arr = [];
   user?.map((item) => {
@@ -95,7 +104,7 @@ export default function ListUserPage({ user }) {
   return (
     <>
       <ModalForm></ModalForm>
-      <CustomTable columns={columns} data={data}></CustomTable>
+      <CustomTable columns={columns} data={data} Key={"hoTen"}></CustomTable>
     </>
   );
 }

@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
 import Input from "components/admin/input/Input";
 import { toast, ToastContainer } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { fetchDangNhap } from "thunks/admin/userThunks";
 
 // schema validation
 const schema = yup
@@ -16,39 +18,24 @@ const schema = yup
 
 const LoginAdmin = () => {
   const navigate = useNavigate();
-  const [isLogin, setIsLogin] = useState(false);
+  const dispatch = useDispatch();
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors, isValid, isSubmitting },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmitHandle = (values) => {
-    console.log("values:", values);
+    dispatch(fetchDangNhap(values, toast,navigate));
     if (!isValid) return;
     // để hiển thị loading trên nút
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve();
-        if (values.taiKhoan === "admin" && values.matKhau === "admin@123") {
-          toast.success("Đăng nhập thành công!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-          setIsLogin(true);
-        }
-        else{
-          toast.error("Đăng nhập thất bại!", {
-            position: toast.POSITION.TOP_RIGHT,
-          });
-        }
       }, 1000);
     });
   };
-  setTimeout(()=>{
-    if(isLogin){
-      return navigate("/admin/home")
-    }
-  },2000)
+
+
   return (
     <>
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white">

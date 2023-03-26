@@ -305,3 +305,26 @@ npm install react-select
 ```
   npm i date-fns
 ```
+
+## @mui/lab
+``` 
+npm i @mui/lab
+```
+
+## @mui/x-date-pickers
+
+```
+  npm i @mui/x-date-pickers
+```
+
+## Ck editor
+
+```
+  npm install --save @ckeditor/ckeditor5-react @ckeditor/ckeditor5-build-classic
+
+```
+
+## dompurify (thư viện chuyển mã html sang văn bản thuần)
+```
+npm i dompurify
+```

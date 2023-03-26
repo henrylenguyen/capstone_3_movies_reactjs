@@ -1,5 +1,9 @@
 import Form from "components/admin/form/Form";
+import moment from "moment";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ThemPhimUploadHinh } from "thunks/admin/movieThunks";
 import * as yup from "yup";
 const schema = yup
   .object()
@@ -25,15 +29,33 @@ const schema = yup
       .required("Bí danh là bắt buộc")
       .matches(/^[a-zA-Z0-9._-]{3,}$/gm, "Vui lòng nhập bí danh hợp lệ"),
     hot: yup.boolean(),
-    // hinhAnh:yup.,
+    hinhAnh: yup.array().min(1, "Hình ảnh không được bỏ trống"),
+    maNhom: yup
+      .string()
+      .oneOf(
+        [
+          "GP00",
+          "GP01",
+          "GP02",
+          "GP03",
+          "GP04",
+          "GP05",
+          "GP06",
+          "GP07",
+          "GP08",
+          "GP09",
+        ],
+        "Giá trị đã chọn không hợp lệ"
+      )
+      .required("Bạn phải chọn một nhóm"),
+    ngayKhoiChieu: yup.string().required("Ngày là bắt buộc"),
   })
   .required();
-  let gr=[];
-  
-  for(let i = 0;i<10;i++){
-    gr.push({ label: `GP0${i}`, value: `GP${i}`, id: i });
-  }
+let option = [];
 
+for (let i = 0; i < 10; i++) {
+  option.push({ label: `GP0${i}`, value: `GP0${i}`, id: i });
+}
 const fields = [
   {
     label: "Tên phim",
@@ -64,15 +86,12 @@ const fields = [
     name: "hinhAnh",
     type: "file",
   },
-  { label: "Ngày khởi chiếu", name: "ngayKhoiChieu", type: "datetime" },
+  { label: "Ngày khởi chiếu", name: "ngayKhoiChieu", type: "date" },
   {
     name: "maNhom",
     label: "Mã nhóm",
     type: "select",
-    options: [
-      { label: "GP00", value: "GP00", id: 1 },
-      { label: "Sắp chiếu", value: false, id: 2 },
-    ],
+    options: option,
   },
   {
     name: "dangChieu",
@@ -91,20 +110,28 @@ const fields = [
     options: [{ label: "Đang hot", value: false, id: 1 }],
   },
 ];
-const handleSubmitForm = (data) => {
-  let formData = new FormData();
-  console.log(data);
-  for (let key in data) {
-    console.log("key:", key);
-    if (key !== "hinhAnh") {
-      formData.append(key, data[key]);
-    } else {
-      formData.append(key, data.hinhAnh[0], data.hinhAnh[0].name);
-    }
-  }
-  console.log(formData.get("hinhAnh"));
-};
+
 const AddNewFilm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleSubmitForm = (data) => {
+    data.danhGia = 0;
+    let formData = new FormData();
+    console.log(data);
+    for (let key in data) {
+      if (key === "ngayKhoiChieu") {
+        formData.append(key, moment(data[key]).format("DD/MM/YYYY"));
+      } else if (key === "hinhAnh") {
+        formData.append("File", data.hinhAnh[0], data.hinhAnh[0].name);
+      } else {
+        formData.append(key, data[key]);
+      }
+    }
+    // Gửi dữ liệu về backend
+    dispatch(ThemPhimUploadHinh(formData, navigate));
+
+
+  };
   return (
     <div className="p-10 bg-adminPrimary w-full">
       <Form
@@ -112,7 +139,7 @@ const AddNewFilm = () => {
         fields={fields}
         // closeModal={closeModal}
         handleSubmitForm={handleSubmitForm}
-        // title={title}
+        title={"Thêm mới phim"}
         color="text-white"
       />
     </div>

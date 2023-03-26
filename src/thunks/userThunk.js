@@ -6,9 +6,12 @@ export function fetchSignIn(data) {
   return async function (dispatch) {
     try {
       const res = await userAPI.signIn(data);
+      
 
       dispatch(loginUser(res.data.content));
-
+       if (res?.data?.content?.maLoaiNguoiDung === "QuanTri") {
+         localStorage.setItem("isQuanTri", true);
+       }
       // save localStorage
       localStorage.setItem(ACCESS_TOKEN, res.data.content.accessToken);
     } catch (error) {
