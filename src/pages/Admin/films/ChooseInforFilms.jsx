@@ -10,17 +10,18 @@ const ChooseInforFilms = () => {
   const dispatch = useDispatch();
   const { DanhSachPhim } = useSelector((state) => state.movieAdmin);
   const [searchParam, setUseSearchParam] = useSearchParams();
-  const [Nhom, setNhom] = useState("")
   // useLocalStorage
   const [localStorage,setLocalStorage] = useLocalStorage("danhsachphim","");
+  const [localNhom, setLocalNhom] = useLocalStorage("Nhom", "");
+  
   const handleClickGroup = (item) => {
     dispatch(fetchLayDanhSachPhim(item.maNhom));
-    setNhom(item.maNhom)
+    setLocalNhom(item.maNhom);
   };
   useEffect(() => {
     if(DanhSachPhim.length>0){
     setLocalStorage({ danhsachphim: DanhSachPhim });
-      setUseSearchParam({ Nhom: Nhom });
+      setUseSearchParam({ Nhom: localNhom });
     }
   }, [DanhSachPhim, localStorage.danhsachphim]);
   

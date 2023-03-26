@@ -1,18 +1,31 @@
+import { message } from "antd";
 import userAPI from "API/admin/UserAPI";
 import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import { statusCode } from "constants/admin/constants";
-import { loginAdminInfor } from "reduxs/Slice/admin/UserSliceAdmin";
-import { LayThongTinNguoiDung } from "reduxs/Slice/admin/UserSliceAdmin";
+import { layThongTinTaiKhoan } from "reduxs/Slice/admin/UserSliceAdmin";
+import { layDanhSachNguoiDung } from "reduxs/Slice/admin/UserSliceAdmin";
 
-export const fetchLayThongTinUser = (MaNhom) => async (dispatch) => {
+export const fetchLayThongTinDanhSachUser = (MaNhom) => async (dispatch) => {
   try {
-    const res = await userAPI.layThongTinNguoiDung(MaNhom);
-    dispatch(LayThongTinNguoiDung(res.data.content));
+    const res = await userAPI.layDanhSachNguoiDung(MaNhom);
+    dispatch(layDanhSachNguoiDung(res.data.content));
   } catch (error) {
     console.log(error);
   }
 };
-export const fetchDangNhap = (data, toast,navigate) => async (dispatch) => {
+
+
+export const fetchLayThongTinTaiKhoan = () => async (dispatch) => {
+  try {
+    const res = await userAPI.layThongTinTaiKhoan();
+    if (res.data.statusCode === statusCode.OK){
+      dispatch(layThongTinTaiKhoan(res.data.content));
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchDangNhap = (data, toast, navigate) => async (dispatch) => {
   try {
     const res = await userAPI.dangNhap(data);
     if (
@@ -36,4 +49,16 @@ export const fetchDangNhap = (data, toast,navigate) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+export const XoaNguoiDungAction = (TaiKhoan) => {
+  return async (dispatch) => {
+    try {
+      const res = await userAPI.XoaNguoiDung(TaiKhoan);
+      if (res.data.statusCode === 200) {
+        message.success("Xóa người dùng thành công");
+      }
+    } catch (error) {
+      message.error(`Xóa người dùng thất bại, ${error.response.data.content}`);
+    }
+  };
 };

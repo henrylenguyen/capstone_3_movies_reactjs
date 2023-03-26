@@ -5,22 +5,40 @@ const UserSliceAdmin = createSlice({
   initialState: {
     danhSachNguoiDung: [],
     loginInfor: "",
-
+    ThongTinTaiKhoan: "",
+    hasLogOut: false,
   },
   reducers: {
-    LayThongTinNguoiDung: (state, { payload }) => {
+    layDanhSachNguoiDung: (state, { payload }) => {
       return {
         ...state,
         danhSachNguoiDung: payload,
       };
     },
-    loginAdminInfor: (state,{payload})=>{
+    layThongTinTaiKhoan: (state, { payload }) => {
+      return {
+        ...state,
+        ThongTinTaiKhoan: payload,
+      };
+    },
+    loginAdminInfor: (state, { payload }) => {
       return {
         ...state,
         loginInfor: payload,
       };
     },
+    DangXuatTaiKhoan: (state,{payload})=>{
+      return {
+        ...state,
+        hasLogOut: payload,
+      };
+    }
   },
 });
-export const { LayThongTinNguoiDung, loginAdminInfor } = UserSliceAdmin.actions;
+export const {
+  layDanhSachNguoiDung,
+  loginAdminInfor,
+  layThongTinTaiKhoan,
+  DangXuatTaiKhoan,
+} = UserSliceAdmin.actions;
 export default UserSliceAdmin.reducer;

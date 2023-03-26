@@ -1,10 +1,16 @@
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import getColumnConfig from "utils/admin/dataColumn";
 import useModalForm from "HOCS/useModalForm";
-import * as yup from "yup"
-const schema =  yup
+import * as yup from "yup";
+import { useDispatch, useSelector } from "react-redux";
+import { FetchLayThongTinPhim } from "thunks/admin/movieThunks";
+import { XoaPhimAction } from "thunks/admin/movieThunks";
+import useLocalStorage from "hooks/useLocalStorage";
+import { fetchLayDanhSachPhim } from "thunks/admin/movieThunks";
+import { fetchLayThongTinDanhSachUser } from "thunks/admin/userThunks";
+const schema = yup
   .object()
   .shape({
     tenPhim: yup
@@ -30,7 +36,7 @@ const schema =  yup
     hot: yup.boolean(),
     // hinhAnh:yup.,
   })
-  .required()
+  .required();
 const fields = [
   {
     label: "Tên phim",
@@ -79,29 +85,50 @@ const fields = [
   },
 ];
 
-const handleDelete = (item) => {
-  console.log(item);
-};
 const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
+  const { ThongTinPhim, DanhSachPhim } = useSelector(
+    (state) => state.movieAdmin
+  );
+
+  const [filmList, setFilmList] = useState(phim || DanhSachPhim);
+
+  const dispatch = useDispatch();
   const { ModalForm, openModal } = useModalForm({
     schema,
     fields,
     handleSubmitForm,
     title: "Chỉnh sửa Phim",
+    initialValues: ThongTinPhim,
   });
 
-  const handleEdit = () => {
+  const handleDelete = (id) => {
+    const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
+    dispatch(XoaPhimAction(id.maPhim)).then(() => {
+      dispatch(fetchLayDanhSachPhim(Nhom));
+    });
+  };
+  useEffect(() => {
+    // Update `filmList` when `DanhSachPhim` changes in the store
+    setFilmList(DanhSachPhim);
+  }, [DanhSachPhim]);
+
+  const handleEdit = (id) => {
     openModal();
+    dispatch(FetchLayThongTinPhim(id.maPhim));
   };
   const arr = [];
-  phim?.map((item) => {
+
+  filmList?.map((item) => {
     const { maNhom, ...rest } = item;
     arr.push({ ...rest, tuyChinh: "hành động" });
   });
   const data = arr;
+  if (!data || data.length === 0) {
+    return null;
+  }
   // 1. Lấy ra tất cả các key của object
   const keys = data && Object.keys(data[0]);
   const dataIndexKey = keys?.map((item) => {
@@ -136,8 +163,7 @@ const FilmList = ({ phim }) => {
       dataIndexKeyItem,
       newTitle,
       handleEdit,
-      handleDelete,
-
+      handleDelete
     );
   });
 

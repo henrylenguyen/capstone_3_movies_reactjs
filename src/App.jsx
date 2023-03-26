@@ -8,6 +8,7 @@ import routesAdmin from "routes/admin/routesAdmin";
 import bgError from "assets/images/error.png";
 import LoginPage from "pages/Admin/LoginPage";
 import ContainerLayout from "layouts/admin/home/ContainerLayout";
+import { fetchLayThongTinTaiKhoan } from "thunks/admin/userThunks";
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchProfile());
+    dispatch(fetchLayThongTinTaiKhoan());
   }, []);
 const params = window.location.pathname;
   return (

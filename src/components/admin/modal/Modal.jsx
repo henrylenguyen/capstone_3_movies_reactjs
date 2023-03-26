@@ -1,10 +1,8 @@
-import useOnClickOutside from "hooks/useClickOutside";
+
 import { useEffect, useRef } from "react";
 
 const Modal = ({ isOpen, closeModal, children }) => {
-  const modalRef = useRef(null);
-  // useOnClickOutside(modalRef, closeModal);
-
+  const modalRef = useRef(null)
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("overflow-hidden");

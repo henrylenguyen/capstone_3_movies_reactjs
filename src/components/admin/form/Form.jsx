@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TextArea from "../textArea/CKTextArea";
@@ -15,12 +15,14 @@ const Form = ({
   closeModal,
   handleSubmitForm,
   title,
+  initialValues,
   color = "text-gray-700",
 }) => {
   const {
     control,
     handleSubmit,
     register,
+    // setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -29,6 +31,13 @@ const Form = ({
   const onSubmit = (data) => {
     handleSubmitForm(data);
   };
+  // useEffect(() => {
+  //   // Set value for each field in the form
+  //   Object.keys(initialValues).forEach(
+  //     (key) => 
+  //      setValue(key, initialValues[key])
+  //   );
+  // }, [initialValues, setValue]);
   return (
     <>
       <h3 className="font-semibold uppercase text-[30px] text-center">
@@ -46,6 +55,7 @@ const Form = ({
                 name={name}
                 placeholder={placeholder}
                 errors={errors[name]}
+                
               />
             ) : type === "checkbox" ? (
               <CheckboxGroup

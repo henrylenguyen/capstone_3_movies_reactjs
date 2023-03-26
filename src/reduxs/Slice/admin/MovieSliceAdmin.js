@@ -7,6 +7,7 @@ const movieSliceAdmin = createSlice({
     ticketList: [],
     CumRapTheoHeThong: [],
     DanhSachPhim: [],
+    ThongTinPhim: "",
   },
   reducers: {
     LayThongTinLichChieuHeThongRap: (state, { payload }) => {
@@ -33,6 +34,12 @@ const movieSliceAdmin = createSlice({
         DanhSachPhim: payload,
       };
     },
+    LayThongTinPhim: (state,{payload})=>{
+      return {
+        ...state,
+        ThongTinPhim: payload,
+      };
+    }
   },
 });
 export const {
@@ -40,5 +47,6 @@ export const {
   getSeatsByShowtimeCode,
   LayThongTinCumRapTheoHeThong,
   LayDanhSachPhim,
+  LayThongTinPhim,
 } = movieSliceAdmin.actions;
 export default movieSliceAdmin.reducer;

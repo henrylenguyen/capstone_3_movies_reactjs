@@ -14,11 +14,6 @@ export const navList = [
         title_child: "Danh sách người dùng",
         to: "/admin/danh-sach-nguoi-dung",
       },
-      {
-        child_id: 2,
-        title_child: "Phân quyền người dùng",
-        to: "/admin/phan-quyen-nguoi-dung",
-      },
     ],
   },
   {

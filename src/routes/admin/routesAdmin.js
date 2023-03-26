@@ -13,7 +13,6 @@ import ChooseInforUser from "pages/Admin/user/ChooseInforUser";
 
 // import TicketList from "pages/Admin/ticket/TicketList";
 import ListUserPage from "pages/Admin/user/ListUserPage";
-import UserAuthorizationPage from "pages/Admin/user/UserAuthorizationPage";
 const routesAdmin = [
   {
     path: "/admin/home",
@@ -26,10 +25,6 @@ const routesAdmin = [
   {
     path: "/admin/danh-sach-nguoi-dung",
     element: ChooseInforUser,
-  },
-  {
-    path: "/admin/phan-quyen-nguoi-dung",
-    element: UserAuthorizationPage,
   },
   {
     path: "/admin/danh-sach-phong-ve",

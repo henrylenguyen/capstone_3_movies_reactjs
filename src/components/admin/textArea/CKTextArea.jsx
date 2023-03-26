@@ -7,7 +7,7 @@ const CKTextArea = ({ control, ...props }) => {
   const { field } = useController({
     control,
     name: props.name,
-    defaultValue: "",
+    defaultValue: props.defaultValue ||"",
   });
 
   return (

@@ -18,11 +18,11 @@ const SignInPage = () => {
   const hasLogin = useSelector((state) => state.user.hasLogin);
   const timerInterval = useRef();
   const timeoutId = useRef();
-
   async function handleSubmit(values) {
     try {
       await dispatch(fetchSignIn(values));
       dispatch(login());
+      
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -41,7 +41,11 @@ const SignInPage = () => {
 
   // Prevent after user login that can access to auth page
   useEffect(() => {
+    
     if (accessToken || userLogin) {
+     
+     
+
       Swal.fire({
         title: "Bạn đã đăng nhập!",
         html: "Sẽ quay trở lại trang chủ sau <b></b> giây",

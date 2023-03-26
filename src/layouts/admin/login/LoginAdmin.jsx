@@ -7,8 +7,6 @@ import Input from "components/admin/input/Input";
 import { toast, ToastContainer } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { fetchDangNhap } from "thunks/admin/userThunks";
-import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
-import useLocalStorage from "hooks/useLocalStorage";
 
 // schema validation
 const schema = yup
@@ -24,7 +22,6 @@ const LoginAdmin = () => {
   const {
     control,
     handleSubmit,
-    reset,
     formState: { errors, isValid, isSubmitting },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmitHandle = (values) => {
