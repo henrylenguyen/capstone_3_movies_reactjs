@@ -1,34 +1,57 @@
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CottageIcon from "@mui/icons-material/Cottage";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { navList } from "routes/admin/Slug";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ControlledAccordions from "../accordion/Accordion";
-import { DangXuatTaiKhoan } from "reduxs/Slice/admin/UserSliceAdmin";
-import Modal from "../modal/Modal";
+import Swal from "sweetalert2";
+import MyButton from "../button/MyButton";
+import { message } from "antd";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
+import { ACCESS_TOKEN } from "constants/constants";
 const NavbarAdmin = () => {
   const { isOpen } = useSelector((state) => state.navbar);
-  const { hasLogOut } = useSelector((state) => state.userAdmin);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const { ThongTinTaiKhoan } = useSelector((state) => state.userAdmin);
   const { hoTen } = ThongTinTaiKhoan;
-  const handleLogout = (e)=>{
-    // dispatch(DangXuatTaiKhoan(true));
-    <Modal isOpen="true"></Modal>;
-  }
-  
+  const handleLogout = () => {
+    localStorage.removeItem(ACCESS_TOKEN_ADMIN);
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem("isQuanTri");
+   let timerInterval;
+   Swal.fire({
+     title: "Đang đăng xuất",
+     html: "Bạn sẽ được chuyển về trang đăng nhập sau <b></b> giây.",
+     timer: 1500,
+     timerProgressBar: true,
+     didOpen: () => {
+       Swal.showLoading();
+       const b = Swal.getHtmlContainer().querySelector("b");
+       timerInterval = setInterval(() => {
+         b.textContent = Swal.getTimerLeft();
+       }, 100);
+     },
+     willClose: () => {
+       clearInterval(timerInterval);
+         navigate("/admin/login");
+     },
+   }).then((result) => {
+     /* Read more about handling dismissals below */
+     if (result.dismiss === Swal.DismissReason.timer) {
+      message.info("Đã đăng xuất khỏi hệ thống")
+     }
+   });
+  };
+
   return (
     <div
       className={`flex flex-col gap-y-5 transition-all ease-in-out duration-300 flex-shrink-0 ${
         isOpen ? " w-[350px] mr-5" : "navbarTransition absolute"
       }`}
     >
-      {hasLogOut ? (
-        ""
-      ) : (
         <div className="user-admin">
           <ControlledAccordions
             avatar={true}
@@ -51,19 +74,28 @@ const NavbarAdmin = () => {
               ></AccountCircleIcon>
               Thông tin tài khoản
             </NavLink>
-            <button
-              className="text-adminThirdary p-4 text-left"
-              onClick={handleLogout}
-            >
+            <div className="text-adminThirdary p-5 text-left">
               <LogoutIcon
                 fontSize="large"
                 sx={{ marginRight: "10px" }}
               ></LogoutIcon>
-              Đăng xuất
-            </button>
+              <MyButton
+                title="Đăng xuất khỏi hệ thống"
+                text="Bạn sẽ đăng xuất hệ thống và không còn truy cập hệ thống được nữa"
+                icon="warning"
+                confirmButtonText="Yes"
+                cancelButtonText="No"
+                children1={() => {
+                  handleLogout();
+                }}
+                children2={() => {
+                  
+                }}
+                label="Đăng xuất"
+              ></MyButton>
+            </div>
           </ControlledAccordions>
         </div>
-      )}
       <div className="navbar p-4 bg-adminPrimary">
         <div className="w-full flex items-center pt-4 ">
           <NavLink
