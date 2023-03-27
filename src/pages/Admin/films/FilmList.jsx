@@ -89,20 +89,18 @@ const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
-  const { ThongTinPhim, DanhSachPhim } = useSelector(
-    (state) => state.movieAdmin
-  );
-
-  const [filmList, setFilmList] = useState(phim || DanhSachPhim);
-
+  const { ThongTinPhim } = useSelector((state) => state.movieAdmin);
+  const [movieData, setMovieData] = useState(null);
+  console.log("movieData:", movieData);
   const dispatch = useDispatch();
   const { ModalForm, openModal } = useModalForm({
     schema,
     fields,
     handleSubmitForm,
     title: "Chỉnh sửa Phim",
-    initialValues: ThongTinPhim,
+    initialValues: movieData,
   });
+ 
 
   const handleDelete = (id) => {
     const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
@@ -110,18 +108,19 @@ const FilmList = ({ phim }) => {
       dispatch(fetchLayDanhSachPhim(Nhom));
     });
   };
-  useEffect(() => {
-    // Update `filmList` when `DanhSachPhim` changes in the store
-    setFilmList(DanhSachPhim);
-  }, [DanhSachPhim]);
+ const handleEdit = async (id) => {
+   try {
+     await dispatch(FetchLayThongTinPhim(id.maPhim));
+     setMovieData(ThongTinPhim);
+     openModal();
+   } catch (error) {
+     console.log(error);
+   }
+ };
 
-  const handleEdit = (id) => {
-    openModal();
-    dispatch(FetchLayThongTinPhim(id.maPhim));
-  };
   const arr = [];
 
-  filmList?.map((item) => {
+  phim?.map((item) => {
     const { maNhom, ...rest } = item;
     arr.push({ ...rest, tuyChinh: "hành động" });
   });

@@ -56,7 +56,7 @@ export default function ListUserPage({ user }) {
     openModal();
   };
   const handleDelete = (id) => {
-    console.log("id:", id);
+    
     const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
     dispatch(XoaNguoiDungAction(id.taiKhoan)).then(() => {
       dispatch(fetchLayThongTinDanhSachUser(Nhom));

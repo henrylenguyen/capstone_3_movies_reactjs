@@ -2,6 +2,7 @@ import { message } from "antd";
 import userAPI from "API/admin/UserAPI";
 import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import { statusCode } from "constants/admin/constants";
+import { loginAdminInfor } from "reduxs/Slice/admin/UserSliceAdmin";
 import { layThongTinTaiKhoan } from "reduxs/Slice/admin/UserSliceAdmin";
 import { layDanhSachNguoiDung } from "reduxs/Slice/admin/UserSliceAdmin";
 
@@ -22,7 +23,8 @@ export const fetchLayThongTinTaiKhoan = () => async (dispatch) => {
       dispatch(layThongTinTaiKhoan(res.data.content));
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
+    message.error(error.response.data.content);
   }
 };
 export const fetchDangNhap = (data, toast, navigate) => async (dispatch) => {
@@ -47,7 +49,9 @@ export const fetchDangNhap = (data, toast, navigate) => async (dispatch) => {
       });
     }
   } catch (error) {
-    console.log(error);
+     toast.error("Đăng nhập thất bại!", {
+       position: toast.POSITION.TOP_RIGHT,
+     });
   }
 };
 export const XoaNguoiDungAction = (TaiKhoan) => {

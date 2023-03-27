@@ -52,50 +52,50 @@ const NavbarAdmin = () => {
         isOpen ? " w-[350px] mr-5" : "navbarTransition absolute"
       }`}
     >
-        <div className="user-admin">
-          <ControlledAccordions
-            avatar={true}
-            src=""
-            alt="avatar"
-            title={hoTen}
-            sx={{ bgcolor: "#2B2B4B", color: "#fff", p: 2 }}
+      <div className="user-admin">
+        <ControlledAccordions
+          avatar={true}
+          src=""
+          alt="avatar"
+          title={hoTen}
+          sx={{ bgcolor: "#2B2B4B", color: "#fff", p: 2 }}
+        >
+          <NavLink
+            to={"/admin/thong-tin-tai-khoan"}
+            className={({ isActive }) =>
+              isActive
+                ? "bg-adminSecondary text-white w-full p-2 block"
+                : "p-4 text-adminThirdary w-full"
+            }
           >
-            <NavLink
-              to={"/admin/thong-tin-tai-khoan"}
-              className={({ isActive }) =>
-                isActive
-                  ? "bg-adminSecondary text-white w-full p-2 block"
-                  : "p-4 text-adminThirdary w-full"
-              }
+            <AccountCircleIcon
+              fontSize="large"
+              sx={{ marginRight: "10px" }}
+            ></AccountCircleIcon>
+            Thông tin tài khoản
+          </NavLink>
+          <div className="text-adminThirdary p-5 text-left">
+            <MyButton
+              title="Đăng xuất khỏi hệ thống"
+              text="Bạn sẽ đăng xuất hệ thống và không còn truy cập hệ thống được nữa"
+              icon="warning"
+              confirmButtonText="Yes"
+              cancelButtonText="No"
+              children1={() => {
+                handleLogout();
+              }}
+              children2={() => {}}
             >
-              <AccountCircleIcon
-                fontSize="large"
-                sx={{ marginRight: "10px" }}
-              ></AccountCircleIcon>
-              Thông tin tài khoản
-            </NavLink>
-            <div className="text-adminThirdary p-5 text-left">
+              {" "}
               <LogoutIcon
                 fontSize="large"
                 sx={{ marginRight: "10px" }}
               ></LogoutIcon>
-              <MyButton
-                title="Đăng xuất khỏi hệ thống"
-                text="Bạn sẽ đăng xuất hệ thống và không còn truy cập hệ thống được nữa"
-                icon="warning"
-                confirmButtonText="Yes"
-                cancelButtonText="No"
-                children1={() => {
-                  handleLogout();
-                }}
-                children2={() => {
-                  
-                }}
-                label="Đăng xuất"
-              ></MyButton>
-            </div>
-          </ControlledAccordions>
-        </div>
+              Đăng xuất
+            </MyButton>
+          </div>
+        </ControlledAccordions>
+      </div>
       <div className="navbar p-4 bg-adminPrimary">
         <div className="w-full flex items-center pt-4 ">
           <NavLink

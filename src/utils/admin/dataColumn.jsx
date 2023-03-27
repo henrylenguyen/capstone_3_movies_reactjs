@@ -1,5 +1,6 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Avatar, Button, Image, Tooltip } from "antd";
+import MyButton from "components/admin/button/MyButton";
 import Active from "components/admin/span/Active";
 import InActive from "components/admin/span/InActive";
 import Pending from "components/admin/span/Pending";
@@ -43,7 +44,7 @@ const getColumnConfig = (
     columnConfig.width = 250;
     columnConfig.align = "center";
     columnConfig.render = (text, record) => (
-      <span>
+      <div className="flex justify-center items-center gap-5">
         <Button
           type="link"
           icon={<EditOutlined />}
@@ -51,15 +52,23 @@ const getColumnConfig = (
         >
           Edit
         </Button>
-        <Button
-          type="link"
-          danger
-          icon={<DeleteOutlined />}
-          onClick={() => handleDelete(record)}
+        <MyButton
+          title="Xác nhận xóa"
+          text="Bạn sẽ không thể hoàn tác khi đã xóa"
+          icon="warning"
+          confirmButtonText="Yes"
+          cancelButtonText="No"
+          children1={() => {
+            handleDelete(record);
+          }}
+          children2={() => {}}
+          className = "text-red-500 hover:text-red-400 flex gap-1 items-center"
         >
+          <DeleteOutlined />
           Delete
-        </Button>
-      </span>
+        </MyButton>
+        
+      </div>
     );
   } else if (newTitle === "trailer") {
     columnConfig.width = 150;

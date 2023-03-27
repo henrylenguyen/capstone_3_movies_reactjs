@@ -10,21 +10,20 @@ const ChooseInforUser = () => {
   const dispatch = useDispatch();
   const { danhSachNguoiDung } = useSelector((state) => state.userAdmin);
   const [searchParam, setUseSearchParam] = useSearchParams();
-  const [Nhom, setNhom] = useState("");
   // useLocalStorage
   const [localStorage, setLocalStorage] = useLocalStorage(
     "danhsachnguoidung",
     ""
   );
-
+const [localNhom, setLocalNhom] = useLocalStorage("Nhom", "");
   const handleClickGroup = (item) => {
     dispatch(fetchLayThongTinDanhSachUser(item.maNhom));
-    setNhom(item.maNhom);
+    setLocalNhom(item.maNhom);
   };
   useEffect(() => {
     if (danhSachNguoiDung.length > 0) {
       setLocalStorage({ danhsachnguoidung: danhSachNguoiDung });
-      setUseSearchParam({ Nhom: Nhom });
+      setUseSearchParam({ Nhom: localNhom });
     }
   }, [danhSachNguoiDung, localStorage.danhsachnguoidung]);
 
