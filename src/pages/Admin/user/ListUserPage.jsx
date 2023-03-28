@@ -1,20 +1,36 @@
 import CustomTable from "components/admin/table/CustomTable";
 import removeVietnameseTones from "config/admin/convertVietnamese";
 import useModalForm from "HOCS/useModalForm";
-import React from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchLayThongTinDanhSachUser } from "thunks/admin/userThunks";
+import { fetchLayThongTinNguoiDung } from "thunks/admin/userThunks";
+import { fetchChinhSuaNguoiDung } from "thunks/admin/userThunks";
 import { XoaNguoiDungAction } from "thunks/admin/userThunks";
 import getColumnConfig from "utils/admin/dataColumn";
 
 import * as yup from "yup";
 
-const handleSubmitForm = (data) => {
-  console.log(data);
-};
-const schema = yup.object().shape({}).required();
 
+const schema = yup.object().shape({}).required();
+let option = [];
+
+for (let i = 0; i < 10; i++) {
+  option.push({ label: `GP0${i}`, value: `GP0${i}`, id: i });
+}
 const fields = [
+  {
+    label: "Tài khoản",
+    name: "taiKhoan",
+    type: "text",
+    placeholder: "Tài khoản",
+  },
+  {
+    label: "Mật khẩu",
+    name: "matKhau",
+    type: "password",
+    placeholder: "Mật khẩu",
+  },
   {
     label: "Họ tên",
     name: "hoTen",
@@ -42,21 +58,45 @@ const fields = [
       { label: "Quản trị", value: "QuanTri" },
     ],
   },
+  {
+    label: "Mã nhóm",
+    name: "maNhom",
+    type: "select",
+    options: option,
+  },
 ];
 
 export default function ListUserPage({ user }) {
-  const { ModalForm, openModal } = useModalForm({
+  const { ThongTinNguoiDung } = useSelector((state) => state.userAdmin);
+ const dispatch = useDispatch();
+ const [userData, setUserData] = useState(null);
+ //------------------------- NÚT CHỈNH SỬA-------------------
+  const handleSubmitForm = async (data) => {
+    console.log("data:", data);
+    const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
+     await dispatch(fetchChinhSuaNguoiDung(data)).then(() => {
+       dispatch(fetchLayThongTinDanhSachUser(Nhom));
+       closeModal();
+     });
+  };
+  const { ModalForm, openModal, closeModal } = useModalForm({
     schema,
     fields,
     handleSubmitForm,
     title: "Chỉnh sửa Người dùng",
+    initialValues: userData,
   });
-  const dispatch = useDispatch();
-  const handleEdit = () => {
-    openModal();
+  const handleEdit = (id) => {
+    dispatch(fetchLayThongTinNguoiDung(id.taiKhoan));
+  };
+  
+  const handleUpdate = () => {
+    setUserData(ThongTinNguoiDung);
+    setTimeout(() => {
+      openModal();
+    }, 1500);
   };
   const handleDelete = (id) => {
-    
     const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
     dispatch(XoaNguoiDungAction(id.taiKhoan)).then(() => {
       dispatch(fetchLayThongTinDanhSachUser(Nhom));
@@ -97,7 +137,8 @@ export default function ListUserPage({ user }) {
       dataIndexKeyItem,
       newTitle,
       handleEdit,
-      handleDelete
+      handleDelete,
+      handleUpdate
     );
   });
 

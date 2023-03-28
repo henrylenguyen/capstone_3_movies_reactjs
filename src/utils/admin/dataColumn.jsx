@@ -1,5 +1,5 @@
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Avatar, Button, Image, Tooltip } from "antd";
+import { Avatar, Button, Image, Popconfirm, Tooltip } from "antd";
 import MyButton from "components/admin/button/MyButton";
 import Active from "components/admin/span/Active";
 import InActive from "components/admin/span/InActive";
@@ -10,7 +10,8 @@ const getColumnConfig = (
   dataIndexKeyItem,
   newTitle,
   handleEdit,
-  handleDelete
+  handleDelete,
+  handleUpdate,
 ) => {
   const columnConfig = {
     title: title.title,
@@ -45,13 +46,20 @@ const getColumnConfig = (
     columnConfig.align = "center";
     columnConfig.render = (text, record) => (
       <div className="flex justify-center items-center gap-5">
-        <Button
-          type="link"
-          icon={<EditOutlined />}
-          onClick={() => handleEdit(record)}
+        <Popconfirm
+          title="Bạn có chắc sẽ chinh sửa thông tin này không?"
+          onConfirm={() => handleUpdate(record)}
+          okText="Có"
+          cancelText="Không"
         >
-          Edit
-        </Button>
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            onClick={() => handleEdit(record)}
+          >
+            Edit
+          </Button>
+        </Popconfirm>
         <MyButton
           title="Xác nhận xóa"
           text="Bạn sẽ không thể hoàn tác khi đã xóa"
@@ -62,12 +70,11 @@ const getColumnConfig = (
             handleDelete(record);
           }}
           children2={() => {}}
-          className = "text-red-500 hover:text-red-400 flex gap-1 items-center"
+          className="text-red-500 hover:text-red-400 flex gap-1 items-center"
         >
           <DeleteOutlined />
           Delete
         </MyButton>
-        
       </div>
     );
   } else if (newTitle === "trailer") {

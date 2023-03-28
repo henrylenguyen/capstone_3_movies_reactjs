@@ -6,13 +6,8 @@ import UserConfig from "pages/Admin/config/UserConfig";
 import AddNewFilm from "pages/Admin/films/AddNewFilm";
 import ChooseInforFilms from "pages/Admin/films/ChooseInforFilms";
 import CreateNewShowtimes from "pages/Admin/films/CreateNewShowtimes";
-import FilmList from "pages/Admin/films/FilmList";
 import ChooseInforTicket from "pages/Admin/ticket/ChooseInforTicket";
-import TicketList from "pages/Admin/ticket/TicketList";
 import ChooseInforUser from "pages/Admin/user/ChooseInforUser";
-
-// import TicketList from "pages/Admin/ticket/TicketList";
-import ListUserPage from "pages/Admin/user/ListUserPage";
 const routesAdmin = [
   {
     path: "/admin/home",

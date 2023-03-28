@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CottageIcon from "@mui/icons-material/Cottage";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -11,12 +11,17 @@ import MyButton from "../button/MyButton";
 import { message } from "antd";
 import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import { ACCESS_TOKEN } from "constants/constants";
+import { fetchLayThongTinTaiKhoan } from "thunks/admin/userThunks";
 const NavbarAdmin = () => {
   const { isOpen } = useSelector((state) => state.navbar);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
   const { ThongTinTaiKhoan } = useSelector((state) => state.userAdmin);
   const { hoTen } = ThongTinTaiKhoan;
+  useEffect(() => {
+    dispatch(fetchLayThongTinTaiKhoan());
+  }, [])
+  
   const handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN_ADMIN);
     localStorage.removeItem(ACCESS_TOKEN);

@@ -1,7 +1,16 @@
 import Form from 'components/admin/form/Form';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchChinhSuaNguoiDung } from 'thunks/admin/userThunks';
+
 import * as yup from "yup";
+
+
+let option = [];
+
+for (let i = 0; i < 10; i++) {
+  option.push({ label: `GP0${i}`, value: `GP0${i}`, id: i });
+}
 const schema = yup
   .object()
   .shape({
@@ -39,19 +48,39 @@ const fields = [
     type: "email",
     placeholder: "Email",
   },
+  {
+    label: "Loại khách hàng",
+    name: "maLoaiNguoiDung",
+    type: "select",
+    options: [
+      { label: "Khách hàng", value: "KhachHang" },
+      { label: "Quản trị", value: "QuanTri" },
+    ],
+  },
+  {
+    label: "Mã nhóm",
+    name: "maNhom",
+    type: "select",
+    options: option,
+  },
 ];
 
 const UserConfig = () => {
   const { ThongTinTaiKhoan } = useSelector((state) => state.userAdmin);
-  console.log("ThongTinTaiKhoan:", ThongTinTaiKhoan);
+  const dispatch = useDispatch();
+    const handleSubmitForm = (data) => {
+     dispatch(fetchChinhSuaNguoiDung(data));
+      
+    };
   return (
-    <div className='w-full'>
+    <div className="w-full">
       <Form
         schema={schema}
         fields={fields}
-        // handleSubmitForm={handleSubmitForm}
+        handleSubmitForm={handleSubmitForm}
         title={"Thông tin tài khoản"}
         color="text-white"
+        initialValues={ThongTinTaiKhoan}
       ></Form>
     </div>
   );

@@ -89,9 +89,8 @@ const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
-  const { ThongTinPhim } = useSelector((state) => state.movieAdmin);
+  const { ThongTinPhim } = useSelector((state) => state.userAdmin);
   const [movieData, setMovieData] = useState(null);
-  console.log("movieData:", movieData);
   const dispatch = useDispatch();
   const { ModalForm, openModal } = useModalForm({
     schema,
@@ -108,16 +107,15 @@ const FilmList = ({ phim }) => {
       dispatch(fetchLayDanhSachPhim(Nhom));
     });
   };
- const handleEdit = async (id) => {
-   try {
-     await dispatch(FetchLayThongTinPhim(id.maPhim));
-     setMovieData(ThongTinPhim);
-     openModal();
-   } catch (error) {
-     console.log(error);
-   }
- };
-
+ const handleEdit = (id) => {
+     dispatch(FetchLayThongTinPhim(id.maPhim));
+    };
+const handleUpdate = ()=>{
+   setMovieData(ThongTinPhim);
+    setTimeout(() => {
+      openModal();
+    }, 1000);
+ }
   const arr = [];
 
   phim?.map((item) => {
@@ -162,7 +160,8 @@ const FilmList = ({ phim }) => {
       dataIndexKeyItem,
       newTitle,
       handleEdit,
-      handleDelete
+      handleDelete,
+      handleUpdate
     );
   });
 
