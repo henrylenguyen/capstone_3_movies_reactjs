@@ -8,12 +8,7 @@ const MovieApi = {
         maNhom,
       },
     }),
-  LayThongTinCumRapTheoHeThong: (maHeThongRap) =>
-    AdminRequest.get("/QuanLyRap/LayThongTinCumRapTheoHeThong", {
-      params: {
-        maHeThongRap,
-      },
-    }),
+
   LayDanhSachPhim: (maNhom) =>
     AdminRequest.get("/QuanLyPhim/LayDanhSachPhim", {
       params: {

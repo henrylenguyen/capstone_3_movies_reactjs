@@ -26,6 +26,17 @@ const userAPI = {
       },
     });
   },
+  layThongTinNguoiDung: (data) => {
+    return AdminRequest.post(
+      `/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${data}`,data
+    );
+  },
+  capNhatThongTinNguoiDung: (data) => {
+    return AdminRequest.post(
+      `/QuanLyNguoiDung/CapNhatThongTinNguoiDung`,
+      data  
+    );
+  },
 };
 
 export default userAPI;

@@ -5,7 +5,6 @@ const movieSliceAdmin = createSlice({
   initialState: {
     LichChieuHeThongRap: [],
     ticketList: [],
-    CumRapTheoHeThong: [],
     DanhSachPhim: [],
     ThongTinPhim: "",
   },
@@ -22,12 +21,7 @@ const movieSliceAdmin = createSlice({
         ticketList: payload,
       };
     },
-    LayThongTinCumRapTheoHeThong: (state, { payload }) => {
-      return {
-        ...state,
-        CumRapTheoHeThong: payload,
-      };
-    },
+   
     LayDanhSachPhim: (state, { payload }) => {
       return {
         ...state,
@@ -45,7 +39,6 @@ const movieSliceAdmin = createSlice({
 export const {
   LayThongTinLichChieuHeThongRap,
   getSeatsByShowtimeCode,
-  LayThongTinCumRapTheoHeThong,
   LayDanhSachPhim,
   LayThongTinPhim,
 } = movieSliceAdmin.actions;

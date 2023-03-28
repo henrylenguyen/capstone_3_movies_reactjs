@@ -4,8 +4,9 @@ import TicketList from "pages/Admin/ticket/TicketList";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-import { fetchThongTinCumRapTheoHeThong } from "thunks/admin/movieThunks";
+
 import { fetchLichChieuHeThongRap } from "thunks/admin/movieThunks";
+import { fetchThongTinCumRapTheoHeThong } from "thunks/admin/theaterThunks";
 
 const ChooseInforTicket = () => {
   const [list, setList] = useState([]);

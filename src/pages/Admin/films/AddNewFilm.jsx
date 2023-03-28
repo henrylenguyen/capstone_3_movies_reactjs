@@ -1,4 +1,5 @@
 import Form from "components/admin/form/Form";
+import { option } from "constants/admin/optionsGroup";
 import moment from "moment";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -51,11 +52,6 @@ const schema = yup
     ngayKhoiChieu: yup.string().required("Ngày là bắt buộc"),
   })
   .required();
-let option = [];
-
-for (let i = 0; i < 10; i++) {
-  option.push({ label: `GP0${i}`, value: `GP0${i}`, id: i });
-}
 const fields = [
   {
     label: "Tên phim",
@@ -117,7 +113,7 @@ const AddNewFilm = () => {
   const handleSubmitForm = (data) => {
     data.danhGia = 0;
     let formData = new FormData();
-    console.log(data);
+    
     for (let key in data) {
       if (key === "ngayKhoiChieu") {
         formData.append(key, moment(data[key]).format("DD/MM/YYYY"));

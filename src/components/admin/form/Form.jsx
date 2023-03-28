@@ -22,7 +22,6 @@ const Form = ({
     control,
     handleSubmit,
     register,
-    // setValue,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -31,96 +30,207 @@ const Form = ({
   const onSubmit = (data) => {
     handleSubmitForm(data);
   };
-  // useEffect(() => {
-  //   // Set value for each field in the form
-  //   Object.keys(initialValues).forEach(
-  //     (key) => 
-  //      setValue(key, initialValues[key])
-  //   );
-  // }, [initialValues, setValue]);
+
+  const newFields = fields?.reduce((acc, field) => {
+    if (initialValues?.hasOwnProperty(field.name)) {
+      acc.push({
+        ...field,
+        value: initialValues[field.name],
+      });
+    }
+    return acc;
+  }, []);
+  
+
+
   return (
     <>
       <h3 className="font-semibold uppercase text-[30px] text-center">
         {title}
       </h3>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
-        {fields.map(({ label, name, type, placeholder, ...rest }) => (
-          <div key={name} className="flex flex-col gap-3">
-            <label className={`block font-medium ${color}`} htmlFor={name}>
-              {label}
-            </label>
-            {type === "textarea" ? (
-              <CKTextArea
-                control={control}
-                name={name}
-                placeholder={placeholder}
-                errors={errors[name]}
-                
-              />
-            ) : type === "checkbox" ? (
-              <CheckboxGroup
-                control={control}
-                placeholder={placeholder}
-                options={rest.options}
-                name={name}
-                errors={errors[name]}
-              />
-            ) : type === "radio" ? (
-              <Radio
-                control={control}
-                placeholder={placeholder}
-                options={rest.options}
-                name={name}
-                errors={errors[name]}
-              />
-            ) : type === "file" ? (
-              <ImageUpload
-                name={name}
-                control={control}
-                errors={errors[name]}
-              />
-            ) : type === "select" ? (
-              <Dropdown
-                control={control}
-                name={name}
-                options={rest.options}
-                errors={errors[name]}
-              />
-            ) : type === "date" ? (
-              <DateTimePickerField
-                control={control}
-                name={name}
-                errors={errors}
-                type="date"
-              />
-            ) : type === "time" ? (
-              <DateTimePickerField
-                control={control}
-                name={name}
-                errors={errors}
-                type="time"
-              />
-            ) : (
-              <input
-                type={type}
-                placeholder={placeholder}
-                {...register(name)}
-                name={name}
-                className={`${
-                  errors[name]
-                    ? "border border-red-500"
-                    : "border border-gray-300"
-                } focus:outline-none focus:border-blue-400  focus:ring-2 focus:ring-blue-400 block w-full rounded-md  py-2 px-3 mt-2 text-black`}
-              />
-            )}
+        {newFields.length > 0
+          ? newFields.map(
+              ({ label, name, type, placeholder, onChange, ...rest }) => (
+                <div key={name} className="flex flex-col gap-3">
+                  <label
+                    className={`block font-medium ${color}`}
+                    htmlFor={name}
+                  >
+                    {label}
+                  </label>
+                  {type === "textarea" ? (
+                    <CKTextArea
+                      control={control}
+                      name={name}
+                      placeholder={placeholder}
+                      errors={errors[name]}
+                      defaultValue={rest.value}
+                    />
+                  ) : type === "checkbox" ? (
+                    <CheckboxGroup
+                      control={control}
+                      placeholder={placeholder}
+                      options={rest.options}
+                      name={name}
+                      errors={errors[name]}
+                    />
+                  ) : type === "radio" ? (
+                    <Radio
+                      control={control}
+                      placeholder={placeholder}
+                      options={rest.options}
+                      name={name}
+                      errors={errors[name]}
+                    />
+                  ) : type === "file" ? (
+                    <ImageUpload
+                      name={name}
+                      control={control}
+                      errors={errors[name]}
+                      // defaultValue={[
+                      //   {
+                      //     preview:
+                      //       rest.value,
+                      //   },
+                      // ]}
+                    />
+                  ) : type === "select" ? (
+                    <Dropdown
+                      control={control}
+                      name={name}
+                      options={rest.options}
+                      errors={errors[name]}
+                      defaultValue={rest.value}
+                    />
+                  ) : type === "date" ? (
+                    <DateTimePickerField
+                      control={control}
+                      name={name}
+                      errors={errors}
+                      type="date"
+                    />
+                  ) : type === "time" ? (
+                    <DateTimePickerField
+                      control={control}
+                      name={name}
+                      errors={errors}
+                      type="time"
+                    />
+                  ) : (
+                    <input
+                      type={type}
+                      placeholder={placeholder}
+                      {...register(name)}
+                      name={name}
+                      defaultValue={rest.value}
+                      className={`${
+                        errors[name]
+                          ? "border border-red-500"
+                          : "border border-gray-300"
+                      } focus:outline-none focus:border-blue-400  focus:ring-2 focus:ring-blue-400 block w-full rounded-md  py-2 px-3 mt-2 text-black`}
+                    />
+                  )}
 
-            {errors[name] && (
-              <span className="text-red-500 text-sm italic">
-                {errors[name].message}
-              </span>
+                  {errors[name] && (
+                    <span className="text-red-500 text-sm italic">
+                      {errors[name].message}
+                    </span>
+                  )}
+                </div>
+              )
+            )
+          : fields.map(
+              ({ label, name, type, placeholder, onChange, ...rest }) => (
+                <div key={name} className="flex flex-col gap-3">
+                  <label
+                    className={`block font-medium ${color}`}
+                    htmlFor={name}
+                  >
+                    {label}
+                  </label>
+                  {type === "textarea" ? (
+                    <CKTextArea
+                      control={control}
+                      name={name}
+                      placeholder={placeholder}
+                      errors={errors[name]}
+                    />
+                  ) : type === "checkbox" ? (
+                    <CheckboxGroup
+                      control={control}
+                      placeholder={placeholder}
+                      options={rest.options}
+                      name={name}
+                      errors={errors[name]}
+                    />
+                  ) : type === "radio" ? (
+                    <Radio
+                      control={control}
+                      placeholder={placeholder}
+                      options={rest.options}
+                      name={name}
+                      errors={errors[name]}
+                    />
+                  ) : type === "file" ? (
+                    <ImageUpload
+                      name={name}
+                      control={control}
+                      errors={errors[name]}
+                    />
+                  ) : type === "select" ? (
+                    onChange ? (
+                      <Dropdown
+                        control={control}
+                        name={name}
+                        options={rest.options}
+                        errors={errors[name]}
+                        Select={onChange}
+                      />
+                    ) : (
+                      <Dropdown
+                        control={control}
+                        name={name}
+                        options={rest.options}
+                        errors={errors[name]}
+                      />
+                    )
+                  ) : type === "date" ? (
+                    <DateTimePickerField
+                      control={control}
+                      name={name}
+                      errors={errors}
+                      type="date"
+                    />
+                  ) : type === "time" ? (
+                    <DateTimePickerField
+                      control={control}
+                      name={name}
+                      errors={errors}
+                      type="time"
+                    />
+                  ) : (
+                    <input
+                      type={type}
+                      placeholder={placeholder}
+                      {...register(name)}
+                      name={name}
+                      className={`${
+                        errors[name]
+                          ? "border border-red-500"
+                          : "border border-gray-300"
+                      } focus:outline-none focus:border-blue-400  focus:ring-2 focus:ring-blue-400 block w-full rounded-md  py-2 px-3 mt-2 text-black`}
+                    />
+                  )}
+
+                  {errors[name] && (
+                    <span className="text-red-500 text-sm italic">
+                      {errors[name].message}
+                    </span>
+                  )}
+                </div>
+              )
             )}
-          </div>
-        ))}
         <div className="flex justify-between gap-5 mt-5">
           <button
             type="submit"
