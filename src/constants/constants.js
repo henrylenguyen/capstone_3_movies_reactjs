@@ -25,7 +25,8 @@ export const RATING_LABEL = {
   5: "Excellent+",
 };
 
-export const NAME_REGEX = /^[A-Z\sa-z]+$/g; // Only accept string and space , not number
+export const NAME_REGEX =
+  /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/g; // Only accept string and space , not number
 export const PHONE_REGEX = /^[0-9]+$/g; // Only accept number , not string
 
 export const SIGNUP_VARIABLE = [

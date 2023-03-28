@@ -22,6 +22,7 @@ function FormSignUp({ onSubmit }) {
       retypeMatKhau: "",
       hasAgree: false,
     },
+    mode: "all",
     resolver: yupResolver(schemaSignUp),
   });
 
