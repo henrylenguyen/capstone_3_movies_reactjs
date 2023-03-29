@@ -10,6 +10,27 @@ import LoginPage from "pages/Admin/LoginPage";
 import ContainerLayout from "layouts/admin/home/ContainerLayout";
 import { fetchLayThongTinTaiKhoan } from "thunks/admin/userThunks";
 
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCXp_-yPlQFR1Hj4KqFJHl06bsY_tBdgsk",
+  authDomain: "movietheater-e6e7a.firebaseapp.com",
+  projectId: "movietheater-e6e7a",
+  storageBucket: "movietheater-e6e7a.appspot.com",
+  messagingSenderId: "757041044584",
+  appId: "1:757041044584:web:bdec16fa9dfdb3d26eafdd",
+  measurementId: "G-DBX22PFJKP"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
 
 function App() {
   const dispatch = useDispatch();
