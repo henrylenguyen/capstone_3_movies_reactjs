@@ -10,43 +10,43 @@ import ChooseInforTicket from "pages/Admin/ticket/ChooseInforTicket";
 import ChooseInforUser from "pages/Admin/user/ChooseInforUser";
 const routesAdmin = [
   {
-    path: "/admin/home",
+    path: "home",
     element: AdminHomePage,
   },
   {
-    path: "/admin/thong-tin-tai-khoan",
+    path: "thong-tin-tai-khoan",
     element: UserConfig,
   },
   {
-    path: "/admin/danh-sach-nguoi-dung",
+    path: "danh-sach-nguoi-dung",
     element: ChooseInforUser,
   },
   {
-    path: "/admin/danh-sach-phong-ve",
+    path: "danh-sach-phong-ve",
     element: ChooseInforTicket,
   },
   {
-    path: "/admin/danh-sach-phim",
+    path: "danh-sach-phim",
     element: ChooseInforFilms,
   },
   {
-    path: "/admin/tao-moi-phim",
+    path: "tao-moi-phim",
     element: AddNewFilm,
   },
   {
-    path: "/admin/tao-lich-chieu",
+    path: "tao-lich-chieu",
     element: CreateNewShowtimes,
   },
   {
-    path: "/admin/them-moi-cum-rap",
+    path: "them-moi-cum-rap",
     element: AddNewCinema,
   },
   {
-    path: "/admin/danh-sach-cum-rap",
+    path: "danh-sach-cum-rap",
     element: CinemaList,
   },
   {
-    path: "/admin/cai-dat-he-thong",
+    path: "cai-dat-he-thong",
     element: SettingPage,
   },
 ];
