@@ -1,3 +1,8 @@
+User: La Ngô Hoàn Phúc => tài khoản : abc123, mật khẩu: 123456
+Admin: Lê Nguyễn Phương Thái => tài khoản: adminThai, mật khẩu: admin@123
+
+
+
 # Cấu trúc thư mục của reactjs
 
 - **API:** Nơi chứa đựng các API làm việc với server
