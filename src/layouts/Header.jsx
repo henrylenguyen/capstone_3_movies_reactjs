@@ -209,9 +209,7 @@ function Header() {
                     {userLogin.maLoaiNguoiDung === USER_TYPE.manager && (
                       <MenuItem
                         className="header__user-login-menu-item"
-                        onClick={() => {
-                          window.location.pathname = "/admin/home";
-                        }}
+                        onClick={() => navigate("/admin")}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
