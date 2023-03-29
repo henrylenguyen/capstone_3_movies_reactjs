@@ -39,7 +39,7 @@ const params = window.location.pathname;
           );
         })}
         <Route path="*" element={<PageNotFound />}></Route>
-      </Routes>):(
+      </Routes>):params === "/admin" ?(
       <div className="w-full h-screen">
         <div className="xl:hidden relative h-full flex justify-center items-center">
           <img src={bgError} alt="background" className="object-cover h-full" />
@@ -60,7 +60,7 @@ const params = window.location.pathname;
             <Route path="*" element={<PageNotFound />}></Route>
           </Routes>
         </div>
-      </div>)}
+      </div>):""}
     </>
   );
 }
