@@ -17,6 +17,8 @@ import CreateNewShowtimes from "pages/Admin/films/CreateNewShowtimes";
 import ChooseInforTicket from "pages/Admin/ticket/ChooseInforTicket";
 import ChooseInforUser from "pages/Admin/user/ChooseInforUser";
 import ContainerLayout from "layouts/admin/home/ContainerLayout";
+
+import LoginPage from "pages/Admin/LoginPage";
 const routes = [
   {
     path: "/",
@@ -57,6 +59,7 @@ const routes = [
         path: "/admin/home",
         component: AdminHomePage,
       },
+
       {
         path: "/admin/thong-tin-tai-khoan",
         component: UserConfig,
@@ -94,6 +97,10 @@ const routes = [
         component: SettingPage,
       },
     ],
+  },
+  {
+    path: "/admin/login",
+    component: LoginPage,
   },
 ];
 export default routes;
