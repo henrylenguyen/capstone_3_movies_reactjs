@@ -23,9 +23,9 @@ const ContainerLayout = () => {
       localStorage.setItem("isQuanTri", true);
     } 
     if (token || tokenUser) {
-      if (isQuanTri && params === "/admin") navigate("home");
+      if (isQuanTri && params === "/admin") navigate("/admin/home");
     } else {
-      if (!isQuanTri) navigate("login");
+      if (!isQuanTri) navigate("/admin/login");
     }
   }, []);
 

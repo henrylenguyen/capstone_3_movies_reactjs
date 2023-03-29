@@ -18,25 +18,14 @@ function App() {
     dispatch(fetchProfile());
     dispatch(fetchLayThongTinTaiKhoan());
   }, []);
-
-  const params = window.location.pathname;
-  const isAdmin = params.startsWith("/admin");
-
+const params = window.location.pathname;
   return (
     <>
-      {isAdmin ? (
-        <Routes>
-          <Route path="/admin/login" element={<LoginPage />} />
-          <Route path="/admin/*" element={<ContainerLayout />}>
-            {routesAdmin.map(({ path, element: Element }, index) => (
-              <Route key={index} path={path} element={<Element />} />
-            ))}
-          </Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      ) : (
-        <Routes>
-          {routes.map(({ path, component: Component, children }, idx) => (
+     {params === "/" ? (
+      <Routes>
+        {/* <Route>Route này để navbar hoặc header</Route> */}
+        {routes?.map(({ path, component: Component, children }, idx) => {
+          return (
             <Route key={idx} path={path} element={<Component />}>
               {children?.map(({ path, component: Component, index }, idx) => (
                 <Route
@@ -47,10 +36,31 @@ function App() {
                 />
               ))}
             </Route>
-          ))}
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      )}
+          );
+        })}
+        <Route path="*" element={<PageNotFound />}></Route>
+      </Routes>):(
+      <div className="w-full h-screen">
+        <div className="xl:hidden relative h-full flex justify-center items-center">
+          <img src={bgError} alt="background" className="object-cover h-full" />
+          <h2 className="absolute inline-block bg-red-700 p-5 rounded-xl text-white text-[18px] font-bold uppercase text-center">
+            Chúng tôi hiện chưa hỗ trợ trên thiết bị này!
+          </h2>
+        </div>
+        <div className="hidden xl:block h-full overflow-y-auto">
+          <Routes>
+            <Route path={"/admin"} element={<ContainerLayout></ContainerLayout>}>
+              {routesAdmin?.map(({ path, element: Element, slug }, index) => (
+                <Route key={index} path={path} element={<Element />}>
+      
+                </Route>
+              ))}
+            </Route>
+            <Route path="/admin/login" element={<LoginPage />}></Route>
+            <Route path="*" element={<PageNotFound />}></Route>
+          </Routes>
+        </div>
+      </div>)}
     </>
   );
 }
