@@ -1,7 +1,7 @@
 import PageNotFound from "pages/NotFoundPage";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import routes from "routes/routes";
 import { fetchProfile } from "thunks/userThunk";
 import routesAdmin from "routes/admin/routesAdmin";
@@ -34,12 +34,18 @@ const analytics = getAnalytics(app);
 
 function App() {
   const dispatch = useDispatch();
-
+const navigate = useNavigate();
   useEffect(() => {
     dispatch(fetchProfile());
     dispatch(fetchLayThongTinTaiKhoan());
   }, []);
-const params = window.location.pathname;
+  const params = window.location.pathname;
+  useEffect(() => {
+
+    if (params === "/admin") {
+      navigate("/admin/home");
+    }
+  }, []);
   return (
     <>
      {params === "/" ? (
