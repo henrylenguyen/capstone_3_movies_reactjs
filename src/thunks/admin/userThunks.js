@@ -23,8 +23,8 @@ export const fetchLayThongTinTaiKhoan = () => async (dispatch) => {
       dispatch(layThongTinTaiKhoan(res.data.content));
     }
   } catch (error) {
-    // console.log(error);
-    message.error(error.response.data.content);
+    console.log(error);
+ 
   }
 };
 export const fetchLayThongTinNguoiDung = (taiKhoan) => async (dispatch) => {

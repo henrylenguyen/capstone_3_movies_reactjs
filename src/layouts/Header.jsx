@@ -1,6 +1,7 @@
 import { Button, MenuItem, MenuList } from "@mui/material";
 
 import clsx from "clsx";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import { navigateList } from "constants/constants";
 import { ACCESS_TOKEN } from "constants/constants";
 import { USER_TYPE } from "constants/constants";
@@ -67,6 +68,8 @@ function Header() {
         dispatch(logoutUser());
         dispatch(logout());
         localStorage.removeItem(ACCESS_TOKEN);
+        localStorage.removeItem(ACCESS_TOKEN_ADMIN);
+        localStorage.removeItem("isQuanTri");
         navigate("/");
       }
     });

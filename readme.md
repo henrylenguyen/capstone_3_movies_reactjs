@@ -1,4 +1,4 @@
-User: La Ngô Hoàn Phúc => tài khoản : abc123, mật khẩu: 123456
+User: La Ngô Hoàn Phúc => tài khoản : khachhangPhuc, mật khẩu: khachhang123@
 Admin: Lê Nguyễn Phương Thái => tài khoản: adminThai, mật khẩu: admin@123
 
 

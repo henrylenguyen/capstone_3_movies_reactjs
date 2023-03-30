@@ -25,6 +25,7 @@ const ContainerLayout = () => {
     } 
     if (token || tokenUser) {
       if (isQuanTri && params === "/admin") navigate("/admin/home");
+      if (!isQuanTri) navigate("/admin/login");
     } else {
       if (!isQuanTri) navigate("/admin/login");
     }

@@ -1,4 +1,5 @@
 import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
+import { ACCESS_TOKEN } from "constants/constants";
 import AdminRequest from "./requestAPIAdmin";
 
 const userAPI = {
@@ -20,9 +21,12 @@ const userAPI = {
     });
   },
   layThongTinTaiKhoan: (data) => {
+    const token =
+      localStorage.getItem(ACCESS_TOKEN_ADMIN) ||
+      localStorage.getItem(ACCESS_TOKEN);
     return AdminRequest.post("/QuanLyNguoiDung/ThongTinTaiKhoan", data, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN_ADMIN)}`,
+        Authorization: `Bearer ${token}`,
       },
     });
   },
