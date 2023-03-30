@@ -1,6 +1,7 @@
 import userAPI from "API/userAPI";
 import FormSignUp from "components/form/formSignUp/FormSignUp";
 import SnackbarComponent from "components/snackbar/Snackbar";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import { ACCESS_TOKEN } from "constants/constants";
 import { SIGNUP_VARIABLE } from "constants/constants";
 import React, { useEffect, useRef, useState } from "react";
@@ -14,7 +15,9 @@ import styles from "./styles/signUp.module.scss";
 const SignUpPage = () => {
   const hasSignUp = useSelector((state) => state.user.hasSignUp);
   const userLogin = useSelector((state) => state.user.userLogin);
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const accessToken =
+    localStorage.getItem(ACCESS_TOKEN) ??
+    localStorage.getItem(ACCESS_TOKEN_ADMIN);
   const dispatch = useDispatch();
   const timeoutId = useRef();
   const navigate = useNavigate();

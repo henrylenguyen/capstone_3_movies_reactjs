@@ -9,11 +9,14 @@ import { ACCESS_TOKEN } from "constants/constants";
 import SnackbarComponent from "components/snackbar/Snackbar";
 import { login } from "reduxs/Slice/UserSlice";
 import { resetLogin } from "reduxs/Slice/UserSlice";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 
 const SignInPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const accessToken =
+    localStorage.getItem(ACCESS_TOKEN) ??
+    localStorage.getItem(ACCESS_TOKEN_ADMIN);
   const userLogin = useSelector((state) => state.user.userLogin);
   const hasLogin = useSelector((state) => state.user.hasLogin);
   const timerInterval = useRef();
@@ -22,7 +25,6 @@ const SignInPage = () => {
     try {
       await dispatch(fetchSignIn(values));
       dispatch(login());
-      
     } catch (error) {
       Swal.fire({
         icon: "error",
@@ -41,11 +43,7 @@ const SignInPage = () => {
 
   // Prevent after user login that can access to auth page
   useEffect(() => {
-    
     if (accessToken || userLogin) {
-     
-     
-
       Swal.fire({
         title: "Bạn đã đăng nhập!",
         html: "Sẽ quay trở lại trang chủ sau <b></b> giây",

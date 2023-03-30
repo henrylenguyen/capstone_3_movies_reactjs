@@ -14,10 +14,13 @@ import { ACCESS_TOKEN } from "constants/constants";
 import ScrollBtn from "components/scrollBtn/ScrollBtn";
 import { resetTicketData } from "reduxs/Slice/TicketSlice";
 import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 
 function SeatPage() {
   const userLogin = useSelector((state) => state.user.userLogin);
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const accessToken =
+    localStorage.getItem(ACCESS_TOKEN) ??
+    localStorage.getItem(ACCESS_TOKEN_ADMIN);
   const [showScrollBtn, setShowScrollBtn] = useState(false);
   const navigate = useNavigate();
 

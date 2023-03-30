@@ -4,6 +4,7 @@ import FormUser from "components/form/formUser/FormUser";
 import HistoryBookingList from "components/historyBookingList/HistoryBookingList";
 
 import SnackbarComponent from "components/snackbar/Snackbar";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import { ACCESS_TOKEN } from "constants/constants";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,9 @@ import "./styles/userInfo.scss";
 function UserPage() {
   const userLogin = useSelector((state) => state.user.userLogin);
   const [switchChange, setSwitchChange] = useState(false);
-  const accessToken = localStorage.getItem(ACCESS_TOKEN);
+  const accessToken =
+    localStorage.getItem(ACCESS_TOKEN) ??
+    localStorage.getItem(ACCESS_TOKEN_ADMIN);
   const [hasUpdate, setHasUpdate] = useState(false);
 
   const timeoutId = useRef();

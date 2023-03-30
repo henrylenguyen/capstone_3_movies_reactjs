@@ -1,4 +1,5 @@
 import { ACCESS_TOKEN } from "constants/constants";
+import { ACCESS_TOKEN_ADMIN } from "constants/admin/constants";
 import axiosClient from "./requestAPI";
 
 const userAPI = {
@@ -7,10 +8,14 @@ const userAPI = {
     return axiosClient.post(url, data);
   },
   getProfile() {
+    const accessToken =
+      localStorage.getItem(ACCESS_TOKEN) ??
+      localStorage.getItem(ACCESS_TOKEN_ADMIN);
+
     const url = `/QuanLyNguoiDung/ThongTinTaiKhoan`;
     return axiosClient.post(url, null, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+        Authorization: `Bearer ${localStorage.getItem(accessToken)}`,
       },
     });
   },
