@@ -46,7 +46,7 @@ const SignInPage = () => {
     if (accessToken || userLogin) {
       Swal.fire({
         title: "Bạn đã đăng nhập!",
-        html: "Sẽ quay trở lại trang chủ sau <b></b> giây",
+        html: "Sẽ quay trở lại trang chủ sau <b></b> mili giây",
         timer: 3000,
         timerProgressBar: true,
         didOpen: () => {
@@ -54,7 +54,7 @@ const SignInPage = () => {
           const b = Swal.getHtmlContainer().querySelector("b");
           timerInterval.current = setInterval(() => {
             b.textContent = Swal.getTimerLeft();
-          }, 1000);
+          }, 100);
         },
         willClose: () => {
           clearInterval(timerInterval.current);
