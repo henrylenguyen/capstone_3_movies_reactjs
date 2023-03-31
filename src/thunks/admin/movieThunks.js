@@ -35,6 +35,21 @@ export const ThemPhimUploadHinh = (formData, navigate) => {
     }
   };
 };
+export const CapNhatPhimUploadHinh = (formData, navigate) => {
+  return async (dispatch) => {
+    try {
+      const res = await MovieApi.CapNhatPhim(formData);
+      if (res.data.statusCode === 200) {
+        message.success("Cập nhật phim thành công!");
+        navigate("/admin/danh-sach-phim");
+      }
+    } catch (error) {
+      console.log("error:", error);
+      // message.error(`Cập nhật phim thất bại, ${error.response.data.content}`);
+      
+    }
+  };
+};
 export const FetchLayThongTinPhim = (maPhim) => {
   return async (dispatch) => {
     try {

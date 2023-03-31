@@ -73,7 +73,7 @@ const Form = ({
                       options={rest.options}
                       name={name}
                       errors={errors[name]}
-                      defaultValue={true}
+                      defaultValue={rest.value}
                     />
                   ) : type === "radio" ? (
                     <Radio
@@ -112,6 +112,14 @@ const Form = ({
                       name={name}
                       errors={errors}
                       type="time"
+                    />
+                  ) : type === "datetime" ? (
+                    <DateTimePickerField
+                      control={control}
+                      name={name}
+                      errors={errors}
+                      type="datetime"
+                      defaultValue={rest.value}
                     />
                   ) : (
                     <input

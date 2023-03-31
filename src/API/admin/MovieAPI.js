@@ -17,6 +17,8 @@ const MovieApi = {
     }),
   ThemMoiPhim: (data) =>
     AdminRequest.post("/QuanLyPhim/ThemPhimUploadHinh", data),
+  CapNhatPhim: (data) =>
+    AdminRequest.post("/QuanLyPhim/CapNhatPhimUpload", data),
   LayThongTinPhim: (maPhim) => {
     return AdminRequest.get("/QuanLyPhim/LayThongTinPhim", {
       params: {
