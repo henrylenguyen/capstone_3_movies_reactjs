@@ -5,18 +5,16 @@ import { message, Modal } from "antd";
 import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { Tooltip } from "antd";
 
-const ImageUpload = ({ name, control, ...props }) => {
+const ImageUpload = ({ name, control, defaultValue, ...props }) => {
   const {
     field: { value, onChange },
     fieldState: { invalid },
   } = useController({
     name,
     control,
-    defaultValue: [],
+    defaultValue: defaultValue ? [{ preview: defaultValue }] : [],
   });
-  const [preview, setPreview] = useState(
-    value[0] ? URL.createObjectURL(value[0]) : null
-  );
+  const [preview, setPreview] = useState(value[0] ? value[0].preview : null);
   const [previewVisible, setPreviewVisible] = useState(false);
 
   const handlePreview = useCallback(() => {
@@ -25,7 +23,7 @@ const ImageUpload = ({ name, control, ...props }) => {
 
   useEffect(() => {
     if (value[0]) {
-      setPreview(URL.createObjectURL(value[0]));
+      setPreview(value[0].preview);
     }
   }, [value]);
 
@@ -69,12 +67,7 @@ const ImageUpload = ({ name, control, ...props }) => {
           props.errors ? "border-red-500" : ""
         }`}
       >
-        <input
-          {...getInputProps()}
-          id={name}
-          {...props}
-         
-        />
+        <input {...getInputProps()} id={name} {...props} />
         {isDragActive ? (
           <p>Thả ảnh vào đây...</p>
         ) : (

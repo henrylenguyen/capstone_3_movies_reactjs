@@ -67,6 +67,11 @@ const fields = [
     name: "hinhAnh",
     type: "file",
   },
+  {
+    label: "Ngày khởi chiếu",
+    name: "ngayKhoiChieu",
+    type: "date",
+  },
 
   {
     name: "dangChieu",
@@ -89,7 +94,9 @@ const handleSubmitForm = (data) => {
   console.log(data);
 };
 const FilmList = ({ phim }) => {
-  const { ThongTinPhim } = useSelector((state) => state.userAdmin);
+  console.log("phim:", phim);
+  const { ThongTinPhim } = useSelector((state) => state.movieAdmin);
+  console.log("ThongTinPhim:", ThongTinPhim);
   const [movieData, setMovieData] = useState(null);
   const dispatch = useDispatch();
   const { ModalForm, openModal } = useModalForm({
@@ -108,6 +115,7 @@ const FilmList = ({ phim }) => {
     });
   };
  const handleEdit = (id) => {
+   
      dispatch(FetchLayThongTinPhim(id.maPhim));
     };
 const handleUpdate = ()=>{
@@ -142,6 +150,7 @@ const handleUpdate = ()=>{
     { title: "Đánh giá" },
     { title: "Bí danh" },
     { title: "Trailer" },
+    { title: "Ngày khởi chiếu" },
     { title: "Hot" },
     { title: "Đang chiếu" },
     { title: "Sắp chiếu" },

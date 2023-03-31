@@ -5,6 +5,7 @@ import Active from "components/admin/span/Active";
 import InActive from "components/admin/span/InActive";
 import Pending from "components/admin/span/Pending";
 import DOMPurify from "dompurify";
+import moment from "moment";
 const getColumnConfig = (
   title,
   dataIndexKeyItem,
@@ -96,6 +97,9 @@ const getColumnConfig = (
   } else if (newTitle === "avatar") {
     columnConfig.width = 150;
     columnConfig.render = (text) => <Avatar src={text} size="large"></Avatar>;
+  }
+   else if (newTitle === "ngaykhoichieu") {
+    columnConfig.render = (text) => moment(text).format("DD/MM/YYYY");
   }
   else if (newTitle === "mota") {
 

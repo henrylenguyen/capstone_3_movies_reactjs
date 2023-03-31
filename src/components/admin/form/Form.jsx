@@ -40,6 +40,7 @@ const Form = ({
     }
     return acc;
   }, []);
+  console.log("newFields:", newFields);
   
 
 
@@ -74,6 +75,7 @@ const Form = ({
                       options={rest.options}
                       name={name}
                       errors={errors[name]}
+                      defaultValue={true}
                     />
                   ) : type === "radio" ? (
                     <Radio
@@ -88,12 +90,7 @@ const Form = ({
                       name={name}
                       control={control}
                       errors={errors[name]}
-                      // defaultValue={[
-                      //   {
-                      //     preview:
-                      //       rest.value,
-                      //   },
-                      // ]}
+                      defaultValue={rest.value}
                     />
                   ) : type === "select" ? (
                     <Dropdown
