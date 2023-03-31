@@ -1,7 +1,7 @@
 User: La Ngô Hoàn Phúc => tài khoản : khachhangPhuc, mật khẩu: khachhang123@
 Admin: Lê Nguyễn Phương Thái => tài khoản: adminThai, mật khẩu: admin@123
 
-
+Các chức năng khác của admin: quản lý đặt vé, quản lý rạp, cài đặt sẽ phát triển thêm sau này
 
 # Cấu trúc thư mục của reactjs
 
