@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { Switch, FormControlLabel } from "@mui/material";
 import { useController } from "react-hook-form";
 
-const Radio = ({ control, options, ...props }) => {
+const Radio = ({ control, options, defaultValue, ...props }) => {
   const { field } = useController({
     control,
     name: props.name,
+    defaultValue,
   });
 
   const [isChecked, setIsChecked] = useState();

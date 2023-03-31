@@ -41,8 +41,6 @@ const Form = ({
     return acc;
   }, []);
   console.log("newFields:", newFields);
-  
-
 
   return (
     <>
@@ -84,6 +82,7 @@ const Form = ({
                       options={rest.options}
                       name={name}
                       errors={errors[name]}
+                      defaultValue={rest.value}
                     />
                   ) : type === "file" ? (
                     <ImageUpload
