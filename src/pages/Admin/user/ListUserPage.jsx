@@ -11,8 +11,32 @@ import getColumnConfig from "utils/admin/dataColumn";
 
 import * as yup from "yup";
 
-
-const schema = yup.object().shape({}).required();
+const schema = yup
+  .object()
+  .shape({
+    taiKhoan: yup.string().required("Tài khoản là bắt buộc"),
+    matKhau: yup.string().required("Mật khẩu là bắt buộc"),
+    hoTen: yup
+      .string()
+      .required("Họ tên là bắt buộc")
+      .matches(
+        /^[a-zA-ZêÊĐĂăâÂẠẤấẮắẦầẨẩẬậạẹẸơƠờỜởỞợÍíỊịÚụúÙùủỦỤƯưỨứỪừỬửỰựỢặẶẰằẲẳÊêỂểỀềỆệễỄẾếđàáäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
+        { message: "Họ và tên không được chứa số và ký tự đặc biệt" }
+      ),
+    email: yup
+      .string()
+      .required("Email là bắt buộc")
+      .email("Email phải có định dạng example@abc.com"),
+    soDT: yup
+      .string()
+      .required("Số điện thoại là bắt buộc")
+      .matches(/(((\+|)84)|0)(3|5|7|8|9)+([0-9]{8})\b/, {
+        message: "Số điện thoại không đúng định dạng",
+      }),
+    maLoaiNguoiDung: yup.string().required("Mã loại người dùng là bắt buộc"),
+    maNhom: yup.string().required("Mã nhóm là bắt buộc"),
+  })
+  .required();
 let option = [];
 
 for (let i = 0; i < 10; i++) {
@@ -68,16 +92,15 @@ const fields = [
 
 export default function ListUserPage({ user }) {
   const { ThongTinNguoiDung } = useSelector((state) => state.userAdmin);
- const dispatch = useDispatch();
- const [userData, setUserData] = useState(null);
- //------------------------- NÚT CHỈNH SỬA-------------------
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState(null);
+  //------------------------- NÚT CHỈNH SỬA-------------------
   const handleSubmitForm = async (data) => {
-    console.log("data:", data);
     const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");
-     await dispatch(fetchChinhSuaNguoiDung(data)).then(() => {
-       dispatch(fetchLayThongTinDanhSachUser(Nhom));
-       closeModal();
-     });
+    await dispatch(fetchChinhSuaNguoiDung(data)).then(() => {
+      dispatch(fetchLayThongTinDanhSachUser(Nhom));
+      closeModal();
+    });
   };
   const { ModalForm, openModal, closeModal } = useModalForm({
     schema,
@@ -89,12 +112,12 @@ export default function ListUserPage({ user }) {
   const handleEdit = (id) => {
     dispatch(fetchLayThongTinNguoiDung(id.taiKhoan));
   };
-  
+
   const handleUpdate = () => {
     setUserData(ThongTinNguoiDung);
     setTimeout(() => {
       openModal();
-    }, 1500);
+    }, 2000);
   };
   const handleDelete = (id) => {
     const Nhom = localStorage.getItem("Nhom").replace(/"/g, "");

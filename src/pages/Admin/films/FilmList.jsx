@@ -39,6 +39,8 @@ const schema = yup
       .matches(/^[a-zA-Z0-9._-]{3,}$/gm, "Vui lòng nhập bí danh hợp lệ"),
     hot: yup.boolean(),
     hinhAnh: yup.array().min(1, "Hình ảnh không được bỏ trống"),
+    ngayKhoiChieu: yup.string().required("Ngày là bắt buộc"),
+    maNhom: yup.string().required("Mã nhóm là bắt buộc"),
   })
   .required();
 const fields = [
@@ -119,13 +121,13 @@ const fields = [
 
 const FilmList = ({ phim }) => {
   const { ThongTinPhim } = useSelector((state) => state.movieAdmin);
-  console.log("ThongTinPhim:", ThongTinPhim);
+  
   const [movieData, setMovieData] = useState(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmitForm = (data) => {
-    console.log("data:", data);
+
     if(data.dangChieu===true){
       data.sapChieu = false;
     }
@@ -136,7 +138,7 @@ const FilmList = ({ phim }) => {
     let formData = new FormData();
     
     for (let key in data) {
-      console.log("key:", key);
+      
       if (key === "ngayKhoiChieu") {
         formData.append(key, moment(data[key]).format("DD/MM/YYYY HH:mm:ss"));
       } else if (key === "hinhAnh") {
