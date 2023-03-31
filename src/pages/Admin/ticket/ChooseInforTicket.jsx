@@ -13,7 +13,7 @@ const ChooseInforTicket = () => {
   const [dsphim, setDsphim] = useState([]);
   const dispatch = useDispatch();
   const { LichChieuHeThongRap, CumRapTheoHeThong } = useSelector(
-    (state) => state.movieAdmin
+    (state) => state.theaterAdmin
   );
   const [searchParam, setUseSearchParam] = useSearchParams();
   // useLocalStorage
@@ -55,7 +55,7 @@ const ChooseInforTicket = () => {
           <ChooseGroup onClick={handleClickGroup}></ChooseGroup>
           <div className="bg-adminPrimary p-10 rounded-2xl">
             <h2 className="text-center text-[30px] mb-5"> chọn Rạp</h2>
-            {LichChieuHeThongRap.length === 0 ? (
+            {LichChieuHeThongRap?.length === 0 ? (
               <h3 className="text-center">
                 Bạn hoàn thành việc chọn nhóm rồi mới chọn rạp được nha
               </h3>
@@ -63,7 +63,7 @@ const ChooseInforTicket = () => {
               ""
             )}
             <div className="grid grid-cols-2 gap-5">
-              {LichChieuHeThongRap.length > 0
+              {LichChieuHeThongRap?.length > 0
                 ? LichChieuHeThongRap.map((item, index) => (
                     <button
                       key={index}
@@ -78,7 +78,7 @@ const ChooseInforTicket = () => {
           </div>
           <div className="bg-adminPrimary p-10 rounded-2xl col-span-2">
             <h2 className="text-center text-[30px] mb-5">chọn tên rạp</h2>
-            {CumRapTheoHeThong.length === 0 ? (
+            {CumRapTheoHeThong?.length === 0 ? (
               <h3 className="text-center">
                 Bạn hoàn thành việc chọn cụm rạp rồi mới chọn rạp được nha
               </h3>
